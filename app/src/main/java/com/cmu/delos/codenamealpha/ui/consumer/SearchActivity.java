@@ -32,6 +32,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         setSupportActionBar(toolbar);
         // Show menu icon
         final ActionBar ab = getSupportActionBar();
+        ab.setTitle(R.string.app_name);
         ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
     }
