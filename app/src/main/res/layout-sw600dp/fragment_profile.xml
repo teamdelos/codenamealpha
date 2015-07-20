@@ -11,6 +11,7 @@
 
     <TextView
         android:text="Profile"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:gravity="center_horizontal"
@@ -20,10 +21,11 @@
         android:id="@+id/profile_text"/>
 
     <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/profile_text"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:paddingTop="32dp">
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -65,31 +67,38 @@
                 android:hint="Street Address 2"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/profile_address_2"/>
-            <EditText
-                android:paddingLeft="4dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="State"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/profile_state"/>
-            <EditText
-                android:paddingLeft="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="City"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/profile_city"/>
-            <EditText
-                android:paddingLeft="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Zip Code"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/profile_zip_code"/>
-
+                android:orientation="horizontal">
+                <EditText
+                    android:paddingLeft="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/profile_state"/>
+                <EditText
+                    android:paddingLeft="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/profile_city"/>
+                <EditText
+                    android:paddingLeft="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Zip Code"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/profile_zip_code"/>
+            </LinearLayout>
             <android.widget.Space
                 android:layout_width="match_parent"
-                android:layout_height="6dp" />
+                android:layout_height="32dp" />
             <TextView
                 android:text="About"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -108,29 +117,27 @@
                 android:id="@+id/editText"/>
             <android.widget.Space
                 android:layout_width="match_parent"
-                android:layout_height="6dp" />
+                android:layout_height="32dp" />
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
                 android:clickable="true"
                 android:src="@drawable/default_user_image"
                 android:layout_gravity="center_horizontal"
-                android:adjustViewBounds="false"
                 android:elevation="@dimen/snackbar_elevation" />
             <android.widget.Space
                 android:layout_width="match_parent"
-                android:layout_height="16dp" />
+                android:layout_height="32dp" />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:text="Save"
                 android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textAllCaps="true"
                 android:textColor="@color/textWhite"
                 android:background="@color/colorPrimaryDark"/>
-
         </LinearLayout>
 
     </ScrollView>
