@@ -85,7 +85,8 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/sign_up_string"
             android:textColor="@color/textWhite"
-            android:background="#006064"/>
+            android:background="#006064"
+            android:id="@+id/signUpBtn" />
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
             android:text="------------------OR------------------"
