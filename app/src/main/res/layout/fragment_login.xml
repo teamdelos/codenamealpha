@@ -67,7 +67,7 @@
             android:text="Sign In"
             android:textColor="@color/textWhite"
             android:background="#F44336"
-            android:id="@+id/button_signin"/>
+            android:id="@+id/btnSignIn"/>
 
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
