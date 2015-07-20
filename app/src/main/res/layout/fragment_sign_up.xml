@@ -1,0 +1,96 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/loginFragmentBackground"
+    android:orientation="vertical"
+    tools:context="com.cmu.delos.codenamealpha.ui.SignUpActivityFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:id="@+id/sign_in_form">
+
+        <EditText
+            android:paddingLeft="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="First Name*"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/signup_first_name"/>
+        <EditText
+            android:paddingLeft="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Last Name*"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/signup_last_name"/>
+        <EditText
+            android:paddingLeft="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email*"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/signup_email"/>
+        <EditText
+            android:paddingLeft="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:hint="Password*"
+            android:id="@+id/login_password" />
+        <EditText
+            android:paddingLeft="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:hint="Confirm Password*"
+            android:id="@+id/login_confirm_password" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Create Account"
+            android:textColor="@color/textWhite"
+            android:background="#F44336"/>
+
+        <TextView
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="4dp"
+            android:text="------------------OR------------------"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/facebook_login"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/google_login"/>
+
+    </LinearLayout>
+
+</LinearLayout>
