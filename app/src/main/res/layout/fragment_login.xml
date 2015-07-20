@@ -67,7 +67,7 @@
             android:text="Sign In"
             android:textColor="@color/textWhite"
             android:background="#F44336"
-            android:id="@+id/button_signin"/>
+            android:id="@+id/btnSignIn"/>
 
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
@@ -85,7 +85,8 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/sign_up_string"
             android:textColor="@color/textWhite"
-            android:background="#006064"/>
+            android:background="#006064"
+            android:id="@+id/signUpBtn" />
         <TextView
             android:paddingTop="@dimen/activity_vertical_margin"
             android:text="------------------OR------------------"
