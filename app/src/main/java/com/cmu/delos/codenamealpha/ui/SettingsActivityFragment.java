@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * A placeholder fragment containing a simple view.
  */
 public class SettingsActivityFragment extends Fragment {
-
+//
     public SettingsActivityFragment() {
     }
 
