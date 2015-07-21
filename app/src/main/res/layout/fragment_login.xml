@@ -98,7 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content"
-            android:src="@drawable/facebook_login"/>
+            android:src="@drawable/facebook_login"
+            android:id="@+id/fb_login_button"/>
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
