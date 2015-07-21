@@ -51,7 +51,7 @@
             android:label="@string/title_activity_meal_page" >
         </activity>
         <activity
-            android:name=".consumer.CheckOutActivity"
+            android:name=".consumer.CheckoutActivity"
             android:label="@string/title_activity_order_meal" >
         </activity>
         <activity

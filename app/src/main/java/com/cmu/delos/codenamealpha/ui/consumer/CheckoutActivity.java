@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.cmu.delos.codenamealpha.ui.R;
 
-class CheckOutActivity extends AppCompatActivity {
+public class CheckoutActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -10,7 +10,7 @@
     tools:context="com.cmu.delos.codenamealpha.ui.provider.MealOfferingCompleteActivityFragment">
 
     <TextView
-        android:text="@string/cong_text"
+        android:text="Congratulations!"
         android:layout_width="match_parent"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:enabled="false"
         android:id="@+id/cong_sry_text"/>
     <TextView
-        android:text="Your listing is posted......"
+        android:text="This listing will be published once reviewed!"
         android:layout_width="match_parent"
         android:gravity="center_horizontal"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_below="@+id/space"
         android:layout_centerHorizontal="true" />
     <TextView
-        android:text="Details"
+        android:text="Meal Details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/meal_ordered_view"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:text="BLALALALALALA"
+                android:text="Please specify details of this meal relevant for your buyers."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"

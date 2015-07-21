@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#FFFFFF"
-        android:hint="Search Food"
+        android:hint="What would you like to order?"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/editSearchStr"/>
 

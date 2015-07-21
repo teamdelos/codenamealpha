@@ -31,7 +31,7 @@ public class MealOrderDetailActivityFragment extends Fragment {
             public void onClick(View v) {
 
                 Log.v("on click", "meal Clicked");
-                Intent intentToViewMeal = new Intent(getActivity(), CheckOutActivity.class);
+                Intent intentToViewMeal = new Intent(getActivity(), CheckoutActivity.class);
                 startActivity(intentToViewMeal);
             }
         });

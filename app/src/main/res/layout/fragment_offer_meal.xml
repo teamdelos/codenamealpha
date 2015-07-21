@@ -11,7 +11,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:text="Dish Details"
+        android:text="Meal Details"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,13 +30,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/space"
-        android:hint="What do you call your meal?"/>
+        android:hint="What's the name of this meal?"/>
     <EditText
         android:id="@+id/offer_meal_price"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Price of your meal?"
+        android:hint="How much is this meal listed for?"
         android:layout_below="@id/offer_meal_name"/>
     <EditText
         android:id="@+id/offer_meal_ingrediants"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:hint="Ingrediants in you meal?"
+        android:hint="Main Meal Ingredients:"
         android:layout_below="@id/offer_meal_price"/>
     <android.widget.Space
         android:layout_width="match_parent"
@@ -64,7 +64,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Offer Meal"
+        android:text="List This Meal"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textAllCaps="true"
