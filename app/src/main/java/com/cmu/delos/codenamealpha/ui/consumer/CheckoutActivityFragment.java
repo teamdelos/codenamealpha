@@ -11,14 +11,14 @@ import com.cmu.delos.codenamealpha.ui.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class CheckoutActivityFragment extends Fragment {
+public class CheckOutActivityFragment extends Fragment {
 
-    public CheckoutActivityFragment() {
+    public CheckOutActivityFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_checkout, container, false);
+        return inflater.inflate(R.layout.fragment_check_out_meal, container, false);
     }
 }

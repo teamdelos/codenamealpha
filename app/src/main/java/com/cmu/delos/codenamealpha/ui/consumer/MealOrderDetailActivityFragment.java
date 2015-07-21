@@ -14,24 +14,24 @@ import com.cmu.delos.codenamealpha.ui.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MealPageActivityFragment extends Fragment {
+public class MealOrderDetailActivityFragment extends Fragment {
 
     private ImageButton imageBtn1;
 
-    public MealPageActivityFragment() {
+    public MealOrderDetailActivityFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_meal_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_meal_order_detail, container, false);
         imageBtn1 = (ImageButton)view.findViewById(R.id.imageBtn1);
         imageBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Log.v("on click", "meal Clicked");
-                Intent intentToViewMeal = new Intent(getActivity(), OrderMealActivity.class);
+                Intent intentToViewMeal = new Intent(getActivity(), CheckOutActivity.class);
                 startActivity(intentToViewMeal);
             }
         });

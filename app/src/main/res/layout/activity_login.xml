@@ -7,7 +7,6 @@
     tools:context=".LoginActivity"
     android:id="@+id/loginActivityLayout">
 
-
     <fragment
         android:id="@+id/login_container_fragment"
         android:name="com.cmu.delos.codenamealpha.ui.LoginActivityFragment"

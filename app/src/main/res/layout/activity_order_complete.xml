@@ -10,16 +10,17 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.cmu.delos.codenamealpha.ui.ProfileActivity">
+        tools:context="com.cmu.delos.codenamealpha.ui.consumer.OrderCompleteActivity">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"/>
         <fragment
-            android:id="@+id/profile_container_fragment"
-            android:name="com.cmu.delos.codenamealpha.ui.ProfileActivityFragment"
-            tools:layout="@layout/fragment_profile"
+            android:id="@+id/search_container_fragment"
+            android:name="com.cmu.delos.codenamealpha.ui.consumer.OrderCompleteActivityFragment"
+            tools:layout="@layout/fragment_order_complete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"/>

@@ -1,27 +1,26 @@
-package com.cmu.delos.codenamealpha.ui.provider;
+package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cmu.delos.codenamealpha.ui.R;
 
-public class MealOfferingCompleteActivity extends AppCompatActivity {
+public class OrderCompleteActivity extends AppCompatActivity {
+
     DrawerLayout drawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meal_offering_complete);
-        setupToolbar();
+        setContentView(R.layout.activity_order_complete);
         setupNavigationView();
+        setupToolbar();
     }
-
     private void setupNavigationView(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
@@ -35,10 +34,11 @@ public class MealOfferingCompleteActivity extends AppCompatActivity {
         ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
     }
+
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_meal_offering_complete, menu);
+//        getMenuInflater().inflate(R.menu.menu_order_complete, menu);
 //        return true;
 //    }
 

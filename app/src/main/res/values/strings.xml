@@ -22,4 +22,5 @@
     <string name="title_activity_meal_page">MealPageActivity</string>
     <string name="title_activity_order_meal">OrderMealActivity</string>
     <string name="title_activity_checkout">CheckoutActivity</string>
+    <string name="title_activity_order_complete">OrderCompleteActivity</string>
 </resources>

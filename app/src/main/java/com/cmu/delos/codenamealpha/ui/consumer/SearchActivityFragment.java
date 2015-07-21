@@ -31,7 +31,7 @@ public class SearchActivityFragment extends Fragment {
             public void onClick(View v) {
 
                 Log.v("on click", "search Clicked");
-                Intent intentToSearch = new Intent(getActivity(), MealPageActivity.class);
+                Intent intentToSearch = new Intent(getActivity(), MealOrderDetailActivity.class);
                 startActivity(intentToSearch);
             }
         });

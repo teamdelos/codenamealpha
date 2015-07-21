@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cmu.delos.codenamealpha.ui" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -47,18 +47,17 @@
             android:label="@string/title_activity_search" >
         </activity>
         <activity
-            android:name=".consumer.MealPageActivity"
+            android:name=".consumer.MealOrderDetailActivity"
             android:label="@string/title_activity_meal_page" >
         </activity>
         <activity
-            android:name=".consumer.OrderMealActivity"
+            android:name=".consumer.CheckOutActivity"
             android:label="@string/title_activity_order_meal" >
         </activity>
         <activity
-            android:name=".consumer.CheckoutActivity"
-            android:label="@string/title_activity_checkout" >
+            android:name=".consumer.OrderCompleteActivity"
+            android:label="@string/title_activity_order_complete" >
         </activity>
-
     </application>
 
 </manifest>
