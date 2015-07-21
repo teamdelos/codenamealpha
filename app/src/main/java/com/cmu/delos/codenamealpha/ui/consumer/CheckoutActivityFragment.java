@@ -11,7 +11,7 @@ import com.cmu.delos.codenamealpha.ui.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class CheckOutActivityFragment extends Fragment {
+class CheckOutActivityFragment extends Fragment {
 
     public CheckOutActivityFragment() {
     }
