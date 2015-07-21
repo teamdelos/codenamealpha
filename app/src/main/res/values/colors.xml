@@ -6,5 +6,6 @@
     <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorLight">#E3F2FD</color>
     <color name="colorAccent">#009688</color>
+    <color name="buttonColor">#006064</color>
     <color name="loginFragmentBackground">#ECEFF1</color>
 </resources>

@@ -147,7 +147,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textAllCaps="true"
         android:textColor="@color/textWhite"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/buttonColor"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

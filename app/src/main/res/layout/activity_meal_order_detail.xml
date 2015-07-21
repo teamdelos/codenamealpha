@@ -15,6 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
         <fragment
             android:id="@+id/profile_container_fragment"
