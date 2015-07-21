@@ -25,7 +25,7 @@ public class MealOrderDetailActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meal_order_detail, container, false);
-        imageBtn1 = (ImageButton)view.findViewById(R.id.imageBtn1);
+        imageBtn1 = (ImageButton)view.findViewById(R.id.imageButton1);
         imageBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
