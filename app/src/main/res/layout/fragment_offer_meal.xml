@@ -1,12 +1,78 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.cmu.delos.codenamealpha.ui.provider.OfferMealActivityFragment">
+    tools:context="com.cmu.delos.codenamealpha.ui.provider.OfferMealActivityFragment"
+    android:orientation="vertical">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:text="Dish Details"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:enabled="false"
+        android:id="@+id/dish_details"/>
+    <android.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:id="@+id/space"
+        android:layout_below="@id/dish_details"/>
+    <EditText
+        android:id="@+id/offer_meal_name"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/space"
+        android:hint="What do you call your meal?"/>
+    <EditText
+        android:id="@+id/offer_meal_price"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Price of your meal?"
+        android:layout_below="@id/offer_meal_name"/>
+    <EditText
+        android:id="@+id/offer_meal_ingrediants"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:hint="Ingrediants in you meal?"
+        android:layout_below="@id/offer_meal_price"/>
+    <android.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@id/offer_meal_ingrediants"
+        android:id="@+id/space_under_ingrediants"/>
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:clickable="true"
+        android:src="@drawable/image_placeholder"
+        android:adjustViewBounds="false"
+        android:elevation="@dimen/snackbar_elevation"
+        android:layout_below="@+id/space_under_ingrediants"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Offer Meal"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAllCaps="true"
+        android:textColor="@color/textWhite"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>
