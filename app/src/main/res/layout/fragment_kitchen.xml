@@ -59,7 +59,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Create Account"
+            android:text="Remove Meal"
             android:textColor="@color/textWhite"
             android:background="@color/buttonColor"/>
 

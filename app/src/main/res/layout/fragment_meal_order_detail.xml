@@ -8,10 +8,46 @@
     tools:context="com.cmu.delos.codenamealpha.ui.consumer.MealOrderDetailActivityFragment">
     <ImageButton
         android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="264dp"
+        android:src="@drawable/provider2_meal6"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:src="@drawable/provider2_meal2"
+        android:adjustViewBounds="false"
+        android:baselineAlignBottom="false"/>
+    <ImageButton
+        android:layout_width="386dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:src="@drawable/provider2_meal3"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:src="@drawable/provider2_meal4"
+        android:adjustViewBounds="false"
+        android:baselineAlignBottom="false"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:src="@drawable/provider2_meal5"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:src="@drawable/provider2_meal1"
+        android:adjustViewBounds="false"
+        android:baselineAlignBottom="false"/>
+    <ImageButton
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/imageBtn1"
         android:clickable="true"
-        android:src="@drawable/sample_meal"
+        android:src="@drawable/provider2_meal5"
         android:layout_gravity="center_horizontal"
         android:adjustViewBounds="false"
         android:paddingBottom="50dp"
@@ -22,7 +58,7 @@
         android:layout_height="100dp"
         android:id="@+id/imageBtn2"
         android:clickable="true"
-        android:src="@drawable/sample_meal"
+        android:src="@drawable/provider2_meal4"
         android:layout_gravity="center_horizontal"
         android:adjustViewBounds="false"
         android:elevation="@dimen/snackbar_elevation" />
