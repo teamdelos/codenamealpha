@@ -24,7 +24,7 @@
             android:title="Addresses"/>
         <item
             android:id="@+id/navigation_item_7"
-            android:title="Notificaitons"/>
+            android:title="Notifications"/>
         <item
             android:id="@+id/navigation_item_8"
             android:title="Share"/>
