@@ -23,4 +23,6 @@
     <string name="title_activity_order_meal">OrderMealActivity</string>
     <string name="title_activity_checkout">CheckoutActivity</string>
     <string name="title_activity_order_complete">OrderCompleteActivity</string>
+    <string name="Meal">Meal</string>
+    <string name="Meal2">Meal</string>
 </resources>
