@@ -3,11 +3,6 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context="com.cmu.delos.codenamealpha.ui.provider.KitchenActivityFragment" android:layout_height="match_parent" android:layout_width="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/provider2_meal3"
-        android:contentDescription="@string/Meal2" />
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -16,10 +11,7 @@
         android:layout_height="200dp"
         android:src="@drawable/provider2_meal6"
         card_view:cardCornerRadius="4dp"
-        card_view:cardBackgroundColor="@color/textWhite"
-        android:layout_alignParentBottom="true">
-
-    </android.support.v7.widget.CardView>
+        card_view:cardBackgroundColor="@color/textWhite">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,4 +22,7 @@
         android:baselineAlignBottom="false"
         android:id="@+id/imageButton"
         android:contentDescription="@string/Meal" />
+
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>

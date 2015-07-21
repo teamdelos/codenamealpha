@@ -56,11 +56,12 @@
         android:layout_width="250dp"
         android:layout_height="200dp"
         android:clickable="true"
-        android:src="@drawable/image_placeholder"
+        android:src="@drawable/provider_meal6"
         android:adjustViewBounds="false"
         android:elevation="@dimen/snackbar_elevation"
         android:layout_below="@+id/space_under_ingrediants"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +73,32 @@
         android:background="@color/buttonColor"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:id="@+id/button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Mexican Dish"
+        android:id="@+id/textView6"
+        android:textAllCaps="true"
+        android:textColor="@color/textBlack"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Provider: Jane Smith"
+        android:id="@+id/textView7"
+        android:textAllCaps="true"
+        android:textColor="@color/textBlack"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/textView6"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

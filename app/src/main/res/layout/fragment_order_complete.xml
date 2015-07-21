@@ -12,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Your Order(s) have been placed."
         android:id="@+id/textView"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textColor="@color/textBlack"
         android:layout_centerHorizontal="true" />
 
@@ -31,12 +31,12 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="250dp"
-        android:src="@drawable/image_placeholder"
+        android:src="@drawable/provider_meal3"
         android:layout_gravity="center_horizontal"
         android:adjustViewBounds="false"
         android:id="@+id/imageView_complete"
         android:elevation="@dimen/snackbar_elevation"
-        android:layout_below="@+id/textView2"
+        android:layout_alignTop="@+id/textView2"
         android:layout_centerHorizontal="true" />
 
     <TextView
