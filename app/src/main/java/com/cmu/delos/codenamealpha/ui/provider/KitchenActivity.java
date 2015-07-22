@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -40,7 +39,7 @@ public class KitchenActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.navigation_item_1:
-                        Intent goToProfile = new Intent(KitchenActivity.this, ProfileActivity.class);
+                        Intent goToProfile = new Intent(KitchenActivity.this, SettingsActivity.ProfileActivity.class);
                         startActivity(goToProfile);
                         return true;
                     // For rest of the options we just show a toast on click
