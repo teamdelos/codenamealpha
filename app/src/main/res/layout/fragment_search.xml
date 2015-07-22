@@ -29,4 +29,6 @@
         android:textAlignment="center"
         android:background="@color/buttonColor"
         android:id="@+id/btnSearch"/>
+
+
 </LinearLayout>
