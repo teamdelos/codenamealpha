@@ -22,7 +22,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private TextView mDrawerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

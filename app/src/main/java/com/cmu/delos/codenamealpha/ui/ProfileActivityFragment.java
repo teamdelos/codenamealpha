@@ -24,6 +24,7 @@ import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
  * A placeholder fragment containing a simple view.
  */
 public class ProfileActivityFragment extends Fragment {
+//
 
     private OnFragmentInteractionListener mListener;
 

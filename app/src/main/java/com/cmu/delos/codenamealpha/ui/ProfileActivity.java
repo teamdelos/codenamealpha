@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationDraw
      */
     private CharSequence mTitle;
 
-    DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
