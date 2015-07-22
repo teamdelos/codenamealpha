@@ -11,38 +11,8 @@
             android:id="@+id/navigation_item_2"
             android:title="Settings"/>
         <item
-            android:id="@+id/navigation_item_3"
-            android:title="Favorites"/>
-        <item
-            android:id="@+id/navigation_item_4"
-            android:title="Find A Provider"/>
-        <item
-            android:id="@+id/navigation_item_5"
-            android:title="Track Orders"/>
-        <item
-            android:id="@+id/navigation_item_6"
-            android:title="Addresses"/>
-        <item
-            android:id="@+id/navigation_item_7"
-            android:title="Notifications"/>
-        <item
-            android:id="@+id/navigation_item_8"
-            android:title="Share"/>
-        <item
-            android:id="@+id/navigation_item_9"
-            android:title="Profile"/>
-        <item
-            android:id="@+id/navigation_item_10"
-            android:title="Terms And Conditions"/>
-        <item
             android:id="@+id/navigation_item_11"
             android:title="About Us"/>
-        <item
-            android:id="@+id/navigation_item_12"
-            android:title="Contact Us"/>
-        <item
-            android:id="@+id/navigation_item_13"
-            android:title="Inbox"/>
         <item
             android:id="@+id/navigation_item_14"
             android:title="Sign Out"/>

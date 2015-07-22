@@ -28,21 +28,23 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 //Checking if the item is in checked state or not, if not make it in checked state
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
+//                if (menuItem.isChecked()) menuItem.setChecked(false);
+//                else menuItem.setChecked(true);
+//                //Closing drawer on item click
+//                drawerLayout.closeDrawers();
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.navigation_item_1:
                         Intent goToProfile = new Intent(SettingsActivity.this, ProfileActivity.class);
                         startActivity(goToProfile);
+                        drawerLayout.closeDrawers();
                         return true;
                     // For rest of the options we just show a toast on click
                     case R.id.navigation_item_2:
                         Intent goToSettings = new Intent(SettingsActivity.this, SettingsActivity.class);
                         startActivity(goToSettings);
+                        drawerLayout.closeDrawers();
                         return true;
                     default:
                         Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
