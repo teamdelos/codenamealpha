@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:src="@drawable/provider2_meal1"
+                android:src="@drawable/provider2_meal6"
                 android:adjustViewBounds="false"
                 android:baselineAlignBottom="false"
                 android:id="@+id/imageButton"/>
@@ -52,7 +52,7 @@
         android:id="@+id/card_view1"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         card_view:cardCornerRadius="4dp"
         card_view:cardElevation="4dp">
         <LinearLayout
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:src="@drawable/provider2_meal3"
+                android:src="@drawable/provider2_meal2"
                 android:contentDescription="@string/Meal2"
                 android:adjustViewBounds="false"
                 android:baselineAlignBottom="false"/>
