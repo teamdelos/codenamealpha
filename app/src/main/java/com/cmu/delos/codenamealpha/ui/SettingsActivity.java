@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     @Override
