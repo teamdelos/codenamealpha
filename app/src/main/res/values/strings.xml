@@ -1,4 +1,21 @@
 <resources>
+
+    <string name="title_section1">Profile</string>
+    <string name="title_section2">Settings</string>
+    <string name="title_section3">Favorites</string>
+    <string name="title_section4">Find A Provider</string>
+    <string name="title_section5">Track Orders</string>
+    <string name="title_section6">Addresses</string>
+    <string name="title_section7">Notifications</string>
+    <string name="title_section8">Share</string>
+    <string name="title_section9">Profile</string>
+    <string name="title_section10">Terms and Conditions</string>
+    <string name="title_section11">About Us</string>
+    <string name="title_section12">Contact Us</string>
+    <string name="title_section13">Inbox</string>
+    <string name="title_section14">Sign Out</string>
+
+
     <string name="app_name">CodeNameAlpha</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -25,4 +42,6 @@
     <string name="title_activity_order_complete">OrderCompleteActivity</string>
     <string name="Meal">Meal</string>
     <string name="Meal2">Meal</string>
+    <string name="navigation_drawer_close">\"Close Navigation Drawer\"</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
 </resources>

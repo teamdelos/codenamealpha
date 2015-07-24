@@ -1,23 +1,20 @@
 package com.cmu.delos.codenamealpha.ui.provider;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.cmu.delos.codenamealpha.ui.ProfileActivity;
+import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.R;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
-public class MealOfferingCompleteActivity extends AppCompatActivity {
+public class MealOfferingCompleteActivity extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     @Override
@@ -42,7 +39,7 @@ public class MealOfferingCompleteActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.navigation_item_1:
-                        Intent goToProfile = new Intent(MealOfferingCompleteActivity.this, ProfileActivity.class);
+                        Intent goToProfile = new Intent(MealOfferingCompleteActivity.this, SettingsActivity.ProfileActivity.class);
                         startActivity(goToProfile);
                         return true;
                     // For rest of the options we just show a toast on click

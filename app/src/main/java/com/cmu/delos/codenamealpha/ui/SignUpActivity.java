@@ -1,12 +1,9 @@
 package com.cmu.delos.codenamealpha.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AbstractAlphaActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
