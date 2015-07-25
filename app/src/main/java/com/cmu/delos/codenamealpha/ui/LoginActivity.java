@@ -14,6 +14,10 @@ public class LoginActivity extends AbstractAlphaActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        handleFragment();
+    }
+
+    private void handleFragment(){
         Fragment fragment = new LoginFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

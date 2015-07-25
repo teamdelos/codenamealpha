@@ -28,11 +28,7 @@ public class MealOrderDetailActivity extends AbstractAlphaActivity {
         setContentView(R.layout.activity_meal_order_detail);
         setupToolbar();
         setupNavigationView();
-        Fragment fragment = new MealOrderDetailFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.meal_order_detail_container, fragment);
-        fragmentTransaction.commit();
+        handleFragment();
     }
 
     private void setupNavigationView(){
@@ -76,6 +72,14 @@ public class MealOrderDetailActivity extends AbstractAlphaActivity {
         ab.setTitle(R.string.app_name);
         ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void handleFragment(){
+        Fragment fragment = new MealOrderDetailFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.meal_order_detail_container, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
