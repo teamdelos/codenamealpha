@@ -1,8 +1,9 @@
 package com.cmu.delos.codenamealpha.ui.consumer;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,9 @@ import com.cmu.delos.codenamealpha.ui.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class CheckoutActivityFragment extends Fragment {
+public class CheckoutFragment extends Fragment {
     private Button placeOrderBtn;
-    public CheckoutActivityFragment() {
+    public CheckoutFragment() {
     }
 
     @Override
@@ -27,10 +28,12 @@ public class CheckoutActivityFragment extends Fragment {
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.v("on click", "meal Clicked");
-                Intent intentToCompleteOrder = new Intent(getActivity(), OrderCompleteActivity.class);
-                startActivity(intentToCompleteOrder);
+                Fragment fragment = new OrderCompleteFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.meal_order_detail_container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         return rootView;

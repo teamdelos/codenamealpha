@@ -17,7 +17,7 @@ import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SignUpActivityFragment extends Fragment {
+public class SignUpFragment extends Fragment {
 
     private Button signUpPageBtn;
     private EditText signup_first_name;
@@ -34,7 +34,7 @@ public class SignUpActivityFragment extends Fragment {
 
 
 
-    public SignUpActivityFragment() {
+    public SignUpFragment() {
     }
 
     @Override
@@ -53,7 +53,6 @@ public class SignUpActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.v("on click", "signup Clicked");
                 fName = signup_first_name.getText().toString().trim();
                 lName = signup_last_name.getText().toString().trim();
                 email = signup_email.getText().toString().trim();
@@ -62,8 +61,6 @@ public class SignUpActivityFragment extends Fragment {
 
                 if (!fName.isEmpty() && !lName.isEmpty() && !email.isEmpty() && !passwd.isEmpty()
                         && !confirmPasswd.isEmpty() && passwd == confirmPasswd) {
-
-
                     Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
                     startActivity(intentToSignUp);
 

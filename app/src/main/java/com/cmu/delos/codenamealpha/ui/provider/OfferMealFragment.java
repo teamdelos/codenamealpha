@@ -1,9 +1,9 @@
 package com.cmu.delos.codenamealpha.ui.provider;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +14,10 @@ import com.cmu.delos.codenamealpha.ui.R;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class OfferMealActivityFragment extends Fragment {
+public class OfferMealFragment extends Fragment {
     Button offerMealCompleteButton;
 
-    public OfferMealActivityFragment() {
+    public OfferMealFragment() {
     }
 
     @Override
@@ -28,9 +28,11 @@ public class OfferMealActivityFragment extends Fragment {
         offerMealCompleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.v("on click", "list Meal Button Clicked");
-                Intent intentToCompleteOfferMeal = new Intent(getActivity(), MealOfferingCompleteActivity.class);
-                startActivity(intentToCompleteOfferMeal);
+                Fragment fragment = new MealOfferCompleteFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.offer_meal_container, fragment);
+                fragmentTransaction.commit();
             }
         });
         return rootView;

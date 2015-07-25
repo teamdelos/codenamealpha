@@ -2,20 +2,23 @@ package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.R;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
-public class MealOrderDetailActivity extends AppCompatActivity {
+public class MealOrderDetailActivity extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
@@ -25,7 +28,15 @@ public class MealOrderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_meal_order_detail);
         setupToolbar();
         setupNavigationView();
+        Fragment fragment = new MealOrderDetailFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.meal_order_detail_container, fragment);
+        fragmentTransaction.commit();
+    }
 
+    private void setupNavigationView(){
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -57,10 +68,6 @@ public class MealOrderDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void setupNavigationView(){
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-    }
-
     private void setupToolbar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,12 +77,6 @@ public class MealOrderDetailActivity extends AppCompatActivity {
         ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_meal_page, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -85,5 +86,19 @@ public class MealOrderDetailActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0){
+            super.onBackPressed();
+        }
+        if (getSupportFragmentManager().getBackStackEntryCount() == 2){
+            this.finish();
+        }
+        else {
+            getSupportFragmentManager().popBackStack();
+        }
+
     }
 }

@@ -20,8 +20,12 @@ public class ProfileActivity extends AbstractAlphaActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        setupNavigationView();
         setupToolbar();
+        setupNavigationView();
+    }
+
+    private void setupNavigationView(){
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -37,8 +41,8 @@ public class ProfileActivity extends AbstractAlphaActivity {
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.navigation_item_1:
-                        Intent goToProfile = new Intent(ProfileActivity.this, ProfileActivity.class);
-                        startActivity(goToProfile);
+//                        Intent goToProfile = new Intent(ProfileActivity.this, ProfileActivity.class);
+//                        startActivity(goToProfile);
                         return true;
                     // For rest of the options we just show a toast on click
                     case R.id.navigation_item_2:
@@ -52,18 +56,6 @@ public class ProfileActivity extends AbstractAlphaActivity {
             }
         });
 
-    }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-////        getMenuInflater().inflate(R.menu.menu_profile, menu);
-//        return true;
-//    }
-
-    private void setupNavigationView(){
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
     private void setupToolbar(){

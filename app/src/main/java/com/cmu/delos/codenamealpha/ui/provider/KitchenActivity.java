@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
+import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.R;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
@@ -23,6 +24,10 @@ public class KitchenActivity extends AbstractAlphaActivity {
         setContentView(R.layout.activity_kitchen);
         setupToolbar();
         setupNavigationView();
+    }
+
+    private void setupNavigationView(){
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -38,7 +43,7 @@ public class KitchenActivity extends AbstractAlphaActivity {
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.navigation_item_1:
-                        Intent goToProfile = new Intent(KitchenActivity.this, SettingsActivity.ProfileActivity.class);
+                        Intent goToProfile = new Intent(KitchenActivity.this, ProfileActivity.class);
                         startActivity(goToProfile);
                         return true;
                     // For rest of the options we just show a toast on click
@@ -52,18 +57,6 @@ public class KitchenActivity extends AbstractAlphaActivity {
                 }
             }
         });
-
-    }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_kitchen, menu);
-//        return true;
-//    }
-    private void setupNavigationView(){
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
     private void setupToolbar(){
@@ -84,5 +77,15 @@ public class KitchenActivity extends AbstractAlphaActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+//        System.exit(0);
     }
 }

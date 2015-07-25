@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/loginFragmentBackground"
     android:orientation="vertical"
-    tools:context="com.cmu.delos.codenamealpha.ui.SignUpActivityFragment">
+    tools:context="com.cmu.delos.codenamealpha.ui.SignUpFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

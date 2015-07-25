@@ -3,6 +3,9 @@ package com.cmu.delos.codenamealpha.ui.provider;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
+import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.R;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
@@ -23,9 +27,19 @@ public class OfferMealActivity extends AbstractAlphaActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_meal);
-        setupNavigationView();
         setupToolbar();
+        setupNavigationView();
 
+        Fragment fragment = new OfferMealFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.offer_meal_container, fragment);
+        fragmentTransaction.commit();
+
+    }
+
+    private void setupNavigationView(){
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -41,7 +55,7 @@ public class OfferMealActivity extends AbstractAlphaActivity {
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.navigation_item_1:
-                        Intent goToProfile = new Intent(OfferMealActivity.this, SettingsActivity.ProfileActivity.class);
+                        Intent goToProfile = new Intent(OfferMealActivity.this, ProfileActivity.class);
                         startActivity(goToProfile);
                         return true;
                     // For rest of the options we just show a toast on click
@@ -55,11 +69,6 @@ public class OfferMealActivity extends AbstractAlphaActivity {
                 }
             }
         });
-
-    }
-
-    private void setupNavigationView(){
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
     private void setupToolbar(){
@@ -71,14 +80,6 @@ public class OfferMealActivity extends AbstractAlphaActivity {
         ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-////        getMenuInflater().inflate(R.menu.menu_offer_meal, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

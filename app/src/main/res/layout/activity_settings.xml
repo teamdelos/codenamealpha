@@ -18,7 +18,7 @@
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
         <fragment
-            android:id="@+id/search_container_fragment"
+            android:id="@+id/settings_container"
             android:name="com.cmu.delos.codenamealpha.ui.SettingsActivityFragment"
             tools:layout="@layout/fragment_settings"
             android:layout_width="match_parent"

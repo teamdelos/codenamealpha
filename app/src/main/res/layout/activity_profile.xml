@@ -18,7 +18,7 @@
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
         <fragment
-            android:id="@+id/profile_container_fragment"
+            android:id="@+id/profile_container"
             android:name="com.cmu.delos.codenamealpha.ui.ProfileActivityFragment"
             tools:layout="@layout/fragment_profile"
             android:layout_width="match_parent"

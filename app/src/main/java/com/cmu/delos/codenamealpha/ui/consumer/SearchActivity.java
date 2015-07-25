@@ -11,11 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.R;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AbstractAlphaActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -24,9 +25,12 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        setupNavigationView();
         setupToolbar();
+        setupNavigationView();
+    }
 
+    private void setupNavigationView(){
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -56,11 +60,6 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
-
-    }
-
-    private void setupNavigationView(){
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
     private void setupToolbar(){
@@ -89,5 +88,15 @@ public class SearchActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+//        System.exit(0);
     }
 }

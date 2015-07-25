@@ -18,7 +18,7 @@
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
         <fragment
-            android:id="@+id/search_container_fragment"
+            android:id="@+id/kitchen_container"
             android:name="com.cmu.delos.codenamealpha.ui.provider.KitchenActivityFragment"
             tools:layout="@layout/fragment_kitchen"
             android:layout_below="@+id/toolbar"

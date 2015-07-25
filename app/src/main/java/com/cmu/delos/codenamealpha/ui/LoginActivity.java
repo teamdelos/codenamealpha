@@ -1,6 +1,9 @@
 package com.cmu.delos.codenamealpha.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 
 public class LoginActivity extends AbstractAlphaActivity {
@@ -9,6 +12,22 @@ public class LoginActivity extends AbstractAlphaActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Fragment fragment = new LoginFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.login_container, fragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0){
+            super.onBackPressed();
+        }
+        else {
+            getSupportFragmentManager().popBackStack();
+        }
+
     }
 
 }

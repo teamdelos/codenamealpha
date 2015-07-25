@@ -1,25 +1,25 @@
 package com.cmu.delos.codenamealpha.ui.consumer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.cmu.delos.codenamealpha.ui.R;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MealOrderDetailActivityFragment extends Fragment {
+public class MealOrderDetailFragment extends Fragment {
 
     private Button buyBtn;
 
-    public MealOrderDetailActivityFragment() {
+    public MealOrderDetailFragment() {
     }
 
     @Override
@@ -30,10 +30,12 @@ public class MealOrderDetailActivityFragment extends Fragment {
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.v("on click", "meal Clicked");
-                Intent intentToCheckOut = new Intent(getActivity(), CheckoutActivity.class);
-                startActivity(intentToCheckOut);
+                Fragment fragment = new CheckoutFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.meal_order_detail_container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         return view;

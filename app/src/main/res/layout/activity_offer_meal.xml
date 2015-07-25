@@ -18,10 +18,8 @@
             android:layout_height="?attr/actionBarSize"
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
-        <fragment
-            android:id="@+id/search_container_fragment"
-            android:name="com.cmu.delos.codenamealpha.ui.provider.OfferMealActivityFragment"
-            tools:layout="@layout/fragment_offer_meal"
+        <FrameLayout
+            android:id="@+id/offer_meal_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"/>

@@ -2,6 +2,8 @@ package com.cmu.delos.codenamealpha.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,13 @@ import com.cmu.delos.codenamealpha.ui.provider.KitchenActivity;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class LoginActivityFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
     private Button signUpBtn;
     private Button btnSignIn;
     private ImageButton fbBtn;
 
-    public LoginActivityFragment() {
+    public LoginFragment() {
     }
 
     @Override
@@ -35,10 +37,12 @@ public class LoginActivityFragment extends Fragment {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.v("on click","signup Clicked");
-                Intent intentToSignUp = new Intent(getActivity(), SignUpActivity.class);
-                startActivity(intentToSignUp);
+                Fragment fragment = new SignUpFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.login_container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         btnSignIn.setOnClickListener(new View.OnClickListener() {

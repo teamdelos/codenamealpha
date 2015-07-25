@@ -19,7 +19,7 @@
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
         <fragment
-            android:id="@+id/search_container_fragment"
+            android:id="@+id/search_container"
             android:name="com.cmu.delos.codenamealpha.ui.consumer.SearchActivityFragment"
             tools:layout="@layout/fragment_search"
             android:layout_width="match_parent"
