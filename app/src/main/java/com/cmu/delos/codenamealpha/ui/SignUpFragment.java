@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
-import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 
 
 /**
@@ -77,9 +75,11 @@ public class SignUpFragment extends Fragment {
                         userDetails.put(AlphaContract.UserEntry.COLUMN_PWD, passwd);
 
                         Uri insertedUri = getActivity().getContentResolver().insert(AlphaContract.UserEntry.CONTENT_URI, userDetails);
-                        Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
+                        Intent intentToSignUp = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intentToSignUp);
                         userCurser.close();
+                        Toast.makeText(getActivity(), "Account Created!",
+                                Toast.LENGTH_LONG).show();
 
                     } else {
                         Toast.makeText(getActivity(), "Email already exists!",

@@ -75,6 +75,7 @@ public class LoginFragment extends Fragment {
                         try {
                             for (userCursor.moveToFirst(); !userCursor.isAfterLast(); userCursor.moveToNext()) {
                                 pwd = userCursor.getString(4);
+                                break;
                             }
                         }finally {
                             userCursor.close();
