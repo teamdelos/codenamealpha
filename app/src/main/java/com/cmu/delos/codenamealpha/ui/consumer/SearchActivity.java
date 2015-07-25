@@ -27,7 +27,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    SearchView search;
+    private SearchView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +94,13 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
 
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 // TODO Auto-generated method stub
 
                 //	Toast.makeText(getBaseContext(), newText,
-                //Toast.LENGTH_SHORT.show();
+                  //          Toast.LENGTH_SHORT.show();
 
                 return false;
             }
