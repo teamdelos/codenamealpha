@@ -21,4 +21,6 @@
     <string name="title_activity_meal_page">MealPageActivity</string>
     <string name="Meal">Meal</string>
     <string name="Meal2">Meal</string>
+
+    <string name="Search">Search</string>
 </resources>

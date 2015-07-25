@@ -29,7 +29,7 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 UserEntry.COLUMN_IMAGE + " TEXT, "+
                 UserEntry.COLUMN_GENDER + " TEXT, "+
                 UserEntry.COLUMN_MOBILE_NUMBER + " TEXT, "+
-                " UNIQUE (" + UserEntry.COLUMN_EMAIL+ ");";
+                " UNIQUE (" + UserEntry.COLUMN_EMAIL+ "));";
 
 
         final String SQL_CREATE_KITHCHEN_TABLE = "CREATE TABLE " + KitchenEntry.TABLE_NAME + " (" +
@@ -39,7 +39,7 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 KitchenEntry.COLUMN_KITCHEN_IMAGE + " INTEGER NOT NULL," +
                 KitchenEntry.COLUMN_FOOD_ALBUM + " REAL NOT NULL, " +
                 " FOREIGN KEY (" + KitchenEntry.COLUMN_USER_ID+ ") REFERENCES " +
-                UserEntry.TABLE_NAME + " (" + UserEntry._ID + ");";
+                UserEntry.TABLE_NAME + " (" + UserEntry._ID + "));";
 
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_KITHCHEN_TABLE);
