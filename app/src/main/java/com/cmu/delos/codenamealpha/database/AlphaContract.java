@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 public class AlphaContract {
 
@@ -12,6 +11,7 @@ public class AlphaContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_USER = "user";
     public static final String PATH_KITCHEN = "kitchen";
+    public static final String PATH_ADDRESS = "address";
 
 
     public static final class UserEntry implements BaseColumns {
@@ -26,7 +26,7 @@ public class AlphaContract {
 
         public static final String COLUMN_F_NAME = "first_name";
         public static final String COLUMN_L_NAME = "last_name";
-
+        public static final String COLUMN_IS_PROVIDER = "is_provider";
         public static final String COLUMN_DOB = "dob";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_PWD = "password";
@@ -40,6 +40,10 @@ public class AlphaContract {
         }
 
         public static String getEmailFromUri(Uri uri) {
+            return uri.getPathSegments().get(1);
+        }
+
+        public static String getAddressFromUri(Uri uri) {
             return uri.getPathSegments().get(1);
         }
 
@@ -68,6 +72,32 @@ public class AlphaContract {
         public static final String COLUMN_FOOD_ALBUM = "food_album";
 
         public static Uri buildKitchenUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    public static final class AddressEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_ADDRESS).build();
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ADDRESS;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ADDRESS;
+
+        public static final String TABLE_NAME = "address";
+
+        public static final String COLUMN_USER_ID = "user_id";
+        public static final String COLUMN_STREET_1 = "street_add_1";
+        public static final String COLUMN_STREET_12 = "street_add_2";
+        public static final String COLUMN_STATE = "state";
+        public static final String COLUMN_CITY = "city";
+        public static final String COLUMN_ZIPCODE = "zipcode";
+        public static final String COLUMN_USER_NAME = "user_name";
+        public static final String COLUMN_PIC = "picture";
+        public static final String COLUMN_PROFILE_ABOUT = "profile_about";
+
+        public static Uri buildAddressUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }

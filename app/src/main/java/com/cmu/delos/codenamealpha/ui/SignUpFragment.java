@@ -1,11 +1,13 @@
 package com.cmu.delos.codenamealpha.ui;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
+import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 
 
 /**
@@ -72,12 +75,28 @@ public class SignUpFragment extends Fragment {
                         userDetails.put(AlphaContract.UserEntry.COLUMN_F_NAME, fName);
                         userDetails.put(AlphaContract.UserEntry.COLUMN_L_NAME, lName);
                         userDetails.put(AlphaContract.UserEntry.COLUMN_EMAIL, email);
+                        userDetails.put(AlphaContract.UserEntry.COLUMN_IS_PROVIDER, "Y");
                         userDetails.put(AlphaContract.UserEntry.COLUMN_PWD, passwd);
 
                         Uri insertedUri = getActivity().getContentResolver().insert(AlphaContract.UserEntry.CONTENT_URI, userDetails);
-                        Intent intentToSignUp = new Intent(getActivity(), LoginActivity.class);
+                        Log.v("Person ID",ContentUris.parseId(insertedUri)+"");
+                        //Address
+                        ContentValues userProfileDetails = new ContentValues();
+                        userProfileDetails.put(AlphaContract.AddressEntry.COLUMN_USER_NAME, fName + " " + lName);
+                        userProfileDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, ContentUris.parseId(insertedUri));
+                        Uri insertedAddressUri = getActivity().getContentResolver().insert(AlphaContract.AddressEntry.CONTENT_URI, userProfileDetails);
+                        Log.v("Address ID",ContentUris.parseId(insertedAddressUri)+"");
+
+                        //Kitchen
+                        ContentValues userKitchenDetails = new ContentValues();
+                        userKitchenDetails.put(AlphaContract.KitchenEntry.COLUMN_USER_ID, ContentUris.parseId(insertedUri));
+                        Uri insertedProfileUri = getActivity().getContentResolver().insert(AlphaContract.KitchenEntry.CONTENT_URI, userKitchenDetails);
+                        Log.v("Kitchen ID",ContentUris.parseId(insertedProfileUri)+"");
+
+                        Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
                         startActivity(intentToSignUp);
                         userCurser.close();
+
                         Toast.makeText(getActivity(), "Account Created!",
                                 Toast.LENGTH_LONG).show();
 
