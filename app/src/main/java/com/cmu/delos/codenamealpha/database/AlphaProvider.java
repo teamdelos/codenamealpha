@@ -25,7 +25,7 @@ public class AlphaProvider extends ContentProvider{
         final String authority = AlphaContract.CONTENT_AUTHORITY;
         // For each type of URI you want to add, create a corresponding code.
         matcher.addURI(authority, AlphaContract.PATH_USER, USER);
-        matcher.addURI(authority, AlphaContract.PATH_USER + "/#", USER_WITH_EMAIL);
+        matcher.addURI(authority, AlphaContract.PATH_USER + "/*", USER_WITH_EMAIL);
         matcher.addURI(authority, AlphaContract.PATH_KITCHEN, KITCHEN);
         return matcher;
     }

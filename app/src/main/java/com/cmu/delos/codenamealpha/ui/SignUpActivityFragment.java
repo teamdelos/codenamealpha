@@ -1,6 +1,9 @@
 package com.cmu.delos.codenamealpha.ui;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cmu.delos.codenamealpha.R;
+import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 
 
@@ -61,14 +66,37 @@ public class SignUpActivityFragment extends Fragment {
                 confirmPasswd = login_confirm_password.getText().toString().trim();
 
                 if (!fName.isEmpty() && !lName.isEmpty() && !email.isEmpty() && !passwd.isEmpty()
-                        && !confirmPasswd.isEmpty() && passwd == confirmPasswd) {
+                        && !confirmPasswd.isEmpty()) {
+                    Log.v("inside after true", "signup Clicked");
 
 
-                    Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
-                    startActivity(intentToSignUp);
+
+
+                    //search
+
+                    Cursor userCurser = getActivity().getContentResolver().query(AlphaContract.UserEntry.buildUserUriWithEmail(email),null,null,null,null);
+                    Log.v("","count" + userCurser.getCount());
+                    if (userCurser.getCount() == 0) {
+                        ContentValues userDetails = new ContentValues();
+                        userDetails.put(AlphaContract.UserEntry.COLUMN_F_NAME, fName);
+                        userDetails.put(AlphaContract.UserEntry.COLUMN_L_NAME, lName);
+                        userDetails.put(AlphaContract.UserEntry.COLUMN_EMAIL, email);
+                        userDetails.put(AlphaContract.UserEntry.COLUMN_PWD, passwd);
+
+                        Uri insertedUri = getActivity().getContentResolver().insert(AlphaContract.UserEntry.CONTENT_URI, userDetails);
+                        Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
+                        startActivity(intentToSignUp);
+
+                    } else {
+                        Toast.makeText(getActivity(), "Email already exists!",
+                            Toast.LENGTH_LONG).show();
+                    }
+
+                    //insert users
+
 
                 } else {
-                    Toast.makeText(getActivity(), "Please Enter correct field!",
+                    Toast.makeText(getActivity(), "Please Enter correct fields!",
                             Toast.LENGTH_LONG).show();
                 }
 

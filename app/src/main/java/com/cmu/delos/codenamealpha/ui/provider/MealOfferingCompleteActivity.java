@@ -10,8 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
-import com.cmu.delos.codenamealpha.ui.R;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
 public class MealOfferingCompleteActivity extends AbstractAlphaActivity {

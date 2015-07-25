@@ -2,6 +2,8 @@ package com.cmu.delos.codenamealpha.ui;
 
 import android.os.Bundle;
 
+import com.cmu.delos.codenamealpha.R;
+
 
 public class LoginActivity extends AbstractAlphaActivity {
 

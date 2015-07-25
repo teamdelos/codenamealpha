@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.cmu.delos.codenamealpha.R;
+
 
 public class SettingsActivity extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
