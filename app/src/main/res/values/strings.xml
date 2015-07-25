@@ -44,4 +44,6 @@
     <string name="Meal2">Meal</string>
     <string name="navigation_drawer_close">\"Close Navigation Drawer\"</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
+
+    <string name="Search">Search</string>
 </resources>
