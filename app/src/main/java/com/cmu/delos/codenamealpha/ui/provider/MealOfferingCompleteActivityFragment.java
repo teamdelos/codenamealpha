@@ -3,6 +3,8 @@ package com.cmu.delos.codenamealpha.ui.provider;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +31,15 @@ public class MealOfferingCompleteActivityFragment extends Fragment {
             public void onClick(View v) {
 
                 Log.v("on click", "toKitchen Clicked");
-                Intent intentToGoKitchen = new Intent(getActivity(), KitchenActivity.class);
-                startActivity(intentToGoKitchen);
+//                Intent intentToGoKitchen = new Intent(getActivity(), KitchenActivity.class);
+//                startActivity(intentToGoKitchen);
+                Fragment OfferMealFragment = new OfferMealActivityFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, OfferMealFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
             }
         });
         return rootView;
