@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,27 +19,27 @@
         android:layout_alignParentStart="true"
         android:hint="What would you like to order?"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-
-
     <Button
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="false"
         android:text="Search"
         android:textColor="@color/textWhite"
         android:textAlignment="center"
         android:background="@color/buttonColor"
         android:id="@+id/btnSearch"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
+
         <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:text="Filter"
             android:textAlignment="center"
@@ -52,8 +52,8 @@
             android:layout_alignParentEnd="true"
             android:id="@+id/filter_button"/>
         <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:text="Map"
             android:textAlignment="center"
@@ -67,4 +67,4 @@
             android:id="@+id/view_button"/>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

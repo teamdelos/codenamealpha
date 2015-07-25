@@ -73,19 +73,5 @@
                 android:id="@+id/offer_meal_complete_details"/>
         </LinearLayout>
     </ScrollView>
-    <!--<Button-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="end"-->
-        <!--android:text="To Kitchen"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-        <!--android:textAllCaps="true"-->
-        <!--android:textColor="@color/textWhite"-->
-        <!--android:background="@color/buttonColor"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:id="@+id/toKitchenButton"/>-->
 
 </RelativeLayout>

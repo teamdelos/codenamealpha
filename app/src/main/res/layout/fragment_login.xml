@@ -63,7 +63,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:text="Sign In"
             android:textColor="@color/textWhite"
             android:background="#F44336"
@@ -81,7 +81,7 @@
         <Button
             android:paddingLeft="6dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/sign_up_string"
             android:textColor="@color/textWhite"
@@ -103,6 +103,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:clickable="true"
             android:layout_height="wrap_content"
             android:src="@drawable/google_login"
             android:adjustViewBounds="false"

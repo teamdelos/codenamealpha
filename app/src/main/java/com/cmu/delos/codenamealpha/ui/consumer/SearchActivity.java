@@ -23,7 +23,7 @@ public class SearchActivity extends AbstractAlphaActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    SearchView search;
+    private SearchView search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,47 @@ public class SearchActivity extends AbstractAlphaActivity {
         setContentView(R.layout.activity_search);
         setupToolbar();
         setupNavigationView();
+
+        search=(SearchView) findViewById(R.id.searchView);
+        search.setQueryHint("What type of food?");
+
+        //*** setOnQueryTextFocusChangeListener ***
+        search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                // TODO Auto-generated method stub
+
+                Toast.makeText(getBaseContext(), String.valueOf(hasFocus),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //*** setOnQueryTextListener ***
+        search.setOnQueryTextListener(new OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // TODO Auto-generated method stub
+
+                Toast.makeText(getBaseContext(), query,
+                        Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // TODO Auto-generated method stub
+
+                //	Toast.makeText(getBaseContext(), newText,
+                //          Toast.LENGTH_SHORT.show();
+
+                return false;
+            }
+        });
+
     }
 
     private void setupNavigationView(){
@@ -64,52 +105,7 @@ public class SearchActivity extends AbstractAlphaActivity {
                 }
             }
         });
-
     }
-
-//    private void setupNavigationView(){
-//        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//
-//        search=(SearchView) findViewById(R.id.searchView);
-//        search.setQueryHint("What type of food?");
-//
-//        //*** setOnQueryTextFocusChangeListener ***
-//        search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-//
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                // TODO Auto-generated method stub
-//
-//                Toast.makeText(getBaseContext(), String.valueOf(hasFocus),
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        //*** setOnQueryTextListener ***
-//        search.setOnQueryTextListener(new OnQueryTextListener() {
-//
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                // TODO Auto-generated method stub
-//
-//                Toast.makeText(getBaseContext(), query,
-//                        Toast.LENGTH_SHORT).show();
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                // TODO Auto-generated method stub
-//
-//                //	Toast.makeText(getBaseContext(), newText,
-//                //Toast.LENGTH_SHORT.show();
-//
-//                return false;
-//            }
-//        });
-//
-//    }
 
     private void setupToolbar(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
