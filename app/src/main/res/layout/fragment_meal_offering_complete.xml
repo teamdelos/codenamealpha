@@ -97,27 +97,10 @@
             android:textColor="@color/textBlack"
             android:enabled="false"
             android:id="@+id/dishName"/>
-        <TextView
+        <ListView
+            android:id="@+id/listview_meal_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/textBlack"
-            android:enabled="false"
-            android:id="@+id/dishIngrediants"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/textBlack"
-            android:enabled="false"
-            android:id="@+id/dishCount"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/textBlack"
-            android:enabled="false"
-            android:id="@+id/dishDesc"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </RelativeLayout>

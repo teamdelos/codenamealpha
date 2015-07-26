@@ -9,14 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.model.Meal;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -24,12 +29,12 @@ import java.io.File;
  */
 public class MealOfferCompleteFragment extends Fragment {
     private TextView dish_name;
-    private TextView dish_ingredients;
-    private TextView dish_count;
     private TextView dish_price;
-    private TextView dish_desc;
     private ImageView dish_image;
     private Meal m;
+
+    private ArrayAdapter<String> mMealDetailListAdapter;
+
     public MealOfferCompleteFragment() {
     }
 
@@ -38,9 +43,9 @@ public class MealOfferCompleteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_meal_offering_complete, container, false);
         dish_name = (TextView) rootView.findViewById(R.id.dishName);
-        dish_ingredients = (TextView) rootView.findViewById(R.id.dishIngrediants);
-        dish_count = (TextView) rootView.findViewById(R.id.dishCount);
-        dish_desc  = (TextView) rootView.findViewById(R.id.dishDesc);
+//        dish_ingredients = (TextView) rootView.findViewById(R.id.dishIngrediants);
+//        dish_count = (TextView) rootView.findViewById(R.id.dishCount);
+//        dish_desc  = (TextView) rootView.findViewById(R.id.dishDesc);
         dish_price= (TextView) rootView.findViewById(R.id.dish_price_text);
         dish_image = (ImageView) rootView.findViewById(R.id.meal_offered_view);
 
@@ -48,10 +53,24 @@ public class MealOfferCompleteFragment extends Fragment {
         if(m.getDishImage()!=null) setPic();
 
         dish_name.setText(m.getDishName());
-        dish_ingredients.setText("Ingredients:\n\t"+m.getDishIngredients());
-        dish_count.setText("Number of Meals Available: "+ m.getMealCount());
         dish_price.setText("$"+(int) m.getMealPrice());
-        dish_desc.setText("Dish Description:\n"+m.getShortDesc());
+
+        String[] data = {
+                "Ingredients:\n"+m.getDishIngredients(),
+                "Number of Meals Available: "+ m.getMealCount(),
+                "Dish Description:\n"+m.getShortDesc(),
+        };
+
+        List<String> mealDetails = new ArrayList<String>(Arrays.asList(data));
+        mMealDetailListAdapter =
+                new ArrayAdapter<String>(
+                        getActivity(), // The current context (this activity)
+                        R.layout.meal_detail_list, // The name of the layout ID.
+                        R.id.list_item_meal_details_textview, // The ID of the textview to populate.
+                        mealDetails);
+
+        ListView listView = (ListView)rootView.findViewById(R.id.listview_meal_details);
+        listView.setAdapter(mMealDetailListAdapter);
 
         return rootView;
     }
