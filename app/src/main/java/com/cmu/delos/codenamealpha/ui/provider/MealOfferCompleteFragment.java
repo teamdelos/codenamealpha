@@ -56,9 +56,9 @@ public class MealOfferCompleteFragment extends Fragment {
         dish_price.setText("$"+(int) m.getMealPrice());
 
         String[] data = {
-                "Ingredients:\n"+m.getDishIngredients(),
-                "Number of Meals Available: "+ m.getMealCount(),
                 "Dish Description:\n"+m.getShortDesc(),
+                "Number of Meals Available: "+ m.getMealCount(),
+                "Ingredients:\n"+m.getDishIngredients()
         };
 
         List<String> mealDetails = new ArrayList<String>(Arrays.asList(data));
