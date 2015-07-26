@@ -67,6 +67,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 email = login_username.getText().toString().trim();
                 password = login_password.getText().toString().trim();
+                String isProvider = "";
                 if (!email.isEmpty() && !password.isEmpty()) {
                     //search
                     Cursor userCursor = getActivity().getContentResolver().query(AlphaContract.UserEntry.buildUserUriWithEmail(email),null,null,null,null);
@@ -75,6 +76,7 @@ public class LoginFragment extends Fragment {
                         try {
                             for (userCursor.moveToFirst(); !userCursor.isAfterLast(); userCursor.moveToNext()) {
                                 pwd = userCursor.getString(4);
+                                isProvider = userCursor.getString(7);
                                 break;
                             }
                         }finally {
@@ -82,8 +84,13 @@ public class LoginFragment extends Fragment {
                         }
 
                         if(password.equals(pwd)){
-                            Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
-                            startActivity(intentToSignUp);
+                            if (isProvider.equals("N")) {
+                                Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
+                                startActivity(intentToSignUp);
+                            } else {
+                                Intent intentToSignUp = new Intent(getActivity(), KitchenActivity.class);
+                                startActivity(intentToSignUp);
+                            }
                         }
                         else{
                             login_password.setText("");
