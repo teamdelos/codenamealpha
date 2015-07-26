@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.cmu.delos.codenamealpha.R;
 
 import com.cmu.delos.codenamealpha.database.AlphaContract;
+import com.cmu.delos.codenamealpha.ui.consumer.MyActivity;
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 import com.cmu.delos.codenamealpha.ui.provider.KitchenActivity;
 
@@ -57,6 +58,7 @@ public class LoginFragment extends Fragment {
                 Log.v("on click", "FbBtn Clicked");
                 Intent intentToGoProvider = new Intent(getActivity(), KitchenActivity.class);
                 startActivity(intentToGoProvider);
+
             }
         });
         return view;
@@ -102,7 +104,7 @@ public class LoginFragment extends Fragment {
                     } else {
                         login_username.setText("");
                         login_password.setText("");
-                        Toast.makeText(getActivity(), "User doesnot exist!",
+                        Toast.makeText(getActivity(), "User does not exist!",
                                 Toast.LENGTH_LONG).show();
                     }
                     //insert users
