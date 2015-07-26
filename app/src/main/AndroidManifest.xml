@@ -3,6 +3,16 @@
     package="com.cmu.delos.codenamealpha" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="com.javapapers.android.permission.MAPS_RECEIVE" />
+    <!--
+ The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +22,7 @@
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/app_name"
-            android:noHistory="true">
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,12 +32,12 @@
         <activity
             android:name=".ui.ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:noHistory="true">
+            android:noHistory="true" >
         </activity>
         <activity
             android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:noHistory="true">
+            android:noHistory="true" >
         </activity>
         <activity
             android:name=".ui.provider.KitchenActivity"
@@ -39,15 +49,25 @@
         </activity>
         <activity
             android:name=".ui.consumer.SearchActivity"
-            android:label="@string/title_activity_search">
+            android:label="@string/title_activity_search" >
         </activity>
         <activity
             android:name=".ui.consumer.MealOrderDetailActivity"
             android:label="@string/title_activity_meal_page" >
         </activity>
+
         <provider
-            android:authorities="com.cmu.delos.codenamealpha"
-            android:name=".database.AlphaProvider"/>
+            android:name=".database.AlphaProvider"
+            android:authorities="com.cmu.delos.codenamealpha" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDb3CKp1qQZXfWFuJv2cB5eTE6XKmZwrLA" />
+
+
     </application>
 
 </manifest>

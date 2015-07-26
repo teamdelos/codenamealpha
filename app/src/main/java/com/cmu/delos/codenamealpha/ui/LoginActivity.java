@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.cmu.delos.codenamealpha.R;
 
+import com.cmu.delos.codenamealpha.R;
 
 public class LoginActivity extends AbstractAlphaActivity {
 

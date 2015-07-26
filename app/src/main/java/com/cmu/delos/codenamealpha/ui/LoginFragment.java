@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
+
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 import com.cmu.delos.codenamealpha.ui.provider.KitchenActivity;
