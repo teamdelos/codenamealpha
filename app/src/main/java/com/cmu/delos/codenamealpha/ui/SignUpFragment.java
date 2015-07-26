@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class SignUpFragment extends Fragment {
     private EditText signup_email;
     private EditText login_password;
     private EditText login_confirm_password;
+    private CheckBox signup_checkBox;
 
     private String fName;
     private String lName;
@@ -54,6 +56,7 @@ public class SignUpFragment extends Fragment {
         signup_email = (EditText)view.findViewById(R.id.signup_email);
         login_password = (EditText)view.findViewById(R.id.login_password);
         login_confirm_password = (EditText)view.findViewById(R.id.login_confirm_password);
+        signup_checkBox = (CheckBox)view.findViewById(R.id.signup_checkBox);
 
         signUpPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,14 +71,15 @@ public class SignUpFragment extends Fragment {
                 if (!fName.isEmpty() && !lName.isEmpty() && !email.isEmpty() && !passwd.isEmpty()
                         && !confirmPasswd.isEmpty() && passwd.equals(confirmPasswd)) {
                     //search
-
+                    String provider = (signup_checkBox.isChecked()) ? "Y" : "N";
+                    Log.v("Checked",provider);
                     Cursor userCurser = getActivity().getContentResolver().query(AlphaContract.UserEntry.buildUserUriWithEmail(email),null,null,null,null);
                     if (userCurser.getCount() == 0) {
                         ContentValues userDetails = new ContentValues();
                         userDetails.put(AlphaContract.UserEntry.COLUMN_F_NAME, fName);
                         userDetails.put(AlphaContract.UserEntry.COLUMN_L_NAME, lName);
                         userDetails.put(AlphaContract.UserEntry.COLUMN_EMAIL, email);
-                        userDetails.put(AlphaContract.UserEntry.COLUMN_IS_PROVIDER, "Y");
+                        userDetails.put(AlphaContract.UserEntry.COLUMN_IS_PROVIDER, provider);
                         userDetails.put(AlphaContract.UserEntry.COLUMN_PWD, passwd);
 
                         Uri insertedUri = getActivity().getContentResolver().insert(AlphaContract.UserEntry.CONTENT_URI, userDetails);
