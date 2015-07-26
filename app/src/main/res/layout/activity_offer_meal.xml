@@ -32,5 +32,5 @@
         app:headerLayout="@layout/nav_header"
         app:itemTextColor="#333"
         app:itemIconTint="#333"
-        app:menu="@menu/navigation_drawer_items" />
+        app:menu="@menu/navigation_drawer_items_provider" />
 </android.support.v4.widget.DrawerLayout>

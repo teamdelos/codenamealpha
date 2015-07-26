@@ -1,0 +1,25 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/navigation_item_1"
+            android:title="Profile"/>
+        <item
+            android:id="@+id/navigation_item_2"
+            android:title="Kitchen Profile"/>
+        <item
+            android:id="@+id/navigation_item_3"
+            android:title="Settings"/>
+        <item
+            android:id="@+id/navigation_item_11"
+            android:title="About Us"/>
+        <item
+            android:id="@+id/navigation_item_14"
+            android:title="Sign Out"/>
+
+    </group>
+
+</menu>

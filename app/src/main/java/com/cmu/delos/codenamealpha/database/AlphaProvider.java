@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 /**
@@ -16,9 +17,51 @@ public class AlphaProvider extends ContentProvider{
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private AlphaDBHelper mOpenHelper;
 
-    static final int USER = 100;
-    static final int USER_WITH_EMAIL = 101;
-    static final int KITCHEN = 300;
+    private static final int USER = 100;
+    private static final int USER_WITH_EMAIL = 101;
+    private static final int KITCHEN = 200;
+    private static final int KITCHEN_WITH_EMAIL = 201;
+    private static final int MEAL = 300;
+    private static final int MEAL_WITH_EMAIL = 301;
+
+    private static final SQLiteQueryBuilder sKitchenByUserEmailQueryBuilder;
+    private static final SQLiteQueryBuilder sMealByUserEmailQueryBuilder;
+
+    static{
+        sKitchenByUserEmailQueryBuilder = new SQLiteQueryBuilder();
+        sMealByUserEmailQueryBuilder = new SQLiteQueryBuilder();
+
+        //kitchen INNER JOIN user ON kitchen.user_id = user._id
+        sKitchenByUserEmailQueryBuilder.setTables(
+                AlphaContract.KitchenEntry.TABLE_NAME +
+                        " INNER JOIN " +
+                        AlphaContract.UserEntry.TABLE_NAME +
+                        " ON " + AlphaContract.KitchenEntry.TABLE_NAME +
+                        "." + AlphaContract.KitchenEntry.COLUMN_USER_ID +
+                        " = " + AlphaContract.UserEntry.TABLE_NAME +
+                        "." + AlphaContract.UserEntry._ID);
+
+        //Meal,kitchen,user ON Meal.user_id = kitchen._id and kitchen.user_id = user._id
+        sMealByUserEmailQueryBuilder.setTables(
+                AlphaContract.MealEntry.TABLE_NAME +
+                        " INNER JOIN " +
+                        AlphaContract.KitchenEntry.TABLE_NAME +
+                        " ON " + AlphaContract.MealEntry.TABLE_NAME +
+                        "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID+
+                        " = " + AlphaContract.KitchenEntry.TABLE_NAME +
+                        "." + AlphaContract.KitchenEntry._ID +
+                        " INNER JOIN " +
+                        AlphaContract.UserEntry.TABLE_NAME +
+                        " ON " + AlphaContract.KitchenEntry.TABLE_NAME +
+                        "." + AlphaContract.KitchenEntry.COLUMN_USER_ID +
+                        " = " + AlphaContract.UserEntry.TABLE_NAME +
+                        "." + AlphaContract.UserEntry._ID);
+    }
+
+    //user.email=?
+    private static final String sUserSelectionEmail =
+            AlphaContract.UserEntry.TABLE_NAME +
+                    "." + AlphaContract.UserEntry.COLUMN_EMAIL+ " = ? ";
 
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -27,6 +70,9 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_USER, USER);
         matcher.addURI(authority, AlphaContract.PATH_USER + "/*", USER_WITH_EMAIL);
         matcher.addURI(authority, AlphaContract.PATH_KITCHEN, KITCHEN);
+        matcher.addURI(authority, AlphaContract.PATH_KITCHEN + "/*", KITCHEN_WITH_EMAIL);
+        matcher.addURI(authority, AlphaContract.PATH_MEAL, MEAL);
+        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_EMAIL);
         return matcher;
     }
 
@@ -43,53 +89,73 @@ public class AlphaProvider extends ContentProvider{
         final int match = sUriMatcher.match(uri);
 
         switch (match) {
-            // Student: Uncomment and fill out these two cases
             case USER:
                 return AlphaContract.UserEntry.CONTENT_TYPE;
             case USER_WITH_EMAIL:
                 return AlphaContract.UserEntry.CONTENT_ITEM_TYPE;
             case KITCHEN:
                 return AlphaContract.KitchenEntry.CONTENT_TYPE;
+            case KITCHEN_WITH_EMAIL:
+                return AlphaContract.KitchenEntry.CONTENT_ITEM_TYPE;
+            case MEAL:
+                return AlphaContract.MealEntry.CONTENT_TYPE;
+            case MEAL_WITH_EMAIL:
+                return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
     }
 
-    private static final String sUserSelectionEmail =
-            AlphaContract.UserEntry.TABLE_NAME +
-                    "." + AlphaContract.UserEntry.COLUMN_EMAIL+ " = ? ";
-
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
-        // Here's the switch statement that, given a URI, will determine what kind of request it is,
-        // and query the database accordingly.
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
-            //Weather with location and date
-            //Weather with location
             case USER_WITH_EMAIL: {
-                retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.UserEntry.TABLE_NAME,
-                        projection,
-                        sUserSelectionEmail,
-                        new String[]{AlphaContract.UserEntry.getEmailFromUri(uri)},
-                        null,
-                        null,
-                        sortOrder
-                );
+                retCursor = mOpenHelper.getReadableDatabase()
+                        .query(AlphaContract.UserEntry.TABLE_NAME,
+                                projection,
+                                sUserSelectionEmail,
+                                new String[]{AlphaContract.UserEntry.getEmailFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
                 break;
             }
-            //Weather
             case USER: {
                 retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.UserEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             }
-            //Location
             case KITCHEN: {
                 retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.KitchenEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             }
-
+            case KITCHEN_WITH_EMAIL: {
+                retCursor = sKitchenByUserEmailQueryBuilder
+                        .query(mOpenHelper.getReadableDatabase(),
+                                projection,
+                                sUserSelectionEmail,
+                                new String[]{AlphaContract.UserEntry.getEmailFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
+                break;
+            }
+            case MEAL: {
+                retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.MealEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                break;
+            }
+            case MEAL_WITH_EMAIL: {
+                retCursor = sMealByUserEmailQueryBuilder
+                        .query(mOpenHelper.getReadableDatabase(),
+                                projection,
+                                sUserSelectionEmail,
+                                new String[]{AlphaContract.UserEntry.getEmailFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -120,6 +186,14 @@ public class AlphaProvider extends ContentProvider{
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
+            case MEAL:{
+                long _id = db.insert(AlphaContract.MealEntry.TABLE_NAME,null,values);
+                if(_id > 0)
+                    returnUri = AlphaContract.MealEntry.buildMealUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -143,6 +217,10 @@ public class AlphaProvider extends ContentProvider{
             case KITCHEN:
                 rowsDeleted = db.delete(
                         AlphaContract.KitchenEntry.TABLE_NAME,selection,selectionArgs);
+                break;
+            case MEAL:
+                rowsDeleted = db.delete(
+                        AlphaContract.MealEntry.TABLE_NAME,selection,selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -169,6 +247,9 @@ public class AlphaProvider extends ContentProvider{
                 break;
             case KITCHEN:
                 rowsUpdated = db.update(AlphaContract.KitchenEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case MEAL:
+                rowsUpdated = db.update(AlphaContract.MealEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);

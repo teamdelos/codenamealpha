@@ -49,6 +49,10 @@ public class KitchenActivity extends AbstractAlphaActivity {
                         return true;
                     // For rest of the options we just show a toast on click
                     case R.id.navigation_item_2:
+                        Intent goToKitchenProfile = new Intent(KitchenActivity.this, KitchenProfileActivity.class);
+                        startActivity(goToKitchenProfile);
+                        return true;
+                    case R.id.navigation_item_3:
                         Intent goToSettings = new Intent(KitchenActivity.this, SettingsActivity.class);
                         startActivity(goToSettings);
                         return true;

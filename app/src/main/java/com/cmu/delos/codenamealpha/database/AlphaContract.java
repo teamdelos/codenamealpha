@@ -12,6 +12,7 @@ public class AlphaContract {
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_USER = "user";
     public static final String PATH_KITCHEN = "kitchen";
+    public static final String PATH_MEAL = "meal";
 
 
     public static final class UserEntry implements BaseColumns {
@@ -68,6 +69,35 @@ public class AlphaContract {
         public static final String COLUMN_FOOD_ALBUM = "food_album";
 
         public static Uri buildKitchenUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static Uri buildKitchenUriWithEmail(String email){
+            return CONTENT_URI.buildUpon()
+                    .appendPath(email).build();
+        }
+    }
+
+    public static final class MealEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_MEAL).build();
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MEAL;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MEAL;
+
+        public static final String TABLE_NAME = "meal";
+
+        public static final String COLUMN_KITCHEN_ID = "kitchen_id";
+        public static final String COLUMN_DISH_NAME = "dish_name";
+        public static final String COLUMN_SHORT_DESC = "meal_desc";
+        public static final String COLUMN_DISH_IMAGE = "dish_image";
+        public static final String COLUMN_DISH_VIDEO = "dish_video";
+        public static final String COLUMN_MEAL_COUNT = "meal_count";
+        public static final String COLUMN_MEAL_PRICE = "meal_price";
+
+        public static Uri buildMealUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
