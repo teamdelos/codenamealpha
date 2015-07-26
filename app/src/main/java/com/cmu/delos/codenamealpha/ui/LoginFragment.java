@@ -67,29 +67,59 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 email = login_username.getText().toString().trim();
                 password = login_password.getText().toString().trim();
+                String isProvider = "";
                 if (!email.isEmpty() && !password.isEmpty()) {
                     //search
                     Cursor userCursor = getActivity().getContentResolver().query(AlphaContract.UserEntry.buildUserUriWithEmail(email),null,null,null,null);
+                    Cursor kitchenCursor = getActivity().getContentResolver().query(AlphaContract.KitchenEntry.buildKitchenUriWithEmail(email),null,null,null,null);
                     if (userCursor.getCount() == 1) {
                         String pwd=null;
-                        try {
+                            try {
                             for (userCursor.moveToFirst(); !userCursor.isAfterLast(); userCursor.moveToNext()) {
                                 pwd = userCursor.getString(4);
+                                isProvider = userCursor.getString(7);
+                                ((LoginActivity) getActivity())
+                                        .createUser(
+                                                userCursor.getInt(0),
+                                                userCursor.getString(1),
+                                                userCursor.getString(2),
+                                                userCursor.getString(3),
+                                                userCursor.getString(7)
+                                        );
+                                break;
                             }
                         }finally {
                             userCursor.close();
                         }
 
                         if(password.equals(pwd)){
-                            Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
-                            startActivity(intentToSignUp);
+                            if (isProvider.equals("N")) {
+                                Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
+                                startActivity(intentToSignUp);
+                            } else {
+                                try {
+                                    for (kitchenCursor.moveToFirst(); !kitchenCursor.isAfterLast(); kitchenCursor.moveToNext()) {
+                                        ((LoginActivity) getActivity())
+                                                .createKitchen(
+                                                        kitchenCursor.getInt(0),
+                                                        kitchenCursor.getInt(1),
+                                                        kitchenCursor.getString(2),
+                                                        kitchenCursor.getString(3)
+                                                );
+                                        break;
+                                    }
+                                }finally {
+                                    kitchenCursor.close();
+                                }
+                                Intent intentToSignUp = new Intent(getActivity(), KitchenActivity.class);
+                                startActivity(intentToSignUp);
+                            }
                         }
                         else{
                             login_password.setText("");
                             Toast.makeText(getActivity(), "Wrong Password. Please enter again",
                                     Toast.LENGTH_LONG).show();
                         }
-
                     } else {
                         login_username.setText("");
                         login_password.setText("");

@@ -21,71 +21,74 @@
         android:id="@+id/dish_details"/>
     <android.widget.Space
         android:layout_width="match_parent"
-        android:layout_height="16dp"
+        android:layout_height="8dp"
         android:id="@+id/space"
         android:layout_below="@id/dish_details"/>
     <EditText
-        android:id="@+id/offer_meal_name"
+        android:id="@+id/dish_name"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/space"
-        android:hint="What's the name of this meal?"/>
-    <EditText
-        android:id="@+id/offer_meal_price"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:hint="*What do you call this dish?"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="How much is this meal listed for?"
-        android:layout_below="@id/offer_meal_name"/>
+        android:id="@+id/price_quantity"
+        android:layout_below="@id/dish_name"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/dish_price"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="*How much?"
+            />
+        <EditText
+            android:id="@+id/dish_quantity"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="*How many?"
+            />
+    </LinearLayout>
     <EditText
-        android:id="@+id/offer_meal_ingrediants"
+        android:id="@+id/dish_ingrediants"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:hint="Main Meal Ingredients:"
-        android:layout_below="@id/offer_meal_price"/>
+        android:hint="*Main Ingredients"
+        android:layout_below="@id/price_quantity"/>
+    <EditText
+        android:id="@+id/dish_desc"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:hint="Short Description"
+        android:layout_below="@id/dish_ingrediants"/>
     <android.widget.Space
         android:layout_width="match_parent"
         android:layout_height="16dp"
-        android:layout_below="@id/offer_meal_ingrediants"
-        android:id="@+id/space_under_ingrediants"/>
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="200dp"
+        android:layout_below="@id/dish_desc"
+        android:id="@+id/space_under_desc"/>
+    <ImageButton
+        android:layout_width="300dp"
+        android:layout_height="250dp"
         android:clickable="true"
         android:src="@drawable/image_placeholder"
         android:adjustViewBounds="false"
         android:elevation="@dimen/snackbar_elevation"
-        android:layout_below="@+id/space_under_ingrediants"
+        android:layout_below="@+id/space_under_desc"
         android:layout_centerHorizontal="true"
-        android:id="@+id/imageView" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Mexican Dish"
-        android:id="@+id/textView6"
-        android:textAllCaps="true"
-        android:textColor="@color/textBlack"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Provider: Jane Smith"
-        android:id="@+id/textView7"
-        android:textAllCaps="true"
-        android:textColor="@color/textBlack"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/textView6"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/addDishImage" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="30dp"

@@ -34,44 +34,90 @@
         android:layout_height="6dp"
         android:id="@+id/space"
         android:layout_below="@+id/succ_fail_text"/>
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:src="@drawable/provider_meal6"
-        android:layout_gravity="center_horizontal"
-        android:adjustViewBounds="false"
-        android:elevation="@dimen/snackbar_elevation"
-        android:id="@+id/meal_ordered_view"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/space"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/imageWithPrice">
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:src="@drawable/image_placeholder"
+            android:gravity="center_horizontal"
+            android:adjustViewBounds="false"
+            android:elevation="@dimen/snackbar_elevation"
+            android:id="@+id/meal_offered_view"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/textWhite"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="@dimen/snackbar_elevation"
+            android:id="@+id/dish_price_text"
+            android:layout_alignRight="@+id/meal_offered_view"
+            android:layout_alignBottom="@+id/meal_offered_view" />
+    </RelativeLayout>
     <TextView
         android:text="Meal Details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/meal_ordered_view"
+        android:layout_below="@+id/imageWithPrice"
         android:gravity="center"
         android:paddingTop="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/textBlack"
         android:enabled="false"
         android:id="@+id/details_text"/>
     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/details_text"
+        android:id="@+id/scrollView2"></ScrollView>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/details_text">
-        <LinearLayout
-            android:layout_width="wrap_content"
+        android:paddingLeft="30dp"
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        android:layout_alignTop="@+id/scrollView2"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:text=""
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/textBlack"
-                android:enabled="false"
-                android:id="@+id/offer_meal_complete_details"/>
-        </LinearLayout>
-    </ScrollView>
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@color/textBlack"
+            android:enabled="false"
+            android:id="@+id/dishName"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/textBlack"
+            android:enabled="false"
+            android:id="@+id/dishIngrediants"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/textBlack"
+            android:enabled="false"
+            android:id="@+id/dishCount"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/textBlack"
+            android:enabled="false"
+            android:id="@+id/dishDesc"/>
+    </LinearLayout>
 
 </RelativeLayout>

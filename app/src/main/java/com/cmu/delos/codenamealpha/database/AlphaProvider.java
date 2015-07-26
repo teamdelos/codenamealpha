@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.util.Log;
 
 /**
  * Created by Vignan on 7/19/2015.
@@ -23,6 +24,9 @@ public class AlphaProvider extends ContentProvider{
     private static final int KITCHEN_WITH_EMAIL = 201;
     private static final int MEAL = 300;
     private static final int MEAL_WITH_EMAIL = 301;
+    private static final int MEAL_WITH_DISH_KITCHEN_ID = 302;
+    static final int ADDRESS = 400;
+    static final int ADDRESS_WITH_USER_ID = 401;
 
     private static final SQLiteQueryBuilder sKitchenByUserEmailQueryBuilder;
     private static final SQLiteQueryBuilder sMealByUserEmailQueryBuilder;
@@ -58,11 +62,6 @@ public class AlphaProvider extends ContentProvider{
                         "." + AlphaContract.UserEntry._ID);
     }
 
-    //user.email=?
-    private static final String sUserSelectionEmail =
-            AlphaContract.UserEntry.TABLE_NAME +
-                    "." + AlphaContract.UserEntry.COLUMN_EMAIL+ " = ? ";
-
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = AlphaContract.CONTENT_AUTHORITY;
@@ -73,6 +72,9 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_KITCHEN + "/*", KITCHEN_WITH_EMAIL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL, MEAL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_EMAIL);
+        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*/#", MEAL_WITH_DISH_KITCHEN_ID);
+        matcher.addURI(authority, AlphaContract.PATH_ADDRESS, ADDRESS);
+        matcher.addURI(authority, AlphaContract.PATH_ADDRESS + "/#", ADDRESS_WITH_USER_ID);
         return matcher;
     }
 
@@ -101,10 +103,30 @@ public class AlphaProvider extends ContentProvider{
                 return AlphaContract.MealEntry.CONTENT_TYPE;
             case MEAL_WITH_EMAIL:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
+            case MEAL_WITH_DISH_KITCHEN_ID:
+                return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
+            case ADDRESS:
+                return AlphaContract.AddressEntry.CONTENT_TYPE;
+            case ADDRESS_WITH_USER_ID:
+                return AlphaContract.AddressEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
     }
+
+    //user.email=?
+    private static final String sUserSelectionEmail =
+            AlphaContract.UserEntry.TABLE_NAME +
+                    "." + AlphaContract.UserEntry.COLUMN_EMAIL+ " = ? ";
+
+    private static final String sAddressSelectWithUserId =
+            AlphaContract.AddressEntry.TABLE_NAME +
+                    "." + AlphaContract.AddressEntry.COLUMN_USER_ID+ " = ? ";
+
+    private static final String sMealSelectWithKIdDishName=
+            AlphaContract.MealEntry.TABLE_NAME +
+                    "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? AND "+
+                    AlphaContract.MealEntry.COLUMN_KITCHEN_ID+" = ? ";
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
@@ -120,6 +142,17 @@ public class AlphaProvider extends ContentProvider{
                                 null,
                                 null,
                                 sortOrder);
+                break;
+            }
+            case ADDRESS_WITH_USER_ID: {
+                retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.AddressEntry.TABLE_NAME,
+                        projection,
+                        sAddressSelectWithUserId,
+                        new String[]{AlphaContract.UserEntry.getAddressFromUri(uri)},
+                        null,
+                        null,
+                        sortOrder
+                );
                 break;
             }
             case USER: {
@@ -151,6 +184,18 @@ public class AlphaProvider extends ContentProvider{
                                 projection,
                                 sUserSelectionEmail,
                                 new String[]{AlphaContract.UserEntry.getEmailFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
+                break;
+            }
+            case MEAL_WITH_DISH_KITCHEN_ID:{
+                retCursor = mOpenHelper.getReadableDatabase()
+                        .query(AlphaContract.MealEntry.TABLE_NAME,
+                                projection,
+                                sMealSelectWithKIdDishName,
+                                new String[]{String.valueOf(AlphaContract.MealEntry.getKidFromUri(uri)),
+                                        AlphaContract.MealEntry.getDishNameFromUri(uri)},
                                 null,
                                 null,
                                 sortOrder);
@@ -194,6 +239,14 @@ public class AlphaProvider extends ContentProvider{
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
+            case ADDRESS:{
+                long _id = db.insert(AlphaContract.AddressEntry.TABLE_NAME,null,values);
+                if(_id > 0)
+                    returnUri = AlphaContract.AddressEntry.buildAddressUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -221,6 +274,10 @@ public class AlphaProvider extends ContentProvider{
             case MEAL:
                 rowsDeleted = db.delete(
                         AlphaContract.MealEntry.TABLE_NAME,selection,selectionArgs);
+                break;
+            case ADDRESS:
+                rowsDeleted = db.delete(
+                        AlphaContract.AddressEntry.TABLE_NAME,selection,selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -250,6 +307,9 @@ public class AlphaProvider extends ContentProvider{
                 break;
             case MEAL:
                 rowsUpdated = db.update(AlphaContract.MealEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case ADDRESS:
+                rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
