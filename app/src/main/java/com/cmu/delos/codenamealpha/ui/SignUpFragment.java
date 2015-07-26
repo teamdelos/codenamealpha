@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
+import com.cmu.delos.codenamealpha.ui.provider.KitchenActivity;
 
 
 /**
@@ -97,8 +98,13 @@ public class SignUpFragment extends Fragment {
                         Uri insertedProfileUri = getActivity().getContentResolver().insert(AlphaContract.KitchenEntry.CONTENT_URI, userKitchenDetails);
                         Log.v("Kitchen ID",ContentUris.parseId(insertedProfileUri)+"");
 
-                        Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
-                        startActivity(intentToSignUp);
+                        if (provider.equals("N")) {
+                            Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
+                            startActivity(intentToSignUp);
+                        } else {
+                            Intent intentToSignUp = new Intent(getActivity(), KitchenActivity.class);
+                            startActivity(intentToSignUp);
+                        }
                         userCurser.close();
 
                         Toast.makeText(getActivity(), "Account Created!",
