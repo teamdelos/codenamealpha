@@ -125,8 +125,8 @@ public class AlphaProvider extends ContentProvider{
 
     private static final String sMealSelectWithKIdDishName=
             AlphaContract.MealEntry.TABLE_NAME +
-                    "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? AND "+
-                    AlphaContract.MealEntry.COLUMN_KITCHEN_ID+" = ? ";
+                    "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID+" = ?  AND "+
+                    AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,

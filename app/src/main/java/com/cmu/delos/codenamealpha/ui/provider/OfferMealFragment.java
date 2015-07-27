@@ -29,11 +29,14 @@ import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.Kitchen;
 import com.cmu.delos.codenamealpha.ui.LoginActivity;
+import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 
 /**
@@ -142,27 +145,17 @@ public class OfferMealFragment extends Fragment {
     }
 
     private void setPic() {
-        // Get the dimensions of the View
-        int targetW = addDishImageBtn.getWidth();
-        int targetH = addDishImageBtn.getHeight();
+        File imgFile = new File(mCurrentPhotoPath);
+        // Part 1: Decode image
+        Bitmap unscaledBitmap = decodeResource(imgFile, 500, 400, ScalingUtilities.ScalingLogic.FIT);
 
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
+        // Part 2: Scale image
+        Bitmap scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, 500,
+                400, ScalingUtilities.ScalingLogic.FIT);
+        unscaledBitmap.recycle();
 
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        addDishImageBtn.setImageBitmap(bitmap);
+        // Publish results
+        addDishImageBtn.setImageBitmap(scaledBitmap);
     }
 
     private void listMealHandler(){
@@ -178,7 +171,6 @@ public class OfferMealFragment extends Fragment {
                 Kitchen k = ((OfferMealActivity) getActivity()).getKitchen();
                 if (!dishName.isEmpty() && !dishPrice.isEmpty()
                         && !dishQuantity.isEmpty()&& !dishIngredients.isEmpty()) {
-
                     Cursor mealCursor = getActivity().getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithKidDName(k.getKitchenId(), dishName),null,null,null,null);
                     if(mealCursor.getCount() == 0){
                         ContentValues mealDetails = new ContentValues();
@@ -192,27 +184,27 @@ public class OfferMealFragment extends Fragment {
 
                         Uri insertedMealUri = getActivity().getContentResolver().insert(AlphaContract.MealEntry.CONTENT_URI, mealDetails);
                         mealId = (int) ContentUris.parseId(insertedMealUri);
+                        Toast.makeText(getActivity(), "Dish Added!",
+                                Toast.LENGTH_LONG).show();
+
+                        ((OfferMealActivity) getActivity())
+                                .createMeal(
+                                        mealId,
+                                        k.getKitchenId(),
+                                        dishName,
+                                        dishDesc,
+                                        dishIngredients,
+                                        mCurrentPhotoPath,
+                                        Integer.valueOf(dishQuantity),
+                                        Double.valueOf(dishPrice)
+                                );
+
+                        setUpFragment();
                     } else {
                         Toast.makeText(getActivity(), "Dish already exists!",
                                 Toast.LENGTH_LONG).show();
                     }
                     mealCursor.close();
-                    Toast.makeText(getActivity(), "Dish Added!",
-                            Toast.LENGTH_LONG).show();
-
-                    ((OfferMealActivity) getActivity())
-                            .createMeal(
-                                    mealId,
-                                    k.getKitchenId(),
-                                    dishName,
-                                    dishDesc,
-                                    dishIngredients,
-                                    mCurrentPhotoPath,
-                                    Integer.valueOf(dishQuantity),
-                                    Double.valueOf(dishPrice)
-                            );
-
-                    setUpFragment();
                 }
                 else{
                     Toast.makeText(getActivity(), "Please fill all * fields!",
