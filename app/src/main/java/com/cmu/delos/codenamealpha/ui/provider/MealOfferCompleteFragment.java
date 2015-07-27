@@ -1,27 +1,26 @@
 package com.cmu.delos.codenamealpha.ui.provider;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.model.Meal;
+import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 
 /**
@@ -43,9 +42,6 @@ public class MealOfferCompleteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_meal_offering_complete, container, false);
         dish_name = (TextView) rootView.findViewById(R.id.dishName);
-//        dish_ingredients = (TextView) rootView.findViewById(R.id.dishIngrediants);
-//        dish_count = (TextView) rootView.findViewById(R.id.dishCount);
-//        dish_desc  = (TextView) rootView.findViewById(R.id.dishDesc);
         dish_price= (TextView) rootView.findViewById(R.id.dish_price_text);
         dish_image = (ImageView) rootView.findViewById(R.id.meal_offered_view);
 
@@ -77,7 +73,16 @@ public class MealOfferCompleteFragment extends Fragment {
 
     private void setPic(){
         File imgFile = new File(m.getDishImage());
-        Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-        dish_image.setImageBitmap(myBitmap);
+
+        // Part 1: Decode image
+        Bitmap unscaledBitmap = decodeResource(imgFile, 500, 400, ScalingUtilities.ScalingLogic.FIT);
+
+        // Part 2: Scale image
+        Bitmap scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, 500,
+                400, ScalingUtilities.ScalingLogic.FIT);
+        unscaledBitmap.recycle();
+
+        // Publish results
+        dish_image.setImageBitmap(scaledBitmap);
     }
 }

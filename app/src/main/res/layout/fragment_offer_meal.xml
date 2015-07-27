@@ -3,105 +3,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     tools:context="com.cmu.delos.codenamealpha.ui.provider.OfferMealFragment"
     android:orientation="vertical">
-
-    <TextView
-        android:text="Meal Details"
-        android:textStyle="bold"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000"
-        android:enabled="false"
-        android:id="@+id/dish_details"/>
+        android:orientation="horizontal"
+        android:id="@+id/title">
+        <TextView
+            android:text="Please enter meal details"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_gravity="bottom"
+            android:textColor="#000000"
+            android:enabled="false"
+            android:id="@+id/dish_details"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="List This Meal"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@color/textWhite"
+            android:background="@color/buttonColor"
+            android:elevation="2dp"
+            android:id="@+id/list_meal_button"/>
+    </LinearLayout>
+
     <android.widget.Space
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:id="@+id/space"
-        android:layout_below="@id/dish_details"/>
-    <EditText
-        android:id="@+id/dish_name"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@id/title"/>
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/space"
-        android:hint="*What do you call this dish?"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/price_quantity"
-        android:layout_below="@id/dish_name"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/dish_price"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="*How much?"
-            />
-        <EditText
-            android:id="@+id/dish_quantity"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="*How many?"
-            />
-    </LinearLayout>
-    <EditText
-        android:id="@+id/dish_ingrediants"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:hint="*Main Ingredients"
-        android:layout_below="@id/price_quantity"/>
-    <EditText
-        android:id="@+id/dish_desc"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:hint="Short Description"
-        android:layout_below="@id/dish_ingrediants"/>
-    <android.widget.Space
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:layout_below="@id/dish_desc"
-        android:id="@+id/space_under_desc"/>
-    <ImageButton
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:clickable="true"
-        android:src="@drawable/image_placeholder"
-        android:adjustViewBounds="false"
-        android:elevation="@dimen/snackbar_elevation"
-        android:layout_below="@+id/space_under_desc"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/addDishImage" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="List This Meal"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textAllCaps="true"
-        android:textColor="@color/textWhite"
-        android:background="@color/buttonColor"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/list_meal_button" />
-
-
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_below="@+id/space">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/dish_name"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/space"
+                android:hint="*What do you call this dish?"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_quantity"
+                android:layout_below="@id/dish_name"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/dish_price"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="*How much?"
+                    />
+                <EditText
+                    android:id="@+id/dish_quantity"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="*How many?"/>
+            </LinearLayout>
+            <EditText
+                android:id="@+id/dish_ingrediants"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:hint="*Main Ingredients"
+                android:layout_below="@id/price_quantity"/>
+            <EditText
+                android:id="@+id/dish_desc"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:hint="Short Description"
+                android:layout_below="@id/dish_ingrediants"/>
+            <android.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:layout_below="@id/dish_desc"
+                android:id="@+id/space_under_desc"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:clickable="true"
+                android:src="@drawable/default_meal"
+                android:adjustViewBounds="false"
+                android:elevation="@dimen/snackbar_elevation"
+                android:layout_below="@+id/space_under_desc"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/addDishImage" />
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
