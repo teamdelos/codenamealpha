@@ -5,12 +5,31 @@ package com.cmu.delos.codenamealpha.model;
  */
 public class User {
 
+    private int userId;
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
-    private String picture;
-    private String phone;
+    private String dateOfBirth;
+    private String image;
+    private String isProvider;
+    private String gender;
+    private String mobileNum;
+
+    public User(int userId,String firstName,String lastName,String email,String isProvider){
+        this.userId=userId;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.email=email;
+        this.isProvider=isProvider;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -36,27 +55,43 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getImage() {
+        return image;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getIsProvider() {
+        return isProvider;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setIsProvider(String isProvider) {
+        this.isProvider = isProvider;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getMobileNum() {
+        return mobileNum;
+    }
+
+    public void setMobileNum(String mobileNum) {
+        this.mobileNum = mobileNum;
     }
 }

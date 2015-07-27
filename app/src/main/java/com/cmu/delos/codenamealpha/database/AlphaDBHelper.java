@@ -3,14 +3,16 @@ package com.cmu.delos.codenamealpha.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.cmu.delos.codenamealpha.database.AlphaContract.UserEntry;
 import com.cmu.delos.codenamealpha.database.AlphaContract.KitchenEntry;
+import com.cmu.delos.codenamealpha.database.AlphaContract.MealEntry;
 import com.cmu.delos.codenamealpha.database.AlphaContract.AddressEntry;
 
 public class AlphaDBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 1;
 
     static final String DATABASE_NAME = "codenamealpha.db";
 
@@ -39,9 +41,23 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 KitchenEntry.COLUMN_USER_ID + " INTEGER NOT NULL, " +
                 KitchenEntry.COLUMN_SHORT_DESC + " TEXT, " +
                 KitchenEntry.COLUMN_KITCHEN_IMAGE + " INTEGER," +
-                KitchenEntry.COLUMN_FOOD_ALBUM + " REAL, " +
+                KitchenEntry.COLUMN_FOOD_ALBUM + " TEXT, " +
+                " UNIQUE (" + KitchenEntry.COLUMN_USER_ID+ ")"+
                 " FOREIGN KEY (" + KitchenEntry.COLUMN_USER_ID+ ") REFERENCES " +
                 UserEntry.TABLE_NAME + " (" + UserEntry._ID + "));";
+
+        final String SQL_CREATE_MEAL_TABLE = "CREATE TABLE " + MealEntry.TABLE_NAME + " (" +
+                MealEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                MealEntry.COLUMN_KITCHEN_ID+ " INTEGER NOT NULL, " +
+                MealEntry.COLUMN_DISH_NAME+ " TEXT NOT NULL, " +
+                MealEntry.COLUMN_MEAL_PRICE + " REAL NOT NULL, " +
+                MealEntry.COLUMN_MEAL_COUNT + " INTEGER NOT NULL, " +
+                MealEntry.COLUMN_DISH_INGREDIENTS + " TEXT NOT NULL, "+
+                MealEntry.COLUMN_SHORT_DESC + " TEXT," +
+                MealEntry.COLUMN_DISH_IMAGE + " TEXT, " +
+                " UNIQUE (" + MealEntry.COLUMN_KITCHEN_ID+ ","+MealEntry.COLUMN_DISH_NAME +")"+
+                " FOREIGN KEY (" + MealEntry.COLUMN_KITCHEN_ID+ ") REFERENCES " +
+                KitchenEntry.TABLE_NAME + " (" + KitchenEntry._ID + "));";
 
         final String SQL_CREATE_ADRESS_TABLE = "CREATE TABLE " + AddressEntry.TABLE_NAME + " (" +
                 AddressEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -59,6 +75,7 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_KITHCHEN_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_MEAL_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_ADRESS_TABLE);
     }
 
@@ -66,6 +83,7 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KitchenEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MealEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + AddressEntry.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }

@@ -40,8 +40,7 @@ public class SignUpFragment extends Fragment {
     private String email;
     private String passwd;
     private String confirmPasswd;
-
-
+    private String provider;
 
     public SignUpFragment() {
     }
@@ -72,7 +71,7 @@ public class SignUpFragment extends Fragment {
                 if (!fName.isEmpty() && !lName.isEmpty() && !email.isEmpty() && !passwd.isEmpty()
                         && !confirmPasswd.isEmpty() && passwd.equals(confirmPasswd)) {
                     //search
-                    String provider = (signup_checkBox.isChecked()) ? "Y" : "N";
+                    provider = (signup_checkBox.isChecked()) ? "Y" : "N";
                     Log.v("Checked",provider);
                     Cursor userCurser = getActivity().getContentResolver().query(AlphaContract.UserEntry.buildUserUriWithEmail(email),null,null,null,null);
                     if (userCurser.getCount() == 0) {
@@ -84,19 +83,39 @@ public class SignUpFragment extends Fragment {
                         userDetails.put(AlphaContract.UserEntry.COLUMN_PWD, passwd);
 
                         Uri insertedUri = getActivity().getContentResolver().insert(AlphaContract.UserEntry.CONTENT_URI, userDetails);
+                        long userId = ContentUris.parseId(insertedUri);
                         Log.v("Person ID",ContentUris.parseId(insertedUri)+"");
                         //Address
                         ContentValues userProfileDetails = new ContentValues();
                         userProfileDetails.put(AlphaContract.AddressEntry.COLUMN_USER_NAME, fName + " " + lName);
-                        userProfileDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, ContentUris.parseId(insertedUri));
+                        userProfileDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, userId);
                         Uri insertedAddressUri = getActivity().getContentResolver().insert(AlphaContract.AddressEntry.CONTENT_URI, userProfileDetails);
-                        Log.v("Address ID",ContentUris.parseId(insertedAddressUri)+"");
+                        Log.v("Address ID", ContentUris.parseId(insertedAddressUri) + "");
 
                         //Kitchen
                         ContentValues userKitchenDetails = new ContentValues();
-                        userKitchenDetails.put(AlphaContract.KitchenEntry.COLUMN_USER_ID, ContentUris.parseId(insertedUri));
-                        Uri insertedProfileUri = getActivity().getContentResolver().insert(AlphaContract.KitchenEntry.CONTENT_URI, userKitchenDetails);
-                        Log.v("Kitchen ID",ContentUris.parseId(insertedProfileUri)+"");
+                        userKitchenDetails.put(AlphaContract.KitchenEntry.COLUMN_USER_ID, userId);
+                        Uri insertedKitchenUri = getActivity().getContentResolver().insert(AlphaContract.KitchenEntry.CONTENT_URI, userKitchenDetails);
+                        Log.v("Kitchen ID", ContentUris.parseId(insertedKitchenUri) + "");
+                        long kitchenId = ContentUris.parseId(insertedKitchenUri);
+
+                        //creating the model User object for use
+                        ((LoginActivity) getActivity())
+                                .createUser(
+                                        (int) userId,
+                                        fName,
+                                        lName,
+                                        email,
+                                        provider
+                                );
+                        //creating the model Kitchen object for use
+                        ((LoginActivity) getActivity())
+                                .createKitchen(
+                                        (int) kitchenId,
+                                        (int) userId,
+                                        null,
+                                        null
+                                );
 
                         if (provider.equals("N")) {
                             Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);

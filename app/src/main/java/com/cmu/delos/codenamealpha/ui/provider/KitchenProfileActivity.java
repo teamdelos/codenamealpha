@@ -1,14 +1,12 @@
 package com.cmu.delos.codenamealpha.ui.provider;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,19 +17,18 @@ import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
-public class OfferMealActivity extends AbstractAlphaActivity {
+public class KitchenProfileActivity extends AbstractAlphaActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_offer_meal);
+        setContentView(R.layout.activity_kitchen_profile);
         setupToolbar();
         setupNavigationView();
-        handleFragment();
     }
+
 
     private void setupNavigationView(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -50,16 +47,16 @@ public class OfferMealActivity extends AbstractAlphaActivity {
                 switch (menuItem.getItemId()) {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.navigation_item_1:
-                        Intent goToProfile = new Intent(OfferMealActivity.this, ProfileActivity.class);
+                        Intent goToProfile = new Intent(KitchenProfileActivity.this, ProfileActivity.class);
                         startActivity(goToProfile);
                         return true;
-                    // For rest of the options we just show a toast on click
                     case R.id.navigation_item_2:
-                        Intent goToKitchenProfile = new Intent(OfferMealActivity.this, KitchenProfileActivity.class);
-                        startActivity(goToKitchenProfile);
+//                        Intent goToKitchenProfile = new Intent(KitchenProfileActivity.this, KitchenProfileActivity.class);
+//                        startActivity(goToKitchenProfile);
                         return true;
+                    // For rest of the options we just show a toast on click
                     case R.id.navigation_item_3:
-                        Intent goToSettings = new Intent(OfferMealActivity.this, SettingsActivity.class);
+                        Intent goToSettings = new Intent(KitchenProfileActivity.this, SettingsActivity.class);
                         startActivity(goToSettings);
                         return true;
                     default:
@@ -68,6 +65,7 @@ public class OfferMealActivity extends AbstractAlphaActivity {
                 }
             }
         });
+
     }
 
     private void setupToolbar(){
@@ -78,14 +76,6 @@ public class OfferMealActivity extends AbstractAlphaActivity {
         ab.setTitle(R.string.app_name);
         ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
-    }
-
-    private void handleFragment(){
-        Fragment fragment = new OfferMealFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.offer_meal_container, fragment);
-        fragmentTransaction.commit();
     }
 
     @Override
