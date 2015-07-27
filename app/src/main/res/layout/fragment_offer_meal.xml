@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         android:id="@+id/title">
         <TextView
-            android:text="Please enter meal details"
+            android:text="Please Enter Meal Details:"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/space"
-                android:hint="*What do you call this dish?"/>
+                android:hint="*Name of this dish?"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
-                    android:hint="*How much?"
+                    android:hint="*List Price?"
                     />
                 <EditText
                     android:id="@+id/dish_quantity"
@@ -83,7 +83,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:hint="*How many?"/>
+                    android:hint="*Quantity Available?"/>
             </LinearLayout>
             <EditText
                 android:id="@+id/dish_ingrediants"
