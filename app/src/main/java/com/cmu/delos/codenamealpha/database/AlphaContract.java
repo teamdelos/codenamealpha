@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 public class AlphaContract {
 
@@ -110,8 +111,15 @@ public class AlphaContract {
                     .appendPath(Integer.toString(kitchenId)).build();
         }
 
-        public static int getKidFromUri(Uri uri) {
-            return Integer.parseInt(uri.getPathSegments().get(2));
+        public static Uri buildMealUriWithKid(int kitchenId) {
+            return CONTENT_URI.buildUpon()
+            .appendQueryParameter(COLUMN_KITCHEN_ID, Integer.toString(kitchenId))
+                    .build();
+        }
+
+        public static String getKidFromUri(Uri uri, boolean onlyKid) {
+            if(onlyKid) return uri.getQueryParameter(COLUMN_KITCHEN_ID);
+            else return uri.getPathSegments().get(2);
         }
         public static String getDishNameFromUri(Uri uri) {
             return uri.getPathSegments().get(1);

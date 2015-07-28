@@ -25,6 +25,7 @@ public class AlphaProvider extends ContentProvider{
     private static final int MEAL = 300;
     private static final int MEAL_WITH_EMAIL = 301;
     private static final int MEAL_WITH_DISH_KITCHEN_ID = 302;
+    private static final int MEAL_WITH_KITCHEN_ID = 303;
     static final int ADDRESS = 400;
     static final int ADDRESS_WITH_USER_ID = 401;
 
@@ -73,6 +74,7 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_MEAL, MEAL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_EMAIL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*/#", MEAL_WITH_DISH_KITCHEN_ID);
+        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/#", MEAL_WITH_KITCHEN_ID);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS, ADDRESS);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS + "/#", ADDRESS_WITH_USER_ID);
         return matcher;
@@ -89,7 +91,6 @@ public class AlphaProvider extends ContentProvider{
 
         // Use the Uri Matcher to determine what kind of URI this is.
         final int match = sUriMatcher.match(uri);
-
         switch (match) {
             case USER:
                 return AlphaContract.UserEntry.CONTENT_TYPE;
@@ -104,6 +105,8 @@ public class AlphaProvider extends ContentProvider{
             case MEAL_WITH_EMAIL:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case MEAL_WITH_DISH_KITCHEN_ID:
+                return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
+            case MEAL_WITH_KITCHEN_ID:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case ADDRESS:
                 return AlphaContract.AddressEntry.CONTENT_TYPE;
@@ -123,6 +126,10 @@ public class AlphaProvider extends ContentProvider{
             AlphaContract.AddressEntry.TABLE_NAME +
                     "." + AlphaContract.AddressEntry.COLUMN_USER_ID+ " = ? ";
 
+    private static final String sMealSelectWithKitchenId =
+            AlphaContract.MealEntry.TABLE_NAME +
+                    "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID+ " = ? ";
+
     private static final String sMealSelectWithKIdDishName=
             AlphaContract.MealEntry.TABLE_NAME +
                     "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID+" = ?  AND "+
@@ -134,6 +141,7 @@ public class AlphaProvider extends ContentProvider{
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
             case USER_WITH_EMAIL: {
+                Log.v("meal insidequery", String.valueOf(USER_WITH_EMAIL));
                 retCursor = mOpenHelper.getReadableDatabase()
                         .query(AlphaContract.UserEntry.TABLE_NAME,
                                 projection,
@@ -194,8 +202,19 @@ public class AlphaProvider extends ContentProvider{
                         .query(AlphaContract.MealEntry.TABLE_NAME,
                                 projection,
                                 sMealSelectWithKIdDishName,
-                                new String[]{String.valueOf(AlphaContract.MealEntry.getKidFromUri(uri)),
+                                new String[]{AlphaContract.MealEntry.getKidFromUri(uri, false),
                                         AlphaContract.MealEntry.getDishNameFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
+                break;
+            }
+            case MEAL_WITH_KITCHEN_ID:{
+                retCursor = mOpenHelper.getReadableDatabase()
+                        .query(AlphaContract.MealEntry.TABLE_NAME,
+                                projection,
+                                sMealSelectWithKitchenId,
+                                new String[]{AlphaContract.MealEntry.getKidFromUri(uri, true)},
                                 null,
                                 null,
                                 sortOrder);
