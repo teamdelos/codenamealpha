@@ -34,8 +34,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:text="Address"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Address:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textBlack"
@@ -47,50 +47,51 @@
                 android:paddingLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Full Name"
+                android:hint="Full Name:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/profile_full_name"/>
             <EditText
                 android:paddingLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Street Address 1"
+                android:hint="Street Address 1:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/profile_address_1"/>
             <EditText
                 android:paddingLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Street Address 2"
+                android:hint="Street Address 2:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/profile_address_2"/>
             <EditText
                 android:paddingLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="State"
+                android:hint="State:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/profile_state"/>
             <EditText
                 android:paddingLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="City"
+                android:hint="City:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/profile_city"/>
             <EditText
                 android:paddingLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Zip Code"
+                android:hint="Zip Code:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/profile_zip_code"/>
             <android.widget.Space
                 android:layout_width="match_parent"
                 android:layout_height="6dp" />
             <TextView
-                android:text="About"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="About You:"
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textBlack"
