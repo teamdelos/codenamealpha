@@ -330,6 +330,9 @@ public class AlphaProvider extends ContentProvider{
             case ADDRESS:
                 rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
+            case ADDRESS_WITH_USER_ID:
+                rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, sAddressSelectWithUserId, new String[]{AlphaContract.AddressEntry.getuseridFromUri(uri)});
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
