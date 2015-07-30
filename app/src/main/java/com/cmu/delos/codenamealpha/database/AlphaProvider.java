@@ -26,6 +26,7 @@ public class AlphaProvider extends ContentProvider{
     private static final int MEAL_WITH_EMAIL = 301;
     private static final int MEAL_WITH_DISH_KITCHEN_ID = 302;
     private static final int MEAL_WITH_KITCHEN_ID = 303;
+    private static final int MEAL_WITH_DISH_NAME = 304;
     static final int ADDRESS = 400;
     static final int ADDRESS_WITH_USER_ID = 401;
 
@@ -75,6 +76,7 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_EMAIL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*/#", MEAL_WITH_DISH_KITCHEN_ID);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/#", MEAL_WITH_KITCHEN_ID);
+        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_DISH_NAME);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS, ADDRESS);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS + "/#", ADDRESS_WITH_USER_ID);
         return matcher;
@@ -106,6 +108,8 @@ public class AlphaProvider extends ContentProvider{
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case MEAL_WITH_DISH_KITCHEN_ID:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
+            case MEAL_WITH_DISH_NAME:
+                return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case MEAL_WITH_KITCHEN_ID:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case ADDRESS:
@@ -134,6 +138,10 @@ public class AlphaProvider extends ContentProvider{
             AlphaContract.MealEntry.TABLE_NAME +
                     "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID+" = ?  AND "+
                     AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
+
+    private static final String sMealSelectWithDishName=
+            AlphaContract.MealEntry.TABLE_NAME +
+                    "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
@@ -204,6 +212,18 @@ public class AlphaProvider extends ContentProvider{
                                 sMealSelectWithKIdDishName,
                                 new String[]{AlphaContract.MealEntry.getKidFromUri(uri, false),
                                         AlphaContract.MealEntry.getDishNameFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
+                break;
+            }
+
+            case MEAL_WITH_DISH_NAME:{
+                retCursor = mOpenHelper.getReadableDatabase()
+                        .query(AlphaContract.MealEntry.TABLE_NAME,
+                                projection,
+                                sMealSelectWithDishName,
+                                new String[]{ },
                                 null,
                                 null,
                                 sortOrder);
