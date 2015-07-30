@@ -25,7 +25,7 @@ public class AlphaProvider extends ContentProvider{
     private static final int MEAL = 300;
     private static final int MEAL_WITH_EMAIL = 301;
     private static final int MEAL_WITH_DISH_KITCHEN_ID = 302;
-    private static final int MEAL_WITH_KITCHEN_ID = 303;
+//    private static final int MEAL_WITH_KITCHEN_ID = 303;
     private static final int MEAL_WITH_DISH_NAME = 304;
     static final int ADDRESS = 400;
     static final int ADDRESS_WITH_USER_ID = 401;
@@ -75,7 +75,7 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_MEAL, MEAL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_EMAIL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*/#", MEAL_WITH_DISH_KITCHEN_ID);
-        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/#", MEAL_WITH_KITCHEN_ID);
+//        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/#", MEAL_WITH_KITCHEN_ID);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_DISH_NAME);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS, ADDRESS);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS + "/#", ADDRESS_WITH_USER_ID);
@@ -109,8 +109,6 @@ public class AlphaProvider extends ContentProvider{
             case MEAL_WITH_DISH_KITCHEN_ID:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case MEAL_WITH_DISH_NAME:
-                return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
-            case MEAL_WITH_KITCHEN_ID:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case ADDRESS:
                 return AlphaContract.AddressEntry.CONTENT_TYPE;
@@ -190,12 +188,23 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case MEAL: {
-                Log.i("meal queryMEAL:", String.valueOf(MEAL));
-                retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.MealEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                if(AlphaContract.MealEntry.getQueryParameterKeyFromUri(uri, AlphaContract.MealEntry.COLUMN_KITCHEN_ID)){
+                    retCursor = mOpenHelper.getReadableDatabase()
+                            .query(AlphaContract.MealEntry.TABLE_NAME,
+                                    projection,
+                                    sMealSelectWithKitchenId,
+                                    new String[]{AlphaContract.MealEntry.getKidFromUri(uri, true)},
+                                    null,
+                                    null,
+                                    sortOrder);
+                }
+                else{
+                    retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.MealEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                }
+
                 break;
             }
             case MEAL_WITH_EMAIL: {
-                Log.i("meal queryEMAIL:", String.valueOf(MEAL_WITH_EMAIL));
                 retCursor = sMealByUserEmailQueryBuilder
                         .query(mOpenHelper.getReadableDatabase(),
                                 projection,
@@ -207,7 +216,6 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case MEAL_WITH_DISH_KITCHEN_ID:{
-                Log.i("meal queryDISHKID:", String.valueOf(MEAL_WITH_DISH_KITCHEN_ID));
                 retCursor = mOpenHelper.getReadableDatabase()
                         .query(AlphaContract.MealEntry.TABLE_NAME,
                                 projection,
@@ -226,18 +234,6 @@ public class AlphaProvider extends ContentProvider{
                                 projection,
                                 sMealSelectWithDishName,
                                 new String[]{AlphaContract.MealEntry.getDishNameFromUri(uri)},
-                                null,
-                                null,
-                                sortOrder);
-                break;
-            }
-            case MEAL_WITH_KITCHEN_ID:{
-                Log.i("meal queryKID:", String.valueOf(MEAL_WITH_KITCHEN_ID));
-                retCursor = mOpenHelper.getReadableDatabase()
-                        .query(AlphaContract.MealEntry.TABLE_NAME,
-                                projection,
-                                sMealSelectWithKitchenId,
-                                new String[]{AlphaContract.MealEntry.getKidFromUri(uri, true)},
                                 null,
                                 null,
                                 sortOrder);
@@ -317,6 +313,11 @@ public class AlphaProvider extends ContentProvider{
                 rowsDeleted = db.delete(
                         AlphaContract.MealEntry.TABLE_NAME,selection,selectionArgs);
                 break;
+            case MEAL_WITH_DISH_KITCHEN_ID:
+                rowsDeleted = db.delete(AlphaContract.MealEntry.TABLE_NAME, sMealSelectWithKIdDishName,
+                        new String[]{AlphaContract.MealEntry.getKidFromUri(uri, false),
+                                AlphaContract.MealEntry.getDishNameFromUri(uri)});
+                break;
             case ADDRESS:
                 rowsDeleted = db.delete(
                         AlphaContract.AddressEntry.TABLE_NAME,selection,selectionArgs);
@@ -349,6 +350,11 @@ public class AlphaProvider extends ContentProvider{
                 break;
             case MEAL:
                 rowsUpdated = db.update(AlphaContract.MealEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case MEAL_WITH_DISH_KITCHEN_ID:
+                rowsUpdated = db.update(AlphaContract.MealEntry.TABLE_NAME, values, sMealSelectWithKIdDishName,
+                        new String[]{AlphaContract.MealEntry.getKidFromUri(uri, false),
+                                AlphaContract.MealEntry.getDishNameFromUri(uri)});
                 break;
             case ADDRESS:
                 rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, selection, selectionArgs);

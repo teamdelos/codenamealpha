@@ -25,6 +25,7 @@
                 android:gravity="center_horizontal"
                 android:textColor="@color/textBlack"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,13 +58,30 @@
                     android:id="@+id/dish_price_text"
                     android:layout_alignRight="@+id/dish_image"
                     android:layout_alignBottom="@+id/dish_image" />
-                <Switch
+                <android.widget.Space
+                    android:id="@+id/space"
+                    android:layout_below="@+id/dish_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="4dp" />
+                <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dish Listed \t"
+                    android:textOn="Is Listed"
+                    android:textOff="Not Listed"
+                    android:elevation="4dp"
                     android:id="@+id/dish_listed_switch"
-                    android:layout_gravity="right"
-                    android:layout_below="@+id/dish_image"
+                    android:layout_below="@+id/dish_price_text"
+                    android:layout_alignLeft="@+id/dish_image"
+                    android:layout_alignStart="@+id/dish_image"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@mipmap/ic_delete"
+                    android:background="#cfd8dc"
+                    android:id="@+id/deleteItem"
+                    android:clickable="true"
+                    android:layout_below="@+id/space"
                     android:layout_alignRight="@+id/dish_price_text"
                     android:layout_alignEnd="@+id/dish_price_text" />
             </RelativeLayout>

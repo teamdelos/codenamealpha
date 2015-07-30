@@ -121,6 +121,10 @@ public class AlphaContract {
                     .build();
         }
 
+        public static boolean getQueryParameterKeyFromUri(Uri uri, String Key){
+            return uri.getBooleanQueryParameter(Key,false);
+        }
+
         public static String getKidFromUri(Uri uri, boolean onlyKid) {
             if(onlyKid) return uri.getQueryParameter(COLUMN_KITCHEN_ID);
             else return uri.getPathSegments().get(2);

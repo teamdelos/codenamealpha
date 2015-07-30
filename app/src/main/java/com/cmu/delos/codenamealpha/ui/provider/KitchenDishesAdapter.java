@@ -1,22 +1,24 @@
 package com.cmu.delos.codenamealpha.ui.provider;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.cmu.delos.codenamealpha.R;
+import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 
 import java.io.File;
@@ -36,10 +38,15 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
     String dishPrice;
     String dishQuantity;
     int dish_is_listed;
+    int kitchenId;
 
-    public KitchenDishesAdapter(Context context, Cursor c) {
+    String[] meal_columns;
+
+    public KitchenDishesAdapter(Context context, Cursor c, int kitchenId, String[] meal_columns) {
         dataCursor = c;
         this.context = context;
+        this.kitchenId = kitchenId;
+        this.meal_columns = meal_columns;
     }
 
     @Override
@@ -48,21 +55,11 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
         final View view = LayoutInflater.from(context).inflate(R.layout.kitchen_items, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(context, view);
-//        ViewHolder viewHolder = new ViewHolder(context, view, new KitchenDishesAdapter.ViewHolder.ICardViewHolderClicks() {
-//            @Override
-//            public void onSwitch(CompoundButton buttonView, boolean isChecked, String dishName) {
-//                if(isChecked){
-//                    Log.i("Switch Working", String.valueOf(isChecked)+ dishName);
-//                }{
-//                    Log.i("Switch Working", String.valueOf(isChecked)+dishName);
-//                }
-//
-//            }
-//        });
         view.setOnClickListener(this);
         viewHolder.dish_is_listed.setOnClickListener(this);
-
+        viewHolder.delete.setOnClickListener(this);
         viewHolder.dish_is_listed.setTag(viewHolder);
+        viewHolder.delete.setTag(viewHolder);
         view.setTag(viewHolder);
         return viewHolder;
     }
@@ -70,9 +67,28 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
     public void onClick(View view) {
         ViewHolder holder = (ViewHolder) view.getTag();
         int position = holder.getPosition();
-
+        int rowsChanged;
         if (view.getId() == holder.dish_is_listed.getId()){
-           Toast.makeText(context, "Switch button onClick at" + position+holder.dish_is_listed.isChecked(), Toast.LENGTH_SHORT).show();
+            Uri listingChangeUri = AlphaContract.MealEntry.buildMealUriWithKidDName(kitchenId, holder.dish_name.getText().toString());
+            ContentValues mealDetails = new ContentValues();
+            if(holder.dish_is_listed.isChecked()){
+                mealDetails.put(AlphaContract.MealEntry.COLUMN_IS_LISTED,1);
+                rowsChanged= context.getContentResolver().update(listingChangeUri, mealDetails, null, null);
+                Toast.makeText(context, rowsChanged+" updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, holder.dish_name.getText().toString()+" will be listed", Toast.LENGTH_SHORT).show();
+            }else{
+                mealDetails.put(AlphaContract.MealEntry.COLUMN_IS_LISTED,0);
+                rowsChanged = context.getContentResolver().update(listingChangeUri, mealDetails, null, null);
+                Toast.makeText(context, rowsChanged+" updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, holder.dish_name.getText().toString()+" will be delisted", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if(view.getId() == holder.delete.getId()){
+            rowsChanged= context.getContentResolver()
+                    .delete(AlphaContract.MealEntry.buildMealUriWithKidDName(kitchenId, holder.dish_name.getText().toString()),
+                            null,
+                            null);
+            Toast.makeText(context, holder.dish_name.getText().toString()+" removed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -98,7 +114,6 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
         }
         holder.dish_price.setText(dishPrice);
         holder.dish_quantity.setText(dishQuantity);
-        Log.i("Meals",dishName+" "+dish_is_listed);
         holder.dish_is_listed.setChecked(dish_is_listed == 0 ? false : true);
     }
 
@@ -127,7 +142,8 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
         protected TextView dish_price;
         protected ImageView dish_image;
         protected TextView dish_quantity;
-        protected Switch dish_is_listed;
+        protected ToggleButton dish_is_listed;
+        protected ImageButton delete;
 //        public ICardViewHolderClicks mListener;
 
 //        public ViewHolder(Context context, View itemView, ICardViewHolderClicks listener) {
@@ -140,7 +156,9 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
             dish_image = (ImageView) itemView.findViewById(R.id.dish_image);
             dish_price = (TextView) itemView.findViewById(R.id.dish_price_text);
             dish_quantity = (TextView) itemView.findViewById(R.id.dish_quantity);
-            dish_is_listed = (Switch) itemView.findViewById(R.id.dish_listed_switch);
+            dish_is_listed = (ToggleButton) itemView.findViewById(R.id.dish_listed_switch);
+            delete = (ImageButton) itemView.findViewById(R.id.deleteItem);
+
 //            dish_is_listed.setOnCheckedChangeListener(this);
         }
 

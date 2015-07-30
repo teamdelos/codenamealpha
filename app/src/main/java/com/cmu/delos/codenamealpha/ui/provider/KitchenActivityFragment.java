@@ -19,6 +19,7 @@ import android.widget.Button;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.Kitchen;
+import com.cmu.delos.codenamealpha.model.User;
 
 
 /**
@@ -31,6 +32,7 @@ public class KitchenActivityFragment extends Fragment implements LoaderManager.L
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private KitchenDishesAdapter mAdapter;
+    private Kitchen k;
 
     private static final String[] MEAL_COLUMNS = {
             AlphaContract.MealEntry.TABLE_NAME+"."+ AlphaContract.MealEntry._ID,
@@ -49,7 +51,8 @@ public class KitchenActivityFragment extends Fragment implements LoaderManager.L
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_kitchen, container, false);
-        mAdapter = new KitchenDishesAdapter(getActivity(), null);
+        k = ((KitchenActivity)getActivity()).getKitchen();
+        mAdapter = new KitchenDishesAdapter(getActivity(), null,k.getKitchenId(),MEAL_COLUMNS);
         mRecyclerView=(RecyclerView)rootView.findViewById(R.id.dishes_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
@@ -63,8 +66,6 @@ public class KitchenActivityFragment extends Fragment implements LoaderManager.L
         addMealBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.v("on click", "got to add meal Clicked");
                 Intent intentToOfferMeal = new Intent(getActivity(), OfferMealActivity.class);
                 startActivity(intentToOfferMeal);
             }
@@ -81,10 +82,7 @@ public class KitchenActivityFragment extends Fragment implements LoaderManager.L
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Kitchen k = ((KitchenActivity) getActivity()).getKitchen();
-        Log.i("Meals Kitchen id:", String.valueOf(k.getKitchenId()));
         Uri dishesUri = AlphaContract.MealEntry.buildMealUriWithKid(k.getKitchenId());
-        Log.i("Meals Kitchen id:", String.valueOf(dishesUri));
         return new CursorLoader(
                 getActivity(),
                 dishesUri,
