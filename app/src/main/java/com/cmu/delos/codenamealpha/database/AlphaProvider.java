@@ -223,7 +223,7 @@ public class AlphaProvider extends ContentProvider{
                         .query(AlphaContract.MealEntry.TABLE_NAME,
                                 projection,
                                 sMealSelectWithDishName,
-                                new String[]{ },
+                                new String[]{AlphaContract.MealEntry.getDishNameFromUri(uri)},
                                 null,
                                 null,
                                 sortOrder);

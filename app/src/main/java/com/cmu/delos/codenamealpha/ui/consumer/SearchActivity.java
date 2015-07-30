@@ -60,7 +60,9 @@ public class SearchActivity extends AbstractAlphaActivity {
                 Log.v("Here after search",userMealSearch.getCount()+"");
                 Toast.makeText(getBaseContext(), query,
                         Toast.LENGTH_SHORT).show();
-
+                Intent intentToSignUp = new Intent(getApplicationContext(), SearchResults.class);
+                intentToSignUp.putExtra("query",query);
+                startActivity(intentToSignUp);
                 return false;
             }
 
