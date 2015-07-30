@@ -52,7 +52,7 @@ public class KitchenActivityFragment extends Fragment implements LoaderManager.L
 
         View rootView = inflater.inflate(R.layout.fragment_kitchen, container, false);
         k = ((KitchenActivity)getActivity()).getKitchen();
-        mAdapter = new KitchenDishesAdapter(getActivity(), null,k.getKitchenId(),MEAL_COLUMNS);
+        mAdapter = new KitchenDishesAdapter(getActivity(), null,k.getKitchenId());
         mRecyclerView=(RecyclerView)rootView.findViewById(R.id.dishes_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 

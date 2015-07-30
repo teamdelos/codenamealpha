@@ -40,13 +40,10 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
     int dish_is_listed;
     int kitchenId;
 
-    String[] meal_columns;
-
-    public KitchenDishesAdapter(Context context, Cursor c, int kitchenId, String[] meal_columns) {
+    public KitchenDishesAdapter(Context context, Cursor c, int kitchenId) {
         dataCursor = c;
         this.context = context;
         this.kitchenId = kitchenId;
-        this.meal_columns = meal_columns;
     }
 
     @Override
@@ -74,13 +71,11 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
             if(holder.dish_is_listed.isChecked()){
                 mealDetails.put(AlphaContract.MealEntry.COLUMN_IS_LISTED,1);
                 rowsChanged= context.getContentResolver().update(listingChangeUri, mealDetails, null, null);
-                Toast.makeText(context, rowsChanged+" updated", Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, holder.dish_name.getText().toString()+" will be listed", Toast.LENGTH_SHORT).show();
             }else{
                 mealDetails.put(AlphaContract.MealEntry.COLUMN_IS_LISTED,0);
                 rowsChanged = context.getContentResolver().update(listingChangeUri, mealDetails, null, null);
-                Toast.makeText(context, rowsChanged+" updated", Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, holder.dish_name.getText().toString()+" will be delisted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, holder.dish_name.getText().toString()+" will be de-listed", Toast.LENGTH_SHORT).show();
             }
         }
         else if(view.getId() == holder.delete.getId()){
@@ -133,8 +128,7 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
         }
         return oldCursor;
     }
-
-//    public static class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
+    
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private Context context;
         protected CardView cardView;
@@ -144,13 +138,10 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
         protected TextView dish_quantity;
         protected ToggleButton dish_is_listed;
         protected ImageButton delete;
-//        public ICardViewHolderClicks mListener;
 
-//        public ViewHolder(Context context, View itemView, ICardViewHolderClicks listener) {
         public ViewHolder(Context context, View itemView) {
             super(itemView);
             this.context = context;
-//            mListener = listener;
             cardView = (CardView) itemView.findViewById(R.id.card_view);
             dish_name = (TextView) itemView.findViewById(R.id.dish_name);
             dish_image = (ImageView) itemView.findViewById(R.id.dish_image);
@@ -158,17 +149,7 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
             dish_quantity = (TextView) itemView.findViewById(R.id.dish_quantity);
             dish_is_listed = (ToggleButton) itemView.findViewById(R.id.dish_listed_switch);
             delete = (ImageButton) itemView.findViewById(R.id.deleteItem);
-
-//            dish_is_listed.setOnCheckedChangeListener(this);
         }
 
-//        @Override
-//        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//            mListener.onSwitch(buttonView, isChecked, dish_name.getText().toString());
-//        }
-//
-//        public static interface ICardViewHolderClicks {
-//            public void onSwitch(CompoundButton buttonView, boolean isChecked, String dishName);
-//        }
     }
 }

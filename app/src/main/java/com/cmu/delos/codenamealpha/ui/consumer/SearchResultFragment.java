@@ -88,7 +88,7 @@ public class SearchResultFragment extends Fragment implements LoaderManager.Load
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
-        mAdapter = new KitchenDishesAdapter(getActivity(), null,0,null);
+        mAdapter = new KitchenDishesAdapter(getActivity(), null,0);
         mRecyclerView=(RecyclerView)view.findViewById(R.id.search_dishes_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
