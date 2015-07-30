@@ -111,6 +111,10 @@ public class AlphaContract {
                     .appendPath(Integer.toString(kitchenId)).build();
         }
 
+        public static Uri buildMealUriWithName(String dishName) {
+            return CONTENT_URI.buildUpon().appendPath(dishName).build();
+        }
+
         public static Uri buildMealUriWithKid(int kitchenId) {
             return CONTENT_URI.buildUpon()
             .appendQueryParameter(COLUMN_KITCHEN_ID, Integer.toString(kitchenId))

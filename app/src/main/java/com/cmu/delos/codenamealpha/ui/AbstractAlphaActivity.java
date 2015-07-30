@@ -16,6 +16,16 @@ public class AbstractAlphaActivity extends AppCompatActivity {
     private static Kitchen kitchenDetails;
     private static Meal mealDetails;
 
+    public static String getQuery() {
+        return query;
+    }
+
+    public static void setQuery(String query) {
+        AbstractAlphaActivity.query = query;
+    }
+
+    private static String query;
+
     public void createUser(int userId,String firstName,String lastName,String email,String isProvider){
         userDetails = new User(userId,firstName,lastName,email,isProvider);
     }
