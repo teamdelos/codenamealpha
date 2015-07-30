@@ -6,6 +6,8 @@ import com.cmu.delos.codenamealpha.model.Kitchen;
 import com.cmu.delos.codenamealpha.model.Meal;
 import com.cmu.delos.codenamealpha.model.User;
 
+import java.util.ArrayList;
+
 /**
  * Created by Mrik on 7/24/15.
  */
@@ -41,5 +43,6 @@ public class AbstractAlphaActivity extends AppCompatActivity {
     public Meal getMeal(){
         return mealDetails;
     }
+
 
 }

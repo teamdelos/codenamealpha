@@ -166,6 +166,7 @@ public class OfferMealFragment extends Fragment {
                 String dishPrice = dish_price.getText().toString().trim();
                 String dishQuantity = dish_quantity.getText().toString().trim();
                 String dishIngredients = dish_ingredients.getText().toString().trim();
+                int dishIsListed = 1;
                 String dishDesc = dish_desc.getText().toString().trim();
 
                 Kitchen k = ((OfferMealActivity) getActivity()).getKitchen();
@@ -180,6 +181,7 @@ public class OfferMealFragment extends Fragment {
                         mealDetails.put(AlphaContract.MealEntry.COLUMN_MEAL_COUNT, Integer.valueOf(dishQuantity));
                         mealDetails.put(AlphaContract.MealEntry.COLUMN_DISH_INGREDIENTS, dishIngredients);
                         mealDetails.put(AlphaContract.MealEntry.COLUMN_SHORT_DESC, dishDesc);
+                        mealDetails.put(AlphaContract.MealEntry.COLUMN_IS_LISTED,dishIsListed);
                         mealDetails.put(AlphaContract.MealEntry.COLUMN_DISH_IMAGE,mCurrentPhotoPath);
 
                         Uri insertedMealUri = getActivity().getContentResolver().insert(AlphaContract.MealEntry.CONTENT_URI, mealDetails);

@@ -141,7 +141,6 @@ public class AlphaProvider extends ContentProvider{
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
             case USER_WITH_EMAIL: {
-                Log.v("meal insidequery", String.valueOf(USER_WITH_EMAIL));
                 retCursor = mOpenHelper.getReadableDatabase()
                         .query(AlphaContract.UserEntry.TABLE_NAME,
                                 projection,
@@ -183,10 +182,12 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case MEAL: {
+                Log.i("meal queryMEAL:", String.valueOf(MEAL));
                 retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.MealEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             }
             case MEAL_WITH_EMAIL: {
+                Log.i("meal queryEMAIL:", String.valueOf(MEAL_WITH_EMAIL));
                 retCursor = sMealByUserEmailQueryBuilder
                         .query(mOpenHelper.getReadableDatabase(),
                                 projection,
@@ -198,6 +199,7 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case MEAL_WITH_DISH_KITCHEN_ID:{
+                Log.i("meal queryDISHKID:", String.valueOf(MEAL_WITH_DISH_KITCHEN_ID));
                 retCursor = mOpenHelper.getReadableDatabase()
                         .query(AlphaContract.MealEntry.TABLE_NAME,
                                 projection,
@@ -210,6 +212,7 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case MEAL_WITH_KITCHEN_ID:{
+                Log.i("meal queryKID:", String.valueOf(MEAL_WITH_KITCHEN_ID));
                 retCursor = mOpenHelper.getReadableDatabase()
                         .query(AlphaContract.MealEntry.TABLE_NAME,
                                 projection,

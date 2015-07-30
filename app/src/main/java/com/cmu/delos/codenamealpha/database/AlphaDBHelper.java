@@ -55,6 +55,7 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 MealEntry.COLUMN_DISH_INGREDIENTS + " TEXT NOT NULL, "+
                 MealEntry.COLUMN_SHORT_DESC + " TEXT," +
                 MealEntry.COLUMN_DISH_IMAGE + " TEXT, " +
+                MealEntry.COLUMN_IS_LISTED + " INTEGER NOT NULL, "+
                 " UNIQUE (" + MealEntry.COLUMN_KITCHEN_ID+ ","+MealEntry.COLUMN_DISH_NAME +")"+
                 " FOREIGN KEY (" + MealEntry.COLUMN_KITCHEN_ID+ ") REFERENCES " +
                 KitchenEntry.TABLE_NAME + " (" + KitchenEntry._ID + "));";

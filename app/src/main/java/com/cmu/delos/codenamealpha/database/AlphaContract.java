@@ -100,6 +100,7 @@ public class AlphaContract {
         public static final String COLUMN_DISH_INGREDIENTS = "dish_ingredients";
         public static final String COLUMN_MEAL_COUNT = "meal_count";
         public static final String COLUMN_MEAL_PRICE = "meal_price";
+        public static final String COLUMN_IS_LISTED = "is_listed";
 
         public static Uri buildMealUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

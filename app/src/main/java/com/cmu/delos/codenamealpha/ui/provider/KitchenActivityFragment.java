@@ -37,7 +37,8 @@ public class KitchenActivityFragment extends Fragment implements LoaderManager.L
             AlphaContract.MealEntry.COLUMN_DISH_NAME,
             AlphaContract.MealEntry.COLUMN_DISH_IMAGE,
             AlphaContract.MealEntry.COLUMN_MEAL_PRICE,
-            AlphaContract.MealEntry.COLUMN_MEAL_COUNT
+            AlphaContract.MealEntry.COLUMN_MEAL_COUNT,
+            AlphaContract.MealEntry.COLUMN_IS_LISTED
     };
 
     public KitchenActivityFragment() {
@@ -81,8 +82,9 @@ public class KitchenActivityFragment extends Fragment implements LoaderManager.L
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Kitchen k = ((KitchenActivity) getActivity()).getKitchen();
-
+        Log.i("Meals Kitchen id:", String.valueOf(k.getKitchenId()));
         Uri dishesUri = AlphaContract.MealEntry.buildMealUriWithKid(k.getKitchenId());
+        Log.i("Meals Kitchen id:", String.valueOf(dishesUri));
         return new CursorLoader(
                 getActivity(),
                 dishesUri,
