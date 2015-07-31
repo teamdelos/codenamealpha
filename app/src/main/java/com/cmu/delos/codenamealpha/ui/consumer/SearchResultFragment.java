@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
-import com.cmu.delos.codenamealpha.ui.provider.KitchenDishesAdapter;
 
 
 public class SearchResultFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -36,7 +35,7 @@ public class SearchResultFragment extends Fragment implements LoaderManager.Load
     private static final int DISHES_LOADER = 0;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private KitchenDishesAdapter mAdapter;
+    private MealAdapter mAdapter;
 
 
 
@@ -89,7 +88,7 @@ public class SearchResultFragment extends Fragment implements LoaderManager.Load
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
-        mAdapter = new KitchenDishesAdapter(getActivity(), null,0);
+        mAdapter = new MealAdapter(getActivity(), null);
         mRecyclerView=(RecyclerView)view.findViewById(R.id.search_dishes_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 

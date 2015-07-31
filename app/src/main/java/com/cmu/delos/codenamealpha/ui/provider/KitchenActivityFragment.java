@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import android.widget.Button;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.Kitchen;
-import com.cmu.delos.codenamealpha.model.User;
 
 
 /**
