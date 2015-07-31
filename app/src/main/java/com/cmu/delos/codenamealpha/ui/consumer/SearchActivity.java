@@ -1,8 +1,13 @@
 package com.cmu.delos.codenamealpha.ui.consumer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,8 +26,18 @@ import android.util.Log;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
+import com.cmu.delos.codenamealpha.ui.AppLocationService;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
+//import com.cmu.delos.codenamealpha.ui.MapsActivity;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class SearchActivity extends AbstractAlphaActivity {
 
@@ -30,15 +45,28 @@ public class SearchActivity extends AbstractAlphaActivity {
     private NavigationView navigationView;
     private SearchView search;
 
+    boolean mShowMap;
+
+    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    //private Location mylocation = mMap.getMyLocation();
+    //private LatLng sydney = new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
+
+    AppLocationService appLocationService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
         setupToolbar();
         setupNavigationView();
 
-        search=(SearchView) findViewById(R.id.searchView);
-        search.setQueryHint("What type of food would you like?");
+        //new MapsActivity();
+
+
+
+        search = (SearchView) findViewById(R.id.searchView);
+        search.setQueryHint("What type of food?");
 
         //*** setOnQueryTextFocusChangeListener ***
         search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
@@ -58,13 +86,13 @@ public class SearchActivity extends AbstractAlphaActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // TODO Auto-generated method stub
-                Log.v("Here query",query);
-                Cursor userMealSearch = getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithName(query),null,null,null,null);
-                Log.v("Here after search",userMealSearch.getCount()+"");
+                Log.v("Here query", query);
+                Cursor userMealSearch = getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithName(query), null, null, null, null);
+                Log.v("Here after search", userMealSearch.getCount() + "");
                 Toast.makeText(getBaseContext(), query,
                         Toast.LENGTH_SHORT).show();
                 Intent intentToSignUp = new Intent(getApplicationContext(), SearchResults.class);
-                intentToSignUp.putExtra("query",query);
+                intentToSignUp.putExtra("query", query);
                 startActivity(intentToSignUp);
                 return false;
             }
@@ -83,7 +111,8 @@ public class SearchActivity extends AbstractAlphaActivity {
 
     }
 
-    private void setupNavigationView(){
+
+    private void setupNavigationView() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
@@ -116,7 +145,7 @@ public class SearchActivity extends AbstractAlphaActivity {
         });
     }
 
-    private void setupToolbar(){
+    private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Show menu icon
@@ -190,10 +219,11 @@ public class SearchActivity extends AbstractAlphaActivity {
     }
 
 
-
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.navigation_drawer_items, menu);
 //        return true;
 //    }
+
+
 }

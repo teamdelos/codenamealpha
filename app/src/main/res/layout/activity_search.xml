@@ -19,10 +19,6 @@
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
 
-        <TextView
-            android:id="@+id/tv_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
         <fragment
             android:id="@+id/search_container"
@@ -34,7 +30,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
+
     </RelativeLayout>
+
+
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
@@ -44,4 +43,5 @@
         app:itemTextColor="#333"
         app:itemIconTint="#333"
         app:menu="@menu/navigation_drawer_items_consumer" />
+
 </android.support.v4.widget.DrawerLayout>

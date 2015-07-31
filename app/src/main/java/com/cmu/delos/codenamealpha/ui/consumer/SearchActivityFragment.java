@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.cmu.delos.codenamealpha.R;
+import com.cmu.delos.codenamealpha.ui.AppLocationService;
+//import com.cmu.delos.codenamealpha.ui.MapsActivity;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
 
 
 /**
@@ -22,6 +26,10 @@ public class SearchActivityFragment extends Fragment {
     private Button MaptoList;
     private Button ListToMap;
 
+    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+
+    AppLocationService appLocationService;
+
     public SearchActivityFragment() {
     }
 
@@ -31,6 +39,8 @@ public class SearchActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 //        View view2 = inflater.inflate(R.layout.fragment_search_map, container, false);
         btnSearch = (Button)view.findViewById(R.id.btnSearch);
+
+        
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +63,9 @@ public class SearchActivityFragment extends Fragment {
             }
         });
 **/
+
+
+
         return view;
     }
 }
