@@ -32,8 +32,16 @@
         </activity>
         <activity
             android:name=".ui.ProfileActivity"
-            android:label="@string/title_activity_profile"
-            android:noHistory="true" >
+            android:label="@string/title_activity_profile" >
+
+            <!-- android:noHistory="true" -->
+
+        </activity>
+        <activity
+            android:name=".ui.provider.KitchenProfileActivity"
+            android:label="@string/title_activity_kitchen_profile" >
+
+            <!-- android:noHistory="true" > -->
         </activity>
         <activity
             android:name=".ui.SettingsActivity"
@@ -90,6 +98,12 @@
         <activity
             android:name=".ui.consumer.SearchResults"
             android:label="@string/title_activity_search_results" >
+        </activity>
+
+
+        <activity
+            android:name=".ui.consumer.MealDetails"
+            android:label="@string/title_activity_meal_details" >
         </activity>
     </application>
 

@@ -68,6 +68,21 @@ public class Address {
     private String state;
     private String zipCode;
 
+    public Address(int id, String name, String streetAddress1, String streetAddress2,
+                   String city, String state, String zipCode) {
+        this.addressId = id;
+        this.name = name;
+        this.streetAddress1 = streetAddress1;
+        this.streetAddress2 = streetAddress2;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+    public Address() {
+
+    }
+
     public String getAbout() {
         return about;
     }

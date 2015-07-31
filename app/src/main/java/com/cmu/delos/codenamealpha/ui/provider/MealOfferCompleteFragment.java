@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.model.Meal;
+import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 
 import java.io.File;
@@ -30,13 +31,20 @@ public class MealOfferCompleteFragment extends Fragment {
     private TextView dish_name;
     private TextView dish_price;
     private ImageView dish_image;
+    private TextView cong_sry_text;
+    private TextView succ_fail_text;
     private Meal m;
+    boolean isProvider = true;
 
     private ArrayAdapter<String> mMealDetailListAdapter;
 
     public MealOfferCompleteFragment() {
     }
 
+    public void setIsProvider(boolean isProvider) {
+        this.isProvider = isProvider;
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,10 +52,14 @@ public class MealOfferCompleteFragment extends Fragment {
         dish_name = (TextView) rootView.findViewById(R.id.dishName);
         dish_price= (TextView) rootView.findViewById(R.id.dish_price_text);
         dish_image = (ImageView) rootView.findViewById(R.id.meal_offered_view);
-
-        m = ((OfferMealActivity) getActivity()).getMeal();
+        cong_sry_text = (TextView) rootView.findViewById(R.id.cong_sry_text);
+        succ_fail_text = (TextView) rootView.findViewById(R.id.succ_fail_text);
+        m = ((AbstractAlphaActivity) getActivity()).getMeal();
         if(m.getDishImage()!=null) setPic();
-
+        if (isProvider) {
+            cong_sry_text.setText("Details");
+            succ_fail_text.setText("");
+        }
         dish_name.setText(m.getDishName());
         dish_price.setText("$"+(int) m.getMealPrice());
 

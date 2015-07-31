@@ -84,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Zip Code:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
+                android:inputType="number"
                 android:id="@+id/profile_zip_code"/>
             <android.widget.Space
                 android:layout_width="match_parent"
@@ -91,7 +92,7 @@
             <TextView
                 android:text="About You:"
                 android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textBlack"
@@ -108,14 +109,17 @@
             <android.widget.Space
                 android:layout_width="match_parent"
                 android:layout_height="6dp" />
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image_button"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:clickable="true"
-                android:src="@drawable/default_user_image"
                 android:layout_gravity="center_horizontal"
-                android:adjustViewBounds="false"
-                android:elevation="@dimen/snackbar_elevation" />
+                android:src="@drawable/default_user_image"
+                android:elevation="@dimen/snackbar_elevation"
+                app:border_width="1dp"
+                app:border_color="#607D8B"/>
             <android.widget.Space
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />

@@ -87,6 +87,7 @@ public class LoginFragment extends Fragment {
                                                 userCursor.getString(1),
                                                 userCursor.getString(2),
                                                 userCursor.getString(3),
+                                                userCursor.getString(6),
                                                 userCursor.getString(7)
                                         );
                                 break;

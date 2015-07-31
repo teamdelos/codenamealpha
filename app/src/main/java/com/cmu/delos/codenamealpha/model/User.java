@@ -15,11 +15,12 @@ public class User {
     private String gender;
     private String mobileNum;
 
-    public User(int userId,String firstName,String lastName,String email,String isProvider){
+    public User(int userId,String firstName,String lastName,String email,String image, String isProvider){
         this.userId=userId;
         this.firstName=firstName;
         this.lastName=lastName;
         this.email=email;
+        this.image=image;
         this.isProvider=isProvider;
     }
 

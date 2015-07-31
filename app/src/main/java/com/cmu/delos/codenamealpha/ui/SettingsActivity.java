@@ -8,9 +8,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
+import com.cmu.delos.codenamealpha.ui.provider.KitchenProfileActivity;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class SettingsActivity extends AbstractAlphaActivity {
@@ -27,33 +31,76 @@ public class SettingsActivity extends AbstractAlphaActivity {
     private void setupNavigationView(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
-                //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()) {
-                    //Replacing the main content with ContentFragment Which is our Inbox View;
-                    case R.id.navigation_item_1:
+        TextView navHeaderTitle = (TextView)drawerLayout.findViewById(R.id.nav_header_title);
+        TextView navHeaderEmail = (TextView)drawerLayout.findViewById(R.id.nav_header_email);
+        CircleImageView navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
+        navHeaderTitle.setText(super.getUser().getFirstName()+" "+super.getUser().getLastName());
+        navHeaderEmail.setText(super.getUser().getEmail());
+        if(super.getUser().getIsProvider().equals("N")){
+            navigationView.inflateMenu(R.menu.navigation_drawer_items_consumer);
+            //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                // This method will trigger on item Click of navigation menu
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    //Checking if the item is in checked state or not, if not make it in checked state
+                    if (menuItem.isChecked()) menuItem.setChecked(false);
+                    else menuItem.setChecked(true);
+                    //Closing drawer on item click
+                    drawerLayout.closeDrawers();
+                    //Check to see which item was being clicked and perform appropriate action
+                    switch (menuItem.getItemId()) {
+                        //Replacing the main content with ContentFragment Which is our Inbox View;
+                        case R.id.navigation_item_1:
                         Intent goToProfile = new Intent(SettingsActivity.this, ProfileActivity.class);
                         startActivity(goToProfile);
-                        return true;
-                    case R.id.navigation_item_2:
-//                        Intent goToSettings = new Intent(SettingsActivity.this, SettingsActivity.class);
-//                        startActivity(goToSettings);
-                        return true;
-                    default:
-                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
-                        return true;
+                            return true;
+                        // For rest of the options we just show a toast on click
+                        case R.id.navigation_item_2:
+//                            Intent goToSettings = new Intent(SettingsActivity.this, SettingsActivity.class);
+//                            startActivity(goToSettings);
+                            return true;
+                        default:
+                            Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                            return true;
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            navigationView.inflateMenu(R.menu.navigation_drawer_items_provider);
+            //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                // This method will trigger on item Click of navigation menu
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    //Checking if the item is in checked state or not, if not make it in checked state
+                    if (menuItem.isChecked()) menuItem.setChecked(false);
+                    else menuItem.setChecked(true);
+                    //Closing drawer on item click
+                    drawerLayout.closeDrawers();
+                    //Check to see which item was being clicked and perform appropriate action
+                    switch (menuItem.getItemId()) {
+                        //Replacing the main content with ContentFragment Which is our Inbox View;
+                        case R.id.navigation_item_1:
+                            Intent goToProfile = new Intent(SettingsActivity.this, ProfileActivity.class);
+                            startActivity(goToProfile);
+                            return true;
+                        // For rest of the options we just show a toast on click
+                        case R.id.navigation_item_2:
+                            Intent goToKitchenProfile = new Intent(SettingsActivity.this, KitchenProfileActivity.class);
+                            startActivity(goToKitchenProfile);
+                            return true;
+                        case R.id.navigation_item_3:
+//                            Intent goToSettings = new Intent(SettingsActivity.this, SettingsActivity.class);
+//                            startActivity(goToSettings);
+                            return true;
+                        default:
+                            Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                            return true;
+                    }
+                }
+            });
+        }
 
     }
 

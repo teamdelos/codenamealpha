@@ -7,28 +7,24 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.Kitchen;
-import com.cmu.delos.codenamealpha.ui.LoginActivity;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 
 import java.io.File;
@@ -200,7 +196,7 @@ public class OfferMealFragment extends Fragment {
                                         Integer.valueOf(dishQuantity),
                                         Double.valueOf(dishPrice)
                                 );
-
+                        ((OfferMealActivity) getActivity()).setIsProvider(true);
                         setUpFragment();
                     } else {
                         Toast.makeText(getActivity(), "Dish already exists!",

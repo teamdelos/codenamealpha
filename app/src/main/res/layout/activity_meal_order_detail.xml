@@ -11,12 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.cmu.delos.codenamealpha.ui.consumer.MealOrderDetailActivity">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:titleTextAppearance="@color/textWhite"
-            android:background="?attr/colorPrimary"/>
+
         <FrameLayout
             android:id="@+id/meal_order_detail_container"
             android:layout_width="match_parent"
