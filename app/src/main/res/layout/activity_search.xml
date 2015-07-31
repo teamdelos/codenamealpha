@@ -18,6 +18,12 @@
             android:layout_height="?attr/actionBarSize"
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <fragment
             android:id="@+id/search_container"
             android:name="com.cmu.delos.codenamealpha.ui.consumer.SearchActivityFragment"

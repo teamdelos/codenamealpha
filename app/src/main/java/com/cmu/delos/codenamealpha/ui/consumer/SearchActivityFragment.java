@@ -18,6 +18,9 @@ import com.cmu.delos.codenamealpha.R;
 public class SearchActivityFragment extends Fragment {
 
     private Button btnSearch;
+    private Button btnFilter;
+    private Button MaptoList;
+    private Button ListToMap;
 
     public SearchActivityFragment() {
     }
@@ -26,7 +29,9 @@ public class SearchActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+//        View view2 = inflater.inflate(R.layout.fragment_search_map, container, false);
         btnSearch = (Button)view.findViewById(R.id.btnSearch);
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +41,18 @@ public class SearchActivityFragment extends Fragment {
                 startActivity(intentToSearch);
             }
         });
+/**
+        btnFilter = (Button)view2.findViewById(R.id.btnSearch);
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.v("on click", "Filter Clicked");
+                //Intent intentToSearch = new Intent(getActivity(), MealOrderDetailActivity.class);
+                //startActivity(intentToSearch);
+            }
+        });
+**/
         return view;
     }
 }
