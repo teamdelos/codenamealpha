@@ -28,7 +28,8 @@ public class SearchResultFragment extends Fragment implements LoaderManager.Load
             AlphaContract.MealEntry.COLUMN_DISH_NAME,
             AlphaContract.MealEntry.COLUMN_DISH_IMAGE,
             AlphaContract.MealEntry.COLUMN_MEAL_PRICE,
-            AlphaContract.MealEntry.COLUMN_MEAL_COUNT
+            AlphaContract.MealEntry.COLUMN_MEAL_COUNT,
+            AlphaContract.MealEntry.COLUMN_IS_LISTED
     };
 
 
