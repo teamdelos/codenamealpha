@@ -29,7 +29,7 @@ public class MealOrderDetailActivity extends AbstractAlphaActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_order_detail);
-        setupToolbar();
+//        setupToolbar();
         setupNavigationView();
         handleFragment();
     }
@@ -83,7 +83,7 @@ public class MealOrderDetailActivity extends AbstractAlphaActivity {
     }
 
     private void handleFragment(){
-        Fragment fragment = new MealOrderDetailFragment();
+        Fragment fragment = new CheckoutFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.meal_order_detail_container, fragment);

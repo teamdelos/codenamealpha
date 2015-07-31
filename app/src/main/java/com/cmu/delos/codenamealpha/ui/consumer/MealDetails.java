@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
@@ -18,10 +20,12 @@ import com.cmu.delos.codenamealpha.ui.provider.MealOfferCompleteFragment;
 
 public class MealDetails extends AbstractAlphaActivity {
 
+    private Button buy_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_details);
+        buy_btn = (Button) findViewById(R.id.buy_btn);
         Intent intent = getIntent();
         Log.v("Read", intent.getStringExtra("dishName"));
         Cursor mealCursor = getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithKidDName(intent.getIntExtra("kitchenId", 0), intent.getStringExtra("dishName")),null,null,null,null);
@@ -32,7 +36,7 @@ public class MealDetails extends AbstractAlphaActivity {
                     createMeal(mealCursor.getInt(0), mealCursor.getInt(1), mealCursor.getString(2),
                             mealCursor.getString(6), mealCursor.getString(5), mealCursor.getString(7),
                             mealCursor.getInt(4), mealCursor.getDouble(3));
-
+                    setIsProvider(false);
                     break;
                 }
                 setUpFragment();
@@ -43,6 +47,13 @@ public class MealDetails extends AbstractAlphaActivity {
             Toast.makeText(getApplicationContext(), "Should not be here!",
                     Toast.LENGTH_LONG).show();
         }
+        buy_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MealOrderDetailActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpFragment(){

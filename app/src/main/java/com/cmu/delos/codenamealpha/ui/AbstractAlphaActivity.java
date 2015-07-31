@@ -2,11 +2,10 @@ package com.cmu.delos.codenamealpha.ui;
 
 import android.support.v7.app.AppCompatActivity;
 
+import com.cmu.delos.codenamealpha.model.Address;
 import com.cmu.delos.codenamealpha.model.Kitchen;
 import com.cmu.delos.codenamealpha.model.Meal;
 import com.cmu.delos.codenamealpha.model.User;
-
-import java.util.ArrayList;
 
 /**
  * Created by Mrik on 7/24/15.
@@ -15,6 +14,8 @@ public class AbstractAlphaActivity extends AppCompatActivity {
     private static User userDetails;
     private static Kitchen kitchenDetails;
     private static Meal mealDetails;
+    private static Address address;
+    private static boolean isProvider;
 
     public static String getQuery() {
         return query;
@@ -38,6 +39,9 @@ public class AbstractAlphaActivity extends AppCompatActivity {
         kitchenDetails = new Kitchen(kitchenId, userId, shortDesc, kitchenImage);
     }
 
+    public void setIsProvider(boolean isProvider) {
+        this.isProvider = isProvider;
+    }
     public Kitchen getKitchen(){
         return kitchenDetails;
     }
@@ -48,6 +52,12 @@ public class AbstractAlphaActivity extends AppCompatActivity {
         mealDetails = new Meal(mealId, kitchenId, dishName,
                             shortDesc, dishIng, dishImage,
                             mealCount,mealPrice);
+    }
+
+    public void setAddress(int id, String name, String streetAddress1, String streetAddress2,
+                           String city, String state, String zipCode) {
+        address = new Address(id,name,  streetAddress1,  streetAddress2,
+                city, state, zipCode);
     }
 
     public Meal getMeal(){
