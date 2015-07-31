@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/bland_meal"
+        android:title="Bland Meal" />
+    <item android:id="@+id/diabetic_meal"
+        android:title="Diabetic Meal" />
+    <item android:id="@+id/glutenfree_meal"
+        android:title="Gluten Free Meal" />
+    <item android:id="@+id/low_calorie"
+        android:title="Low Calorie" />
+    <item android:id="@+id/low_cholesterol_meal"
+        android:title="Low Cholesterol Meal" />
+    <item android:id="@+id/low_sodium"
+        android:title="Low Sodium" />
+    <item android:id="@+id/nonlactose_meal"
+        android:title="Non Lactose Meal" />
+    <item android:id="@+id/vegan_meal"
+        android:title="Vegan Meal" />
+    <item android:id="@+id/vegeterian_meal"
+        android:title="Vegeterian Meal" />
+    <item android:id="@+id/nutsorpeanuts"
+        android:title="Nuts or Peanut Allergies" />
+    <item android:id="@+id/kosher_meal"
+        android:title="Kosher Meal" />
+    <item android:id="@+id/child_meal"
+        android:title="Child Meal" />
+
+</menu>

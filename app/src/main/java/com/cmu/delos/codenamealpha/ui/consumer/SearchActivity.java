@@ -8,13 +8,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.MenuInflater;
+import android.util.Log;
+
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
@@ -38,7 +41,7 @@ public class SearchActivity extends AbstractAlphaActivity {
         setupNavigationView();
 
         search=(SearchView) findViewById(R.id.searchView);
-        search.setQueryHint("What type of food?");
+        search.setQueryHint("What type of food would you like?");
 
         //*** setOnQueryTextFocusChangeListener ***
         search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
@@ -137,6 +140,42 @@ public class SearchActivity extends AbstractAlphaActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.bland_meal:
+                //startActivity(new Intent(this, About.class));
+                return true;
+            case R.id.diabetic_meal:
+                //startActivity(new Intent(this, Help.class));
+                return true;
+            case R.id.glutenfree_meal:
+                //startActivity(new Intent(this, About.class));
+                return true;
+            case R.id.low_calorie:
+                //startActivity(new Intent(this, Help.class));
+                return true;
+            case R.id.low_cholesterol_meal:
+                //startActivity(new Intent(this, About.class));
+                return true;
+            case R.id.low_sodium:
+                //startActivity(new Intent(this, Help.class));
+                return true;
+            case R.id.nonlactose_meal:
+                //startActivity(new Intent(this, About.class));
+                return true;
+            case R.id.vegan_meal:
+                //startActivity(new Intent(this, Help.class));
+                return true;
+            case R.id.vegeterian_meal:
+                //startActivity(new Intent(this, About.class));
+                return true;
+            case R.id.nutsorpeanuts:
+                //startActivity(new Intent(this, Help.class));
+                return true;
+            case R.id.kosher_meal:
+                //startActivity(new Intent(this, About.class));
+                return true;
+            case R.id.child_meal:
+                //startActivity(new Intent(this, Help.class));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -150,6 +189,15 @@ public class SearchActivity extends AbstractAlphaActivity {
         finish();
 //        System.exit(0);
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_list, menu);
+        return true;
+    }
+
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
