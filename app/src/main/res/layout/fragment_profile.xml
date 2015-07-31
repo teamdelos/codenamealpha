@@ -134,29 +134,14 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="30dp"
-        android:text="Edit"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textAllCaps="true"
-        android:textColor="@color/textWhite"
-        android:background="@color/buttonColor"
-        android:layout_gravity="right"
-        android:layout_alignBottom="@+id/scrollView"
-        android:layout_alignRight="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView"
-        android:id="@+id/button2" />
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="30dp"
         android:text="Save"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textAllCaps="true"
         android:textColor="@color/textWhite"
         android:background="@color/buttonColor"
-        android:layout_above="@+id/button2" />
+        android:layout_above="@+id/button2"
+        android:id="@+id/saveProfileBtn" />
 
 </LinearLayout>
 

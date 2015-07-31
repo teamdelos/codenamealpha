@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 public class AlphaContract {
 
@@ -101,6 +100,7 @@ public class AlphaContract {
         public static final String COLUMN_DISH_INGREDIENTS = "dish_ingredients";
         public static final String COLUMN_MEAL_COUNT = "meal_count";
         public static final String COLUMN_MEAL_PRICE = "meal_price";
+        public static final String COLUMN_IS_LISTED = "is_listed";
 
         public static Uri buildMealUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
@@ -111,10 +111,18 @@ public class AlphaContract {
                     .appendPath(Integer.toString(kitchenId)).build();
         }
 
+        public static Uri buildMealUriWithName(String dishName) {
+            return CONTENT_URI.buildUpon().appendPath(dishName).build();
+        }
+
         public static Uri buildMealUriWithKid(int kitchenId) {
             return CONTENT_URI.buildUpon()
             .appendQueryParameter(COLUMN_KITCHEN_ID, Integer.toString(kitchenId))
                     .build();
+        }
+
+        public static boolean getQueryParameterKeyFromUri(Uri uri, String Key){
+            return uri.getBooleanQueryParameter(Key,false);
         }
 
         public static String getKidFromUri(Uri uri, boolean onlyKid) {
@@ -149,6 +157,16 @@ public class AlphaContract {
 
         public static Uri buildAddressUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static Uri buildAddrressUriWithid(int userId) {
+            return CONTENT_URI.buildUpon()
+                    .appendQueryParameter(COLUMN_USER_ID, Integer.toString(userId))
+                    .build();
+        }
+
+        public static String getuseridFromUri(Uri uri) {
+            return uri.getQueryParameter(COLUMN_USER_ID);
         }
     }
 

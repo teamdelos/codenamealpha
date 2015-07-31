@@ -25,7 +25,8 @@ public class AlphaProvider extends ContentProvider{
     private static final int MEAL = 300;
     private static final int MEAL_WITH_EMAIL = 301;
     private static final int MEAL_WITH_DISH_KITCHEN_ID = 302;
-    private static final int MEAL_WITH_KITCHEN_ID = 303;
+//    private static final int MEAL_WITH_KITCHEN_ID = 303;
+    private static final int MEAL_WITH_DISH_NAME = 304;
     static final int ADDRESS = 400;
     static final int ADDRESS_WITH_USER_ID = 401;
 
@@ -74,7 +75,8 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_MEAL, MEAL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_EMAIL);
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*/#", MEAL_WITH_DISH_KITCHEN_ID);
-        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/#", MEAL_WITH_KITCHEN_ID);
+//        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/#", MEAL_WITH_KITCHEN_ID);
+        matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_DISH_NAME);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS, ADDRESS);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS + "/#", ADDRESS_WITH_USER_ID);
         return matcher;
@@ -106,7 +108,7 @@ public class AlphaProvider extends ContentProvider{
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case MEAL_WITH_DISH_KITCHEN_ID:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
-            case MEAL_WITH_KITCHEN_ID:
+            case MEAL_WITH_DISH_NAME:
                 return AlphaContract.MealEntry.CONTENT_ITEM_TYPE;
             case ADDRESS:
                 return AlphaContract.AddressEntry.CONTENT_TYPE;
@@ -135,13 +137,16 @@ public class AlphaProvider extends ContentProvider{
                     "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID+" = ?  AND "+
                     AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
 
+    private static final String sMealSelectWithDishName=
+            AlphaContract.MealEntry.TABLE_NAME +
+                    "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
+
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
             case USER_WITH_EMAIL: {
-                Log.v("meal insidequery", String.valueOf(USER_WITH_EMAIL));
                 retCursor = mOpenHelper.getReadableDatabase()
                         .query(AlphaContract.UserEntry.TABLE_NAME,
                                 projection,
@@ -183,7 +188,20 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case MEAL: {
-                retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.MealEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                if(AlphaContract.MealEntry.getQueryParameterKeyFromUri(uri, AlphaContract.MealEntry.COLUMN_KITCHEN_ID)){
+                    retCursor = mOpenHelper.getReadableDatabase()
+                            .query(AlphaContract.MealEntry.TABLE_NAME,
+                                    projection,
+                                    sMealSelectWithKitchenId,
+                                    new String[]{AlphaContract.MealEntry.getKidFromUri(uri, true)},
+                                    null,
+                                    null,
+                                    sortOrder);
+                }
+                else{
+                    retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.MealEntry.TABLE_NAME,projection,selection,selectionArgs,null,null,sortOrder);
+                }
+
                 break;
             }
             case MEAL_WITH_EMAIL: {
@@ -209,12 +227,13 @@ public class AlphaProvider extends ContentProvider{
                                 sortOrder);
                 break;
             }
-            case MEAL_WITH_KITCHEN_ID:{
+
+            case MEAL_WITH_DISH_NAME:{
                 retCursor = mOpenHelper.getReadableDatabase()
                         .query(AlphaContract.MealEntry.TABLE_NAME,
                                 projection,
-                                sMealSelectWithKitchenId,
-                                new String[]{AlphaContract.MealEntry.getKidFromUri(uri, true)},
+                                sMealSelectWithDishName,
+                                new String[]{AlphaContract.MealEntry.getDishNameFromUri(uri)},
                                 null,
                                 null,
                                 sortOrder);
@@ -294,6 +313,11 @@ public class AlphaProvider extends ContentProvider{
                 rowsDeleted = db.delete(
                         AlphaContract.MealEntry.TABLE_NAME,selection,selectionArgs);
                 break;
+            case MEAL_WITH_DISH_KITCHEN_ID:
+                rowsDeleted = db.delete(AlphaContract.MealEntry.TABLE_NAME, sMealSelectWithKIdDishName,
+                        new String[]{AlphaContract.MealEntry.getKidFromUri(uri, false),
+                                AlphaContract.MealEntry.getDishNameFromUri(uri)});
+                break;
             case ADDRESS:
                 rowsDeleted = db.delete(
                         AlphaContract.AddressEntry.TABLE_NAME,selection,selectionArgs);
@@ -327,8 +351,16 @@ public class AlphaProvider extends ContentProvider{
             case MEAL:
                 rowsUpdated = db.update(AlphaContract.MealEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
+            case MEAL_WITH_DISH_KITCHEN_ID:
+                rowsUpdated = db.update(AlphaContract.MealEntry.TABLE_NAME, values, sMealSelectWithKIdDishName,
+                        new String[]{AlphaContract.MealEntry.getKidFromUri(uri, false),
+                                AlphaContract.MealEntry.getDishNameFromUri(uri)});
+                break;
             case ADDRESS:
                 rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case ADDRESS_WITH_USER_ID:
+                rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, sAddressSelectWithUserId, new String[]{AlphaContract.AddressEntry.getuseridFromUri(uri)});
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);

@@ -6,6 +6,8 @@ import com.cmu.delos.codenamealpha.model.Kitchen;
 import com.cmu.delos.codenamealpha.model.Meal;
 import com.cmu.delos.codenamealpha.model.User;
 
+import java.util.ArrayList;
+
 /**
  * Created by Mrik on 7/24/15.
  */
@@ -13,6 +15,16 @@ public class AbstractAlphaActivity extends AppCompatActivity {
     private static User userDetails;
     private static Kitchen kitchenDetails;
     private static Meal mealDetails;
+
+    public static String getQuery() {
+        return query;
+    }
+
+    public static void setQuery(String query) {
+        AbstractAlphaActivity.query = query;
+    }
+
+    private static String query;
 
     public void createUser(int userId,String firstName,String lastName,String email,String isProvider){
         userDetails = new User(userId,firstName,lastName,email,isProvider);
@@ -41,5 +53,6 @@ public class AbstractAlphaActivity extends AppCompatActivity {
     public Meal getMeal(){
         return mealDetails;
     }
+
 
 }

@@ -1,22 +1,25 @@
 package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.Toast;
+import android.view.MenuInflater;
+import android.util.Log;
 
 
 import com.cmu.delos.codenamealpha.R;
+import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
@@ -55,10 +58,14 @@ public class SearchActivity extends AbstractAlphaActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // TODO Auto-generated method stub
-
+                Log.v("Here query",query);
+                Cursor userMealSearch = getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithName(query),null,null,null,null);
+                Log.v("Here after search",userMealSearch.getCount()+"");
                 Toast.makeText(getBaseContext(), query,
                         Toast.LENGTH_SHORT).show();
-
+                Intent intentToSignUp = new Intent(getApplicationContext(), SearchResults.class);
+                intentToSignUp.putExtra("query",query);
+                startActivity(intentToSignUp);
                 return false;
             }
 
