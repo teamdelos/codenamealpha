@@ -2,6 +2,7 @@ package com.cmu.delos.codenamealpha.ui.consumer;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.support.v7.widget.CardView;
@@ -10,7 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,14 +34,11 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
     String dishImage;
     String dishPrice;
     String dishQuantity;
-
     int kitchenId;
 
     public MealAdapter(Context context, Cursor c) {
         dataCursor = c;
         this.context = context;
-        this.kitchenId = kitchenId;
-        this.isProvider = isProvider;
     }
 
     @Override
@@ -59,7 +57,12 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
     }
 
     public void onClick(View view) {
-        Log.v("CLICKED Mealadapter","");
+        Log.v("CLICKED Mealadapter",kitchenId + ":" + dishName);
+        Intent intent = new Intent(context, MealDetails.class);
+
+        intent.putExtra("kitchenId", kitchenId);
+        intent.putExtra("dishName", dishName);
+        context.startActivity(intent);
     }
 
     @Override
@@ -70,6 +73,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
         dishPrice= '$'+dataCursor.getString(3);
         dishQuantity = "Quantity:\t" +dataCursor.getString(4);
         holder.dish_name.setText(dishName);
+        kitchenId = dataCursor.getInt(6);
         if(dishImage!=null){
             File imgFile = new File(dishImage);
             // Part 1: Decode image
@@ -83,6 +87,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
         }
         holder.dish_price.setText(dishPrice);
         holder.dish_quantity.setText(dishQuantity);
+        Log.v("kitchen Id", kitchenId+"");
     }
 
     @Override
@@ -109,7 +114,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
         protected TextView dish_price;
         protected ImageView dish_image;
         protected TextView dish_quantity;
-        protected ImageButton delete;
+        protected Button delete;
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
@@ -119,7 +124,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
             dish_image = (ImageView) itemView.findViewById(R.id.dish_image);
             dish_price = (TextView) itemView.findViewById(R.id.dish_price_text);
             dish_quantity = (TextView) itemView.findViewById(R.id.dish_quantity);
-            delete = (ImageButton) itemView.findViewById(R.id.deleteItem);
+            delete = (Button) itemView.findViewById(R.id.details_btn);
 
         }
 

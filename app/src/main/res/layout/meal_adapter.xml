@@ -63,17 +63,18 @@
                     android:layout_below="@+id/dish_image"
                     android:layout_width="wrap_content"
                     android:layout_height="4dp" />
-                <ImageButton
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:src="@mipmap/ic_delete"
+
                     android:background="#cfd8dc"
-                    android:id="@+id/deleteItem"
+                    android:id="@+id/details_btn"
                     android:clickable="true"
                     android:layout_below="@+id/space"
                     android:layout_alignRight="@+id/dish_price_text"
-                    android:layout_alignEnd="@+id/dish_price_text" />
+                    android:layout_alignEnd="@+id/dish_price_text"
+                    android:text=">>" />
             </RelativeLayout>
             <TextView
                 android:id="@+id/dish_quantity"

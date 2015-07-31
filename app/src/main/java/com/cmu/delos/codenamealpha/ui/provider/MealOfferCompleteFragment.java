@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.model.Meal;
+import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public class MealOfferCompleteFragment extends Fragment {
         dish_price= (TextView) rootView.findViewById(R.id.dish_price_text);
         dish_image = (ImageView) rootView.findViewById(R.id.meal_offered_view);
 
-        m = ((OfferMealActivity) getActivity()).getMeal();
+        m = ((AbstractAlphaActivity) getActivity()).getMeal();
         if(m.getDishImage()!=null) setPic();
 
         dish_name.setText(m.getDishName());
