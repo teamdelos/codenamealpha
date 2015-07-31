@@ -26,8 +26,8 @@ public class AbstractAlphaActivity extends AppCompatActivity {
 
     private static String query;
 
-    public void createUser(int userId,String firstName,String lastName,String email,String isProvider){
-        userDetails = new User(userId,firstName,lastName,email,isProvider);
+    public void createUser(int userId,String firstName,String lastName,String email,String image, String isProvider){
+        userDetails = new User(userId,firstName,lastName,email,image,isProvider);
     }
 
     public User getUser(){

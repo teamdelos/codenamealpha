@@ -63,7 +63,6 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
 
     public void onClick(View view) {
         ViewHolder holder = (ViewHolder) view.getTag();
-        int position = holder.getPosition();
         int rowsChanged;
         if (view.getId() == holder.dish_is_listed.getId()){
             Uri listingChangeUri = AlphaContract.MealEntry.buildMealUriWithKidDName(kitchenId, holder.dish_name.getText().toString());
@@ -128,7 +127,7 @@ public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdap
         }
         return oldCursor;
     }
-    
+
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private Context context;
         protected CardView cardView;

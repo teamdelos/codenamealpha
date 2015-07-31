@@ -1,10 +1,19 @@
 package com.cmu.delos.codenamealpha.ui;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,11 +24,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.Address;
+import com.cmu.delos.codenamealpha.ui.provider.KitchenProfileActivity;
+import com.cmu.delos.codenamealpha.util.ScalingUtilities;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 
 public class ProfileActivity extends AbstractAlphaActivity {
@@ -33,7 +55,11 @@ public class ProfileActivity extends AbstractAlphaActivity {
     private EditText profile_city;
     private EditText profile_zip_code;
     private EditText editText;
+    private CircleImageView profile_image_button;
     private Button saveProfileBtn;
+
+    private String mCurrentPhotoPath;
+    private static int RESULT_LOAD_IMG = 1;
 
     private String name;
     private String address1;
@@ -57,6 +83,7 @@ public class ProfileActivity extends AbstractAlphaActivity {
         profile_city = (EditText)findViewById(R.id.profile_city);
         profile_zip_code = (EditText)findViewById(R.id.profile_zip_code);
         editText = (EditText)findViewById(R.id.editText);
+        profile_image_button = (CircleImageView) findViewById(R.id.profile_image_button);
         saveProfileBtn = (Button)findViewById(R.id.saveProfileBtn);
         Cursor userAddressCur = null;
 
@@ -65,7 +92,6 @@ public class ProfileActivity extends AbstractAlphaActivity {
             if (userAddressCur.getCount() > 0) {
                 for (userAddressCur.moveToFirst(); !userAddressCur.isAfterLast(); userAddressCur.moveToNext()) {
                     address = new Address();
-                    Log.v("Inside prof activity", getUser().getUserId()+"");
                     if (userAddressCur.getString(0) != null) {
                         address.setAddressId(userAddressCur.getInt(0));
 
@@ -98,6 +124,9 @@ public class ProfileActivity extends AbstractAlphaActivity {
                         address.setStreetAddress2(userAddressCur.getString(8));
                         profile_address_2.setText(userAddressCur.getString(8));
                     }
+                    if(super.getUser().getImage()!=null){
+//                        profileImageButton.setImageBitmap();
+                    }
                     break;
                 }
 
@@ -109,8 +138,69 @@ public class ProfileActivity extends AbstractAlphaActivity {
                 userAddressCur.close();
             }
         }
+        uploadImagerHandler();
         handleSave();
+    }
 
+    private void uploadImagerHandler(){
+        profile_image_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create intent to Open Image applications like Gallery, Google Photos
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                // Start the Intent
+                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            // When an Image is picked
+            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
+                    && null != data) {
+                // Get the Image from data
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+                // Get the cursor
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                // Move to first row
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                mCurrentPhotoPath = cursor.getString(columnIndex);
+                setPic();
+                cursor.close();
+
+            }
+            else {
+                Toast.makeText(this, "You haven't picked Image",
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong!!!", Toast.LENGTH_LONG)
+                    .show();
+        }
+
+    }
+
+    private void setPic() {
+        File imgFile = new File(mCurrentPhotoPath);
+        // Part 1: Decode image
+        Bitmap unscaledBitmap = decodeResource(imgFile, 500, 400, ScalingUtilities.ScalingLogic.FIT);
+
+        // Part 2: Scale image
+        Bitmap scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, 500,
+                400, ScalingUtilities.ScalingLogic.FIT);
+        unscaledBitmap.recycle();
+
+        // Publish results
+        profile_image_button.setImageBitmap(scaledBitmap);
     }
 
     private void handleSave() {
@@ -151,34 +241,76 @@ public class ProfileActivity extends AbstractAlphaActivity {
     private void setupNavigationView(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if (menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
-                //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()) {
-                    //Replacing the main content with ContentFragment Which is our Inbox View;
-                    case R.id.navigation_item_1:
+        TextView navHeaderTitle = (TextView)drawerLayout.findViewById(R.id.nav_header_title);
+        TextView navHeaderEmail = (TextView)drawerLayout.findViewById(R.id.nav_header_email);
+        CircleImageView navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
+        navHeaderTitle.setText(super.getUser().getFirstName()+" "+super.getUser().getLastName());
+        navHeaderEmail.setText(super.getUser().getEmail());
+        if(super.getUser().getIsProvider().equals("N")){
+            navigationView.inflateMenu(R.menu.navigation_drawer_items_consumer);
+            //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                // This method will trigger on item Click of navigation menu
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    //Checking if the item is in checked state or not, if not make it in checked state
+                    if (menuItem.isChecked()) menuItem.setChecked(false);
+                    else menuItem.setChecked(true);
+                    //Closing drawer on item click
+                    drawerLayout.closeDrawers();
+                    //Check to see which item was being clicked and perform appropriate action
+                    switch (menuItem.getItemId()) {
+                        //Replacing the main content with ContentFragment Which is our Inbox View;
+                        case R.id.navigation_item_1:
 //                        Intent goToProfile = new Intent(ProfileActivity.this, ProfileActivity.class);
 //                        startActivity(goToProfile);
-                        return true;
-                    // For rest of the options we just show a toast on click
-                    case R.id.navigation_item_2:
-                        Intent goToSettings = new Intent(ProfileActivity.this, SettingsActivity.class);
-                        startActivity(goToSettings);
-                        return true;
-                    default:
-                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
-                        return true;
+                            return true;
+                        // For rest of the options we just show a toast on click
+                        case R.id.navigation_item_2:
+                            Intent goToSettings = new Intent(ProfileActivity.this, SettingsActivity.class);
+                            startActivity(goToSettings);
+                            return true;
+                        default:
+                            Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                            return true;
+                    }
                 }
-            }
-        });
+            });
+        }else{
+            navigationView.inflateMenu(R.menu.navigation_drawer_items_provider);
+            //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                // This method will trigger on item Click of navigation menu
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    //Checking if the item is in checked state or not, if not make it in checked state
+                    if (menuItem.isChecked()) menuItem.setChecked(false);
+                    else menuItem.setChecked(true);
+                    //Closing drawer on item click
+                    drawerLayout.closeDrawers();
+                    //Check to see which item was being clicked and perform appropriate action
+                    switch (menuItem.getItemId()) {
+                        //Replacing the main content with ContentFragment Which is our Inbox View;
+                        case R.id.navigation_item_1:
+//                            Intent goToProfile = new Intent(ProfileActivity.this, ProfileActivity.class);
+//                            startActivity(goToProfile);
+                            return true;
+                        // For rest of the options we just show a toast on click
+                        case R.id.navigation_item_2:
+                            Intent goToKitchenProfile = new Intent(ProfileActivity.this, KitchenProfileActivity.class);
+                            startActivity(goToKitchenProfile);
+                            return true;
+                        case R.id.navigation_item_3:
+                            Intent goToSettings = new Intent(ProfileActivity.this, SettingsActivity.class);
+                            startActivity(goToSettings);
+                            return true;
+                        default:
+                            Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
+                            return true;
+                    }
+                }
+            });
+        }
 
     }
 

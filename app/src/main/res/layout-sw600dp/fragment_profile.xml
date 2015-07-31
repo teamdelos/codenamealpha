@@ -94,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Zip Code"
                     android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:inputType="number"
                     android:id="@+id/profile_zip_code"/>
             </LinearLayout>
             <android.widget.Space
@@ -118,29 +119,42 @@
             <android.widget.Space
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image_button"
                 android:layout_width="280dp"
                 android:layout_height="280dp"
                 android:clickable="true"
-                android:src="@drawable/default_user_image"
                 android:layout_gravity="center_horizontal"
-                android:elevation="@dimen/snackbar_elevation" />
+                android:src="@drawable/default_user_image"
+                android:elevation="@dimen/snackbar_elevation"
+                app:border_width="1dp"
+                app:border_color="#607D8B"/>
             <android.widget.Space
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
-            <Button
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:text="Save"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textAllCaps="true"
-                android:textColor="@color/textWhite"
-                android:background="@color/colorPrimaryDark"/>
         </LinearLayout>
 
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:text="Save"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAllCaps="true"
+            android:textColor="@color/textWhite"
+            android:background="@color/buttonColor"
+            android:layout_above="@+id/button2"
+            android:id="@+id/saveProfileBtn" />
+
+    </LinearLayout>
 
 </RelativeLayout>

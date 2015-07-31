@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
@@ -20,6 +21,8 @@ import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchActivity extends AbstractAlphaActivity {
 
@@ -83,6 +86,11 @@ public class SearchActivity extends AbstractAlphaActivity {
     private void setupNavigationView(){
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation);
+        TextView navHeaderTitle = (TextView)drawerLayout.findViewById(R.id.nav_header_title);
+        TextView navHeaderEmail = (TextView)drawerLayout.findViewById(R.id.nav_header_email);
+        CircleImageView navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
+        navHeaderTitle.setText(super.getUser().getFirstName()+" "+super.getUser().getLastName());
+        navHeaderEmail.setText(super.getUser().getEmail());
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu

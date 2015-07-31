@@ -106,6 +106,7 @@ public class SignUpFragment extends Fragment {
                                         fName,
                                         lName,
                                         email,
+                                        null,
                                         provider
                                 );
                         //creating the model Kitchen object for use
