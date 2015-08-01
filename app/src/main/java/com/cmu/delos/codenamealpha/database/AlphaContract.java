@@ -13,6 +13,7 @@ public class AlphaContract {
     public static final String PATH_KITCHEN = "kitchen";
     public static final String PATH_MEAL = "meal";
     public static final String PATH_ADDRESS = "address";
+    public static final String PATH_TRANSACTION = "transaction";
 
 
     public static final class UserEntry implements BaseColumns {
@@ -168,6 +169,32 @@ public class AlphaContract {
         public static String getuseridFromUri(Uri uri) {
             return uri.getQueryParameter(COLUMN_USER_ID);
         }
+    }
+
+    public static final class TransactionEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_TRANSACTION).build();
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TRANSACTION;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TRANSACTION;
+
+        public static final String TABLE_NAME = "transaction";
+
+        public static final String COLUMN_USER_ID_C = "user_id_c";
+        public static final String COLUMN_USER_ID_P = "user_id_p";
+        public static final String COLUMN_MEAL_ID = "meal_id";
+        public static final String COLUMN_TRAN_TIME = "time";
+        public static final String COLUMN_MEAL_NAME = "meal_name";
+        public static final String COLUMN_KITCHEN_ID = "kitchen_id";
+        public static final String COLUMN_MEAL_PRICE = "meal_price";
+
+        public static Uri buildTransactionUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+
     }
 
 }

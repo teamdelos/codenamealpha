@@ -3,12 +3,12 @@ package com.cmu.delos.codenamealpha.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import com.cmu.delos.codenamealpha.database.AlphaContract.UserEntry;
+import com.cmu.delos.codenamealpha.database.AlphaContract.AddressEntry;
 import com.cmu.delos.codenamealpha.database.AlphaContract.KitchenEntry;
 import com.cmu.delos.codenamealpha.database.AlphaContract.MealEntry;
-import com.cmu.delos.codenamealpha.database.AlphaContract.AddressEntry;
+import com.cmu.delos.codenamealpha.database.AlphaContract.TransactionEntry;
+import com.cmu.delos.codenamealpha.database.AlphaContract.UserEntry;
 
 public class AlphaDBHelper extends SQLiteOpenHelper {
 
@@ -74,10 +74,23 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 " FOREIGN KEY (" + AddressEntry.COLUMN_USER_ID+ ") REFERENCES " +
                 UserEntry.TABLE_NAME + " (" + UserEntry._ID + "));";
 
+        final String SQL_CREATE_TRANSACTION_TABLE = "CREATE TABLE " + TransactionEntry.TABLE_NAME + " (" +
+                TransactionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                TransactionEntry.COLUMN_KITCHEN_ID + " INTEGER NOT NULL, " +
+                TransactionEntry.COLUMN_MEAL_ID + " INTEGER NOT NULL, " +
+                TransactionEntry.COLUMN_MEAL_NAME + " TEXT NOT NULL, " +
+                TransactionEntry.COLUMN_MEAL_PRICE + " REAL NOT NULL, " +
+                TransactionEntry.COLUMN_MEAL_ID + " INTEGER NOT NULL, " +
+                TransactionEntry.COLUMN_TRAN_TIME + " TEXT NOT NULL," +
+                TransactionEntry.COLUMN_USER_ID_C + " INTEGER NOT NULL," +
+                TransactionEntry.COLUMN_USER_ID_P + " INTEGER NOT NULL" +
+                " );";
+
         sqLiteDatabase.execSQL(SQL_CREATE_USER_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_KITHCHEN_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_MEAL_TABLE);
         sqLiteDatabase.execSQL(SQL_CREATE_ADRESS_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_TRANSACTION_TABLE);
     }
 
     @Override
@@ -86,6 +99,7 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + KitchenEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MealEntry.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + AddressEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TransactionEntry.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 }

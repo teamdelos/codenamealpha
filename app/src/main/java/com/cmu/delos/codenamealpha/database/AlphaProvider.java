@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.util.Log;
 
 /**
  * Created by Vignan on 7/19/2015.
@@ -29,6 +28,7 @@ public class AlphaProvider extends ContentProvider{
     private static final int MEAL_WITH_DISH_NAME = 304;
     static final int ADDRESS = 400;
     static final int ADDRESS_WITH_USER_ID = 401;
+    static final int TRANSACTION = 500;
 
     private static final SQLiteQueryBuilder sKitchenByUserEmailQueryBuilder;
     private static final SQLiteQueryBuilder sMealByUserEmailQueryBuilder;
@@ -79,6 +79,7 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_MEAL + "/*", MEAL_WITH_DISH_NAME);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS, ADDRESS);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS + "/#", ADDRESS_WITH_USER_ID);
+        matcher.addURI(authority, AlphaContract.PATH_TRANSACTION, TRANSACTION);
         return matcher;
     }
 
@@ -114,6 +115,8 @@ public class AlphaProvider extends ContentProvider{
                 return AlphaContract.AddressEntry.CONTENT_TYPE;
             case ADDRESS_WITH_USER_ID:
                 return AlphaContract.AddressEntry.CONTENT_ITEM_TYPE;
+            case TRANSACTION:
+                return AlphaContract.TransactionEntry.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -281,6 +284,14 @@ public class AlphaProvider extends ContentProvider{
                 long _id = db.insert(AlphaContract.AddressEntry.TABLE_NAME,null,values);
                 if(_id > 0)
                     returnUri = AlphaContract.AddressEntry.buildAddressUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
+            case TRANSACTION:{
+                long _id = db.insert(AlphaContract.TransactionEntry.TABLE_NAME,null,values);
+                if(_id > 0)
+                    returnUri = AlphaContract.TransactionEntry.buildTransactionUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
