@@ -1,0 +1,9 @@
+{
+    "configUrl": "client_api_configuration_url",
+    "authorizationFingerprint": "authorization_fingerprint",
+    "challenges": ["cvv"],
+    "merchantId": "integration_merchant_id",
+    "merchantAccountId": "integration_merchant_account_id",
+    "paypalEnabled": false,
+    "threeDSecureEnabled": true
+}

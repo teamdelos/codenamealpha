@@ -1,28 +1,24 @@
-package com.cmu.delos.codenamealpha.ui.consumer;
+package com.example.felixamoruwa.gmap;
 
-/**
- * Created by felixamoruwa on 7/25/15.
- */
 import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
+import com.example.felixamoruwa.gmap.AppLocationService;
+import com.google.android.gms.location.LocationListener;
 
-import com.cmu.delos.codenamealpha.ui.AppLocationService;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.cmu.delos.codenamealpha.R;
 
-public abstract class MyActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback {
+
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     //private Location mylocation = mMap.getMyLocation();
@@ -38,7 +34,7 @@ public abstract class MyActivity extends FragmentActivity implements LocationLis
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         appLocationService = new AppLocationService(
-                MyActivity.this);
+                MapsActivity.this);
     }
 
     @Override
@@ -88,21 +84,11 @@ public abstract class MyActivity extends FragmentActivity implements LocationLis
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-        Location gpsLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
-        if (gpsLocation != null) {
-            double mlatitude = gpsLocation.getLatitude();
-            double mlongitude = gpsLocation.getLongitude();
-            String result = "Latitude: " + gpsLocation.getLatitude() +
-                    " Longitude: " + gpsLocation.getLongitude();
 
-            //   mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("I am here"));
-            LatLng sydney = new LatLng(mlatitude, mlongitude);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("You are here."));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
 
-            //LatLng coord;
-            //mMap.addMarker(new MarkerOptions().position(coord).title("Marker"));
-        }
+        //LatLng coord;
+        //mMap.addMarker(new MarkerOptions().position(coord).title("Marker"));
+
     }
 
     public void onMapReady(GoogleMap map) {
@@ -125,67 +111,4 @@ public abstract class MyActivity extends FragmentActivity implements LocationLis
         }
 
     }
-
-    /**
-    private GoogleMap googleMap;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //show error dialog if GoolglePlayServices not available
-        if (!isGooglePlayServicesAvailable()) {
-            finish();
-        }
-        setContentView(R.layout.activity_search);
-        SupportMapFragment supportMapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googleMap);
-        googleMap = supportMapFragment.getMap();
-        googleMap.setMyLocationEnabled(true);
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String bestProvider = locationManager.getBestProvider(criteria, true);
-        Location location = locationManager.getLastKnownLocation(bestProvider);
-        if (location != null) {
-            onLocationChanged(location);
-        }
-        locationManager.requestLocationUpdates(bestProvider, 20000, 0, this);
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        TextView locationTv = (TextView) findViewById(R.id.latlongLocation);
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-        LatLng latLng = new LatLng(latitude, longitude);
-        googleMap.addMarker(new MarkerOptions().position(latLng));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        locationTv.setText("Latitude:" + latitude + ", Longitude:" + longitude);
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        // TODO Auto-generated method stub
-    }
-
-    private boolean isGooglePlayServicesAvailable() {
-        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (ConnectionResult.SUCCESS == status) {
-            return true;
-        } else {
-            GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
-            return false;
-        }
-    }
-    **/
 }

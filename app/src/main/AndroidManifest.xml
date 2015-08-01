@@ -69,41 +69,25 @@
             android:name=".database.AlphaProvider"
             android:authorities="com.cmu.delos.codenamealpha" />
 
+        <activity
+            android:name=".ui.consumer.SearchResults"
+            android:label="@string/title_activity_search_results" >
+        </activity>
+        <activity
+            android:name=".ui.consumer.MealDetails"
+            android:label="@string/title_activity_meal_details" >
+        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDvwuklTTqihEUXP8MaVqnahe5Ss1zWras" />
-
-        <application>
-            <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version" />
-            <meta-data
-                android:name="com.google.android.maps.v2.API_KEY"
-                android:value="@string/google_maps_key" />
-
-            <activity
-                android:name=".ui.MapsActivity"
-                android:label="@string/title_activity_maps" >
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
-        </application>
+            android:value="AIzaSyDRXEbFVEoFg9ZtCpaxv1WN-Z-lc5ezV0E" />
 
         <activity
-            android:name=".ui.consumer.SearchResults"
-            android:label="@string/title_activity_search_results" >
-        </activity>
-
-
-        <activity
-            android:name=".ui.consumer.MealDetails"
-            android:label="@string/title_activity_meal_details" >
+            android:name=".ui.MapsActivity"
+            android:label="@string/title_activity_maps" >
         </activity>
     </application>
 

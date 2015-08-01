@@ -1,52 +1,48 @@
 package com.cmu.delos.codenamealpha.ui;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.location.Location;
-
 import android.location.LocationManager;
-import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
-import com.cmu.delos.codenamealpha.R;
-
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.CameraUpdateFactory;
 
+import com.cmu.delos.codenamealpha.R;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    //private Location mylocation = mMap.getMyLocation();
-    //private LatLng sydney = new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
-
     AppLocationService appLocationService;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        appLocationService = new AppLocationService(
-                MapsActivity.this);
+        setContentView(R.layout.activity_maps);
+        setUpMap();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
-    }
 
+        Location gpsLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
+        if (gpsLocation != null) {
+            double mlatitude = gpsLocation.getLatitude();
+            double mlongitude = gpsLocation.getLongitude();
+            String result = "Latitude: " + gpsLocation.getLatitude() +
+                    " Longitude: " + gpsLocation.getLongitude();
+
+            //   mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("I am here"));
+            LatLng sydney = new LatLng(mlatitude, mlongitude);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("You are here."));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
+            //mMap.moveCamera(CameraUpdateFactory.zoomTo(12));
+        }
+    }
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
@@ -82,49 +78,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-
-        //LatLng coord = new LatLng(mylocation.getLatitude(), mylocation.getLongitude());
-        mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setZoomGesturesEnabled(true);
-        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-        Location gpsLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
-        if (gpsLocation != null) {
-            double mlatitude = gpsLocation.getLatitude();
-            double mlongitude = gpsLocation.getLongitude();
-            String result = "Latitude: " + gpsLocation.getLatitude() +
-                    " Longitude: " + gpsLocation.getLongitude();
-
-            //   mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("I am here"));
-            LatLng sydney = new LatLng(mlatitude, mlongitude);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("You are here."));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12));
-
-
-            //LatLng coord;
-            //mMap.addMarker(new MarkerOptions().position(coord).title("Marker"));
-
-        }
-    }
-
-    public void onMapReady(GoogleMap map) {
-        // Add a marker in Sydney, Australia, and move the camera.
-        // Location mylocation = mMap.getMyLocation();
-        //LatLng coord = new LatLng(mylocation.getLatitude(), mylocation.getLongitude());
-        Location gpsLocation = appLocationService.getLocation(LocationManager.NETWORK_PROVIDER);
-        if (gpsLocation != null) {
-            double mlatitude = gpsLocation.getLatitude();
-            double mlongitude = gpsLocation.getLongitude();
-            String result = "Latitude: " + gpsLocation.getLatitude() +
-                    " Longitude: " + gpsLocation.getLongitude();
-
-            //   mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("I am here"));
-            LatLng sydney = new LatLng(mlatitude, mlongitude);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("You are here."));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,12));
-            //mMap.moveCamera(CameraUpdateFactory.zoomTo(12));
-
-        }
-
+        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 }

@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.braintreepayments.api">
+
+    <application>
+        <!--suppress AndroidDomInspection -->
+        <activity android:name=".test.TestActivity" />
+
+        <!--suppress AndroidDomInspection -->
+        <activity android:name=".test.ThreeDSecureAuthenticationTestActivity" />
+    </application>
+</manifest>
