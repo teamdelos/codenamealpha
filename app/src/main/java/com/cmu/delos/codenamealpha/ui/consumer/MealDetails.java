@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
+import com.cmu.delos.codenamealpha.model.User;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
@@ -32,6 +33,22 @@ public class MealDetails extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Button buy_btn;
+
+    private static final String[] MEAL_COLUMNS = {
+            AlphaContract.MealEntry.TABLE_NAME+"."+ AlphaContract.MealEntry._ID,
+            AlphaContract.MealEntry.COLUMN_KITCHEN_ID,
+            AlphaContract.MealEntry.COLUMN_DISH_NAME,
+            AlphaContract.MealEntry.COLUMN_MEAL_PRICE,
+            AlphaContract.MealEntry.COLUMN_MEAL_COUNT,
+            AlphaContract.MealEntry.COLUMN_DISH_INGREDIENTS,
+            AlphaContract.MealEntry.COLUMN_SHORT_DESC,
+            AlphaContract.MealEntry.COLUMN_DISH_IMAGE,
+            AlphaContract.MealEntry.COLUMN_IS_LISTED,
+            AlphaContract.UserEntry.COLUMN_F_NAME,
+            AlphaContract.UserEntry.COLUMN_L_NAME,
+            AlphaContract.UserEntry.TABLE_NAME+"."+AlphaContract.UserEntry._ID
+
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +58,7 @@ public class MealDetails extends AbstractAlphaActivity {
         buy_btn = (Button) findViewById(R.id.buy_btn);
         Intent intent = getIntent();
         Log.v("Read", intent.getStringExtra("dishName"));
-        Cursor mealCursor = getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithKidDName(intent.getIntExtra("kitchenId", 0), intent.getStringExtra("dishName")),null,null,null,null);
+        Cursor mealCursor = getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithKidDName(intent.getIntExtra("kitchenId", 0), intent.getStringExtra("dishName")),MEAL_COLUMNS,null, null,null);
         Log.v("Count", mealCursor.getCount()+"");
         if (mealCursor.getCount() == 1) {
             try {
@@ -50,6 +67,13 @@ public class MealDetails extends AbstractAlphaActivity {
                             mealCursor.getString(6), mealCursor.getString(5), mealCursor.getString(7),
                             mealCursor.getInt(4), mealCursor.getDouble(3));
                     setIsProvider(false);
+                    User provider = new User();
+                    provider.setUserId(mealCursor.getInt(11));
+                    provider.setFirstName(mealCursor.getString(9));
+                    provider.setLastName(mealCursor.getString(10));
+
+                    setProviderDetails(provider);
+                    Log.v("User ID", mealCursor.getString(10));
                     break;
                 }
                 setUpFragment();
