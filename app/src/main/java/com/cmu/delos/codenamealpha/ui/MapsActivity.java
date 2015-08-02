@@ -79,5 +79,15 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
+        //LatLng coord = new LatLng(mylocation.getLatitude(), mylocation.getLongitude());
+        mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setZoomGesturesEnabled(true);
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
+
+        //LatLng coord;
+        //mMap.addMarker(new MarkerOptions().position(coord).title("Marker"));
     }
 }

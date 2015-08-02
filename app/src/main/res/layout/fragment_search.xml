@@ -27,8 +27,6 @@
         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
 
-
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="30dp"

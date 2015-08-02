@@ -16,6 +16,18 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
+import com.facebook.login.LoginResult;
+import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.widget.LoginButton;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.login.LoginResult;
 
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 //import com.cmu.delos.codenamealpha.ui.consumer.MyActivity;
@@ -29,12 +41,14 @@ public class LoginFragment extends Fragment {
 
     private Button signUpBtn;
     private Button btnSignIn;
+    private LoginButton loginButton;
     private ImageButton fbBtn;
     private EditText login_username;
     private EditText login_password;
 
     private String email;
     private String password;
+    private CallbackManager callbackManager;
 
     public LoginFragment() {
     }
@@ -43,21 +57,47 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+/**
+        loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        loginButton.setReadPermissions("user_friends");
+        // If using in a fragment
+        loginButton.setFragment(this);
+        // Other app specific specialization
+
+        // Callback registration
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
+**/
         signUpBtn = (Button)view.findViewById(R.id.signUpBtn);
         btnSignIn = (Button)view.findViewById(R.id.btnSignIn);
-        fbBtn = (ImageButton) view.findViewById(R.id.fb_login_button);
+
 
         login_username = (EditText)view.findViewById(R.id.login_username);
         login_password = (EditText)view.findViewById(R.id.login_password);
         handleSignIn();
         handleSignUp();
 
-        fbBtn.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.v("on click", "FbBtn Clicked");
-                Intent intentToGoProvider = new Intent(getActivity(), KitchenActivity.class);
-                startActivity(intentToGoProvider);
+                Intent intentToGoSearch = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intentToGoSearch);
 
             }
         });
