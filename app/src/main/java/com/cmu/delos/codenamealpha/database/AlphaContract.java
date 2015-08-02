@@ -13,7 +13,7 @@ public class AlphaContract {
     public static final String PATH_KITCHEN = "kitchen";
     public static final String PATH_MEAL = "meal";
     public static final String PATH_ADDRESS = "address";
-    public static final String PATH_TRANSACTION = "transaction";
+    public static final String PATH_TRANSACTION = "purchase";
 
 
     public static final class UserEntry implements BaseColumns {
@@ -180,7 +180,7 @@ public class AlphaContract {
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TRANSACTION;
 
-        public static final String TABLE_NAME = "transaction";
+        public static final String TABLE_NAME = "purchase";
 
         public static final String COLUMN_USER_ID_C = "user_id_c";
         public static final String COLUMN_USER_ID_P = "user_id_p";

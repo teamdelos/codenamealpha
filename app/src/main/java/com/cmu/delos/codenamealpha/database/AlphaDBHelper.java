@@ -12,7 +12,7 @@ import com.cmu.delos.codenamealpha.database.AlphaContract.UserEntry;
 
 public class AlphaDBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     static final String DATABASE_NAME = "codenamealpha.db";
 
@@ -75,14 +75,13 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 UserEntry.TABLE_NAME + " (" + UserEntry._ID + "));";
 
         final String SQL_CREATE_TRANSACTION_TABLE = "CREATE TABLE " + TransactionEntry.TABLE_NAME + " (" +
-                TransactionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                TransactionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 TransactionEntry.COLUMN_KITCHEN_ID + " INTEGER NOT NULL, " +
                 TransactionEntry.COLUMN_MEAL_ID + " INTEGER NOT NULL, " +
                 TransactionEntry.COLUMN_MEAL_NAME + " TEXT NOT NULL, " +
-                TransactionEntry.COLUMN_MEAL_PRICE + " REAL NOT NULL, " +
-                TransactionEntry.COLUMN_MEAL_ID + " INTEGER NOT NULL, " +
-                TransactionEntry.COLUMN_TRAN_TIME + " TEXT NOT NULL," +
-                TransactionEntry.COLUMN_USER_ID_C + " INTEGER NOT NULL," +
+                TransactionEntry.COLUMN_MEAL_PRICE + " REAL NOT NULL, "+
+                TransactionEntry.COLUMN_TRAN_TIME + " TEXT NOT NULL, " +
+                TransactionEntry.COLUMN_USER_ID_C + " INTEGER NOT NULL, " +
                 TransactionEntry.COLUMN_USER_ID_P + " INTEGER NOT NULL" +
                 " );";
 
