@@ -22,13 +22,11 @@ import android.widget.Toast;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.Address;
+import com.cmu.delos.codenamealpha.ui.consumer.TransactionHistoryActivity;
 import com.cmu.delos.codenamealpha.ui.provider.KitchenProfileActivity;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -262,8 +260,8 @@ public class ProfileActivity extends AbstractAlphaActivity {
                             startActivity(goToSettings);
                             return true;
                         case R.id.navigation_item_3:
-//                        Intent goToHistory = new Intent(ProfileActivity.this, .class);
-//                        startActivity(goToHistory);
+                        Intent goToHistory = new Intent(ProfileActivity.this, TransactionHistoryActivity.class);
+                        startActivity(goToHistory);
                             return true;
                         default:
                             Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();

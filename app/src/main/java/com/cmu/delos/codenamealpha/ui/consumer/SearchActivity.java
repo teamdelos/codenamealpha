@@ -1,28 +1,22 @@
 package com.cmu.delos.codenamealpha.ui.consumer;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.MenuInflater;
-import android.util.Log;
-
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
@@ -30,18 +24,11 @@ import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.AppLocationService;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.SettingsActivity;
-//import com.cmu.delos.codenamealpha.ui.MapsActivity;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.cmu.delos.codenamealpha.ui.MapsActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+//import com.cmu.delos.codenamealpha.ui.MapsActivity;
 
 public class SearchActivity extends AbstractAlphaActivity {
 
@@ -147,8 +134,8 @@ public class SearchActivity extends AbstractAlphaActivity {
                         startActivity(goToSettings);
                         return true;
                     case R.id.navigation_item_3:
-//                        Intent goToHistory = new Intent(SearchActivity.this, .class);
-//                        startActivity(goToHistory);
+                        Intent goToHistory = new Intent(SearchActivity.this, TransactionHistoryActivity.class);
+                        startActivity(goToHistory);
                         return true;
                     default:
                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();

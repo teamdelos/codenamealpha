@@ -65,8 +65,8 @@ public class MealOrderDetailActivity extends AbstractAlphaActivity {
                         startActivity(goToSettings);
                         return true;
                     case R.id.navigation_item_3:
-//                        Intent goToHistory = new Intent(MealDetails.this, .class);
-//                        startActivity(goToHistory);
+                        Intent goToHistory = new Intent(MealOrderDetailActivity.this, TransactionHistoryActivity.class);
+                        startActivity(goToHistory);
                     default:
                         Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                         return true;
