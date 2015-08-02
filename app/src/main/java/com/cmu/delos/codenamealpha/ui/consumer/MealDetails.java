@@ -36,6 +36,7 @@ public class MealDetails extends AbstractAlphaActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_details);
+        setupToolbar();
         setupNavigationView();
         buy_btn = (Button) findViewById(R.id.buy_btn);
         Intent intent = getIntent();
