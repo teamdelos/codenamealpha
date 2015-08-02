@@ -146,6 +146,10 @@ public class SearchActivity extends AbstractAlphaActivity {
                         Intent goToSettings = new Intent(SearchActivity.this, SettingsActivity.class);
                         startActivity(goToSettings);
                         return true;
+                    case R.id.navigation_item_3:
+//                        Intent goToHistory = new Intent(SearchActivity.this, .class);
+//                        startActivity(goToHistory);
+                        return true;
                     default:
                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                         return true;
