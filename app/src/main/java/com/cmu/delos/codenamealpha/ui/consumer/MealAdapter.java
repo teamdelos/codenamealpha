@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -114,7 +114,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
         protected TextView dish_price;
         protected ImageView dish_image;
         protected TextView dish_quantity;
-        protected Button delete;
+        protected ImageButton delete;
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
@@ -124,7 +124,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
             dish_image = (ImageView) itemView.findViewById(R.id.dish_image);
             dish_price = (TextView) itemView.findViewById(R.id.dish_price_text);
             dish_quantity = (TextView) itemView.findViewById(R.id.dish_quantity);
-            delete = (Button) itemView.findViewById(R.id.details_btn);
+            delete = (ImageButton) itemView.findViewById(R.id.details_btn);
 
         }
 
