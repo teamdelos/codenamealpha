@@ -32,10 +32,11 @@ public class AlphaProvider extends ContentProvider{
 
     private static final SQLiteQueryBuilder sKitchenByUserEmailQueryBuilder;
     private static final SQLiteQueryBuilder sMealByUserEmailQueryBuilder;
-
+    private static final SQLiteQueryBuilder sgetMealwithproviderbykidandmealName;
     static{
         sKitchenByUserEmailQueryBuilder = new SQLiteQueryBuilder();
         sMealByUserEmailQueryBuilder = new SQLiteQueryBuilder();
+        sgetMealwithproviderbykidandmealName = new SQLiteQueryBuilder();
 
         //kitchen INNER JOIN user ON kitchen.user_id = user._id
         sKitchenByUserEmailQueryBuilder.setTables(
@@ -62,6 +63,14 @@ public class AlphaProvider extends ContentProvider{
                         "." + AlphaContract.KitchenEntry.COLUMN_USER_ID +
                         " = " + AlphaContract.UserEntry.TABLE_NAME +
                         "." + AlphaContract.UserEntry._ID);
+        sgetMealwithproviderbykidandmealName.setTables(
+                AlphaContract.MealEntry.TABLE_NAME +
+                        " INNER JOIN " +
+                        AlphaContract.KitchenEntry.TABLE_NAME +
+                        " ON " + AlphaContract.KitchenEntry.TABLE_NAME +
+                        "." + AlphaContract.KitchenEntry._ID +
+                        " = " + AlphaContract.MealEntry.TABLE_NAME +
+                        "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID);
     }
 
     static UriMatcher buildUriMatcher() {
@@ -138,7 +147,8 @@ public class AlphaProvider extends ContentProvider{
     private static final String sMealSelectWithKIdDishName=
             AlphaContract.MealEntry.TABLE_NAME +
                     "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID+" = ?  AND "+
-                    AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
+                    AlphaContract.MealEntry.TABLE_NAME +
+                    "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
 
     private static final String sMealSelectWithDishName=
             AlphaContract.MealEntry.TABLE_NAME +
@@ -219,8 +229,8 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case MEAL_WITH_DISH_KITCHEN_ID:{
-                retCursor = mOpenHelper.getReadableDatabase()
-                        .query(AlphaContract.MealEntry.TABLE_NAME,
+                retCursor =  sMealByUserEmailQueryBuilder
+                        .query(mOpenHelper.getReadableDatabase(),
                                 projection,
                                 sMealSelectWithKIdDishName,
                                 new String[]{AlphaContract.MealEntry.getKidFromUri(uri, false),
