@@ -50,18 +50,19 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
         view.setOnClickListener(this);
         viewHolder.delete.setOnClickListener(this);
         viewHolder.delete.setTag(viewHolder);
-
+        viewHolder.dish_image.setOnClickListener(this);
 
         view.setTag(viewHolder);
         return viewHolder;
     }
 
     public void onClick(View view) {
-        Log.v("CLICKED Mealadapter",kitchenId + ":" + dishName);
+        ViewHolder holder = (ViewHolder) view.getTag();
+        Log.v("CLICKED Mealadapter",holder.kitchen_id.getText().toString() + ":" + holder.dish_name.getText().toString());
         Intent intent = new Intent(context, MealDetails.class);
 
-        intent.putExtra("kitchenId", kitchenId);
-        intent.putExtra("dishName", dishName);
+        intent.putExtra("kitchenId", Integer.parseInt(holder.kitchen_id.getText().toString().trim()));
+        intent.putExtra("dishName", holder.dish_name.getText().toString());
         context.startActivity(intent);
     }
 
@@ -74,6 +75,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
         dishQuantity = "Quantity:\t" +dataCursor.getString(4);
         holder.dish_name.setText(dishName);
         kitchenId = dataCursor.getInt(6);
+
+        holder.kitchen_id.setText(kitchenId+"");
         if(dishImage!=null){
             File imgFile = new File(dishImage);
             // Part 1: Decode image
@@ -115,6 +118,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
         protected ImageView dish_image;
         protected TextView dish_quantity;
         protected ImageButton delete;
+        protected TextView kitchen_id;
 
         public ViewHolder(Context context, View itemView) {
             super(itemView);
@@ -124,6 +128,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
             dish_image = (ImageView) itemView.findViewById(R.id.dish_image);
             dish_price = (TextView) itemView.findViewById(R.id.dish_price_text);
             dish_quantity = (TextView) itemView.findViewById(R.id.dish_quantity);
+            kitchen_id = (TextView) itemView.findViewById(R.id.kitchen_id);
             delete = (ImageButton) itemView.findViewById(R.id.details_btn);
 
         }

@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/layoutWithImageNamePrice"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/dish_name"
                 android:layout_width="match_parent"
@@ -33,6 +34,15 @@
                 android:paddingTop="5dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="6dp">
+                <TextView
+                    android:id="@+id/kitchen_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textBlack"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,7 +94,10 @@
                 android:textAllCaps="false"
                 android:textColor="@color/textBlack"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
+
         </LinearLayout>
+
+
     </android.support.v7.widget.CardView>
     <android.widget.Space
         android:layout_width="match_parent"

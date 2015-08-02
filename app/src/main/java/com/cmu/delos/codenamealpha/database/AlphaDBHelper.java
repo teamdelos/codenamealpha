@@ -12,7 +12,7 @@ import com.cmu.delos.codenamealpha.database.AlphaContract.UserEntry;
 
 public class AlphaDBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     static final String DATABASE_NAME = "codenamealpha.db";
 
