@@ -89,6 +89,10 @@
             android:name=".ui.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
+        <activity
+            android:name=".ui.consumer.TransactionHistoryActivity"
+            android:label="@string/title_activity_transaction_history" >
+        </activity>
     </application>
 
 </manifest>

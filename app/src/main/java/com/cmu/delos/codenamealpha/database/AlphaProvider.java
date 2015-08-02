@@ -29,6 +29,7 @@ public class AlphaProvider extends ContentProvider{
     static final int ADDRESS = 400;
     static final int ADDRESS_WITH_USER_ID = 401;
     static final int TRANSACTION = 500;
+    static final int TRANSACTION_WITH_CUST_ID = 501;
 
     private static final SQLiteQueryBuilder sKitchenByUserEmailQueryBuilder;
     private static final SQLiteQueryBuilder sMealByUserEmailQueryBuilder;
@@ -126,6 +127,8 @@ public class AlphaProvider extends ContentProvider{
                 return AlphaContract.AddressEntry.CONTENT_ITEM_TYPE;
             case TRANSACTION:
                 return AlphaContract.TransactionEntry.CONTENT_TYPE;
+            case TRANSACTION_WITH_CUST_ID:
+                return AlphaContract.TransactionEntry.CONTENT_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -153,6 +156,10 @@ public class AlphaProvider extends ContentProvider{
     private static final String sMealSelectWithDishName=
             AlphaContract.MealEntry.TABLE_NAME +
                     "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
+
+    private static final String sTransactionWithCustId=
+            AlphaContract.TransactionEntry.TABLE_NAME +
+                    "." + AlphaContract.TransactionEntry.COLUMN_USER_ID_C+" = ? ";
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
@@ -247,6 +254,18 @@ public class AlphaProvider extends ContentProvider{
                                 projection,
                                 sMealSelectWithDishName,
                                 new String[]{AlphaContract.MealEntry.getDishNameFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
+                break;
+            }
+
+            case TRANSACTION_WITH_CUST_ID:{
+                retCursor = mOpenHelper.getReadableDatabase()
+                        .query(AlphaContract.TransactionEntry.TABLE_NAME,
+                                projection,
+                                sTransactionWithCustId,
+                                new String[]{AlphaContract.TransactionEntry.getTransactionFromCustId(uri)},
                                 null,
                                 null,
                                 sortOrder);
