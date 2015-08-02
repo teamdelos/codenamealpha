@@ -90,6 +90,7 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS, ADDRESS);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS + "/#", ADDRESS_WITH_USER_ID);
         matcher.addURI(authority, AlphaContract.PATH_TRANSACTION, TRANSACTION);
+        matcher.addURI(authority, AlphaContract.PATH_TRANSACTION + "/#", TRANSACTION_WITH_CUST_ID);
         return matcher;
     }
 
@@ -128,7 +129,7 @@ public class AlphaProvider extends ContentProvider{
             case TRANSACTION:
                 return AlphaContract.TransactionEntry.CONTENT_TYPE;
             case TRANSACTION_WITH_CUST_ID:
-                return AlphaContract.TransactionEntry.CONTENT_TYPE;
+                return AlphaContract.TransactionEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -265,7 +266,7 @@ public class AlphaProvider extends ContentProvider{
                         .query(AlphaContract.TransactionEntry.TABLE_NAME,
                                 projection,
                                 sTransactionWithCustId,
-                                new String[]{AlphaContract.TransactionEntry.getTransactionFromCustId(uri)},
+                                new String[]{String.valueOf(AlphaContract.TransactionEntry.getTransactionFromCustId(uri))},
                                 null,
                                 null,
                                 sortOrder);

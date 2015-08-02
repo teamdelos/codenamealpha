@@ -2,6 +2,7 @@ package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -79,6 +80,10 @@ public class OrderCompleteFragment extends Fragment {
                 getProviderDetails().getUserId());
         Uri insertedKitchenUri = getActivity().getContentResolver().insert(AlphaContract.TransactionEntry.CONTENT_URI, transactionValues);
         Log.v("Transact ID", ContentUris.parseId(insertedKitchenUri) + "");
+
+        Cursor userCurser = getActivity().getContentResolver().query(AlphaContract.TransactionEntry.buildTransactionUriWithCustId(user.getUserId()),null,null,null,null);
+        Log.v("Count for transaction", userCurser.getCount()+"");
+
         return rootView;
     }
 }
