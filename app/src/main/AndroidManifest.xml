@@ -90,6 +90,7 @@
             android:label="@string/title_activity_maps" >
         </activity>
 
+
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -98,6 +99,13 @@
         <provider android:authorities="com.facebook.app.FacebookContentProvider991027864253635"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
+
+
+        <activity
+            android:name=".ui.consumer.TransactionHistoryActivity"
+            android:label="@string/title_activity_transaction_history"
+            android:noHistory="true">
+        </activity>
 
     </application>
 

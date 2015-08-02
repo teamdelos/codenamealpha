@@ -60,6 +60,10 @@ public class SettingsActivity extends AbstractAlphaActivity {
 //                            Intent goToSettings = new Intent(SettingsActivity.this, SettingsActivity.class);
 //                            startActivity(goToSettings);
                             return true;
+                        case R.id.navigation_item_3:
+//                        Intent goToHistory = new Intent(SettingsActivity.this, .class);
+//                        startActivity(goToHistory);
+                            return true;
                         default:
                             Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                             return true;

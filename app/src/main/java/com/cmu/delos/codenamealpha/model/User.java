@@ -24,6 +24,10 @@ public class User {
         this.isProvider=isProvider;
     }
 
+    public User () {
+
+    }
+
     public int getUserId() {
         return userId;
     }

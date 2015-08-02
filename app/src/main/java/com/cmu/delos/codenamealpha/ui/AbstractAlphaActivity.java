@@ -16,6 +16,17 @@ public class AbstractAlphaActivity extends AppCompatActivity {
     private static Meal mealDetails;
     private static Address address;
     private static boolean isProvider;
+    private static User providerDetails;
+
+    public static User getProviderDetails() {
+        return providerDetails;
+    }
+
+    public static void setProviderDetails(User providerDetails) {
+        AbstractAlphaActivity.providerDetails = providerDetails;
+    }
+
+
 
     public static String getQuery() {
         return query;

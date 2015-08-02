@@ -11,6 +11,9 @@
             android:id="@+id/navigation_item_2"
             android:title="Settings"/>
         <item
+            android:id="@+id/navigation_item_3"
+            android:title="Transaction History"/>
+        <item
             android:id="@+id/navigation_item_11"
             android:title="About Us"/>
         <item

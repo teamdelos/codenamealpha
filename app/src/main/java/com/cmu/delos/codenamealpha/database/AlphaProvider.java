@@ -29,13 +29,15 @@ public class AlphaProvider extends ContentProvider{
     static final int ADDRESS = 400;
     static final int ADDRESS_WITH_USER_ID = 401;
     static final int TRANSACTION = 500;
+    static final int TRANSACTION_WITH_CUST_ID = 501;
 
     private static final SQLiteQueryBuilder sKitchenByUserEmailQueryBuilder;
     private static final SQLiteQueryBuilder sMealByUserEmailQueryBuilder;
-
+    private static final SQLiteQueryBuilder sgetMealwithproviderbykidandmealName;
     static{
         sKitchenByUserEmailQueryBuilder = new SQLiteQueryBuilder();
         sMealByUserEmailQueryBuilder = new SQLiteQueryBuilder();
+        sgetMealwithproviderbykidandmealName = new SQLiteQueryBuilder();
 
         //kitchen INNER JOIN user ON kitchen.user_id = user._id
         sKitchenByUserEmailQueryBuilder.setTables(
@@ -62,6 +64,14 @@ public class AlphaProvider extends ContentProvider{
                         "." + AlphaContract.KitchenEntry.COLUMN_USER_ID +
                         " = " + AlphaContract.UserEntry.TABLE_NAME +
                         "." + AlphaContract.UserEntry._ID);
+        sgetMealwithproviderbykidandmealName.setTables(
+                AlphaContract.MealEntry.TABLE_NAME +
+                        " INNER JOIN " +
+                        AlphaContract.KitchenEntry.TABLE_NAME +
+                        " ON " + AlphaContract.KitchenEntry.TABLE_NAME +
+                        "." + AlphaContract.KitchenEntry._ID +
+                        " = " + AlphaContract.MealEntry.TABLE_NAME +
+                        "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID);
     }
 
     static UriMatcher buildUriMatcher() {
@@ -80,6 +90,7 @@ public class AlphaProvider extends ContentProvider{
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS, ADDRESS);
         matcher.addURI(authority, AlphaContract.PATH_ADDRESS + "/#", ADDRESS_WITH_USER_ID);
         matcher.addURI(authority, AlphaContract.PATH_TRANSACTION, TRANSACTION);
+        matcher.addURI(authority, AlphaContract.PATH_TRANSACTION + "/#", TRANSACTION_WITH_CUST_ID);
         return matcher;
     }
 
@@ -117,6 +128,8 @@ public class AlphaProvider extends ContentProvider{
                 return AlphaContract.AddressEntry.CONTENT_ITEM_TYPE;
             case TRANSACTION:
                 return AlphaContract.TransactionEntry.CONTENT_TYPE;
+            case TRANSACTION_WITH_CUST_ID:
+                return AlphaContract.TransactionEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -138,11 +151,16 @@ public class AlphaProvider extends ContentProvider{
     private static final String sMealSelectWithKIdDishName=
             AlphaContract.MealEntry.TABLE_NAME +
                     "." + AlphaContract.MealEntry.COLUMN_KITCHEN_ID+" = ?  AND "+
-                    AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
+                    AlphaContract.MealEntry.TABLE_NAME +
+                    "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
 
     private static final String sMealSelectWithDishName=
             AlphaContract.MealEntry.TABLE_NAME +
                     "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
+
+    private static final String sTransactionWithCustId=
+            AlphaContract.TransactionEntry.TABLE_NAME +
+                    "." + AlphaContract.TransactionEntry.COLUMN_USER_ID_C+" = ? ";
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
@@ -219,8 +237,8 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case MEAL_WITH_DISH_KITCHEN_ID:{
-                retCursor = mOpenHelper.getReadableDatabase()
-                        .query(AlphaContract.MealEntry.TABLE_NAME,
+                retCursor =  sMealByUserEmailQueryBuilder
+                        .query(mOpenHelper.getReadableDatabase(),
                                 projection,
                                 sMealSelectWithKIdDishName,
                                 new String[]{AlphaContract.MealEntry.getKidFromUri(uri, false),
@@ -237,6 +255,18 @@ public class AlphaProvider extends ContentProvider{
                                 projection,
                                 sMealSelectWithDishName,
                                 new String[]{AlphaContract.MealEntry.getDishNameFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
+                break;
+            }
+
+            case TRANSACTION_WITH_CUST_ID:{
+                retCursor = mOpenHelper.getReadableDatabase()
+                        .query(AlphaContract.TransactionEntry.TABLE_NAME,
+                                projection,
+                                sTransactionWithCustId,
+                                new String[]{String.valueOf(AlphaContract.TransactionEntry.getTransactionFromCustId(uri))},
                                 null,
                                 null,
                                 sortOrder);
