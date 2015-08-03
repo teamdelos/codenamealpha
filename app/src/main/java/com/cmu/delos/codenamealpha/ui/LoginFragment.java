@@ -165,7 +165,7 @@ public class LoginFragment extends Fragment {
                         }
                         else{
                             login_password.setText("");
-                            Toast.makeText(getActivity(), "Wrong Password. Please enter again",
+                            Toast.makeText(getActivity(), "Wrong Password. Please enter again.",
                                     Toast.LENGTH_LONG).show();
                         }
                     } else {

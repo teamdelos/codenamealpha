@@ -1,6 +1,5 @@
 package com.cmu.delos.codenamealpha.ui;
 
-import com.cmu.delos.codenamealpha.ui.LoginActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,21 +15,20 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.AccessToken;
 
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
-import com.cmu.delos.codenamealpha.ui.LoginFragment;
+
 import android.content.Intent;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 
-import com.facebook.login.widget.LoginButton;
 
 import com.cmu.delos.codenamealpha.R;
 
 public class LoginActivity extends AbstractAlphaActivity {
+
     CallbackManager callbackManager;
     AccessTokenTracker accessTokenTracker;
     AccessToken accessToken;
     ProfileTracker profileTracker;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
