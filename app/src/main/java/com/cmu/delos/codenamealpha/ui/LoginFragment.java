@@ -16,18 +16,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
-import com.facebook.login.LoginResult;
-import android.view.View;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
 import com.facebook.login.LoginResult;
+
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+
 
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 //import com.cmu.delos.codenamealpha.ui.consumer.MyActivity;
@@ -41,8 +36,8 @@ public class LoginFragment extends Fragment {
 
     private Button signUpBtn;
     private Button btnSignIn;
-    private LoginButton loginButton;
-    private ImageButton fbBtn;
+    LoginButton loginButton;
+    //private ImageButton fbBtn;
     private EditText login_username;
     private EditText login_password;
 
@@ -57,7 +52,9 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-/**
+
+        callbackManager = CallbackManager.Factory.create();
+
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
         loginButton.setReadPermissions("user_friends");
         // If using in a fragment
@@ -69,20 +66,23 @@ public class LoginFragment extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
+                Intent intentToGoSearch = new Intent(getActivity(),SearchActivity.class);
+                startActivity(intentToGoSearch);
             }
 
             @Override
             public void onCancel() {
-                // App code
+                Intent intentToGoLogin = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intentToGoLogin);
             }
 
             @Override
             public void onError(FacebookException exception) {
-                // App code
+                Intent intentToGoLogin = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intentToGoLogin);
             }
         });
-**/
+
         signUpBtn = (Button)view.findViewById(R.id.signUpBtn);
         btnSignIn = (Button)view.findViewById(R.id.btnSignIn);
 
@@ -92,7 +92,9 @@ public class LoginFragment extends Fragment {
         handleSignIn();
         handleSignUp();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+
+/**
+        fbBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.v("on click", "FbBtn Clicked");
@@ -100,7 +102,9 @@ public class LoginFragment extends Fragment {
                 startActivity(intentToGoSearch);
 
             }
+
         });
+ **/
         return view;
     }
 
