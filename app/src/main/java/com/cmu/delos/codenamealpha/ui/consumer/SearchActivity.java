@@ -66,8 +66,7 @@ public class SearchActivity extends AbstractAlphaActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 // TODO Auto-generated method stub
 
-                Toast.makeText(getBaseContext(), String.valueOf(hasFocus),
-                        Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -80,8 +79,8 @@ public class SearchActivity extends AbstractAlphaActivity {
                 Log.v("Here query", query);
                 Cursor userMealSearch = getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithName(query), null, null, null, null);
                 Log.v("Here after search", userMealSearch.getCount() + "");
-                Toast.makeText(getBaseContext(), query,
-                        Toast.LENGTH_SHORT).show();
+
+
                 Intent intentToSignUp = new Intent(getApplicationContext(), SearchResults.class);
                 intentToSignUp.putExtra("query", query);
                 startActivity(intentToSignUp);
