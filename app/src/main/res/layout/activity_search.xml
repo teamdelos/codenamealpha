@@ -11,29 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.cmu.delos.codenamealpha.ui.consumer.SearchActivity">
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
-
-
-        <fragment
+        <FrameLayout
             android:id="@+id/search_container"
-            android:name="com.cmu.delos.codenamealpha.ui.consumer.SearchActivityFragment"
-            tools:layout="@layout/fragment_search"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar" />
+        <FrameLayout
+            android:id="@+id/search_result_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_container" />
     </RelativeLayout>
-
-
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation"
         android:layout_width="wrap_content"

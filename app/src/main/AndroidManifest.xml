@@ -27,7 +27,6 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,19 +34,6 @@
             android:name=".ui.ProfileActivity"
             android:label="@string/title_activity_profile" >
 
-            <!-- android:noHistory="true" -->
-
-        </activity>
-        <activity
-            android:name=".ui.provider.KitchenProfileActivity"
-            android:label="@string/title_activity_kitchen_profile" >
-
-            <!-- android:noHistory="true" > -->
-        </activity>
-        <activity
-            android:name=".ui.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:noHistory="true" >
         </activity>
         <activity
             android:name=".ui.provider.KitchenActivity"
@@ -62,7 +48,7 @@
             android:label="@string/title_activity_search" >
         </activity>
         <activity
-            android:name=".ui.consumer.MealOrderDetailActivity"
+            android:name=".ui.consumer.OrderCompleteActivity"
             android:label="@string/title_activity_meal_page" >
         </activity>
 
@@ -70,10 +56,6 @@
             android:name=".database.AlphaProvider"
             android:authorities="com.cmu.delos.codenamealpha" />
 
-        <activity
-            android:name=".ui.consumer.SearchResults"
-            android:label="@string/title_activity_search_results" >
-        </activity>
         <activity
             android:name=".ui.consumer.MealDetails"
             android:label="@string/title_activity_meal_details" >
@@ -100,7 +82,6 @@
         <provider android:authorities="com.facebook.app.FacebookContentProvider991027864253635"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
-
 
         <activity
             android:name=".ui.consumer.TransactionHistoryActivity"

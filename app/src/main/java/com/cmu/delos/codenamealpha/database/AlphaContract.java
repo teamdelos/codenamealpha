@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 public class AlphaContract {
 
@@ -35,6 +36,7 @@ public class AlphaContract {
         public static final String COLUMN_IMAGE = "image";
         public static final String COLUMN_GENDER = "gender";
         public static final String COLUMN_MOBILE_NUMBER = "mobile_number";
+        public static final String COLUMN_ABOUT = "short_desc";
 
 
         public static Uri buildUserUri(long id) {
@@ -163,13 +165,14 @@ public class AlphaContract {
         }
 
         public static Uri buildAddrressUriWithid(int userId) {
-            return CONTENT_URI.buildUpon()
-                    .appendQueryParameter(COLUMN_USER_ID, Integer.toString(userId))
+            Uri uri = CONTENT_URI.buildUpon()
+                    .appendPath(String.valueOf(userId))
                     .build();
+            return uri;
         }
 
-        public static String getuseridFromUri(Uri uri) {
-            return uri.getQueryParameter(COLUMN_USER_ID);
+        public static int getuseridFromUri(Uri uri) {
+            return Integer.parseInt(uri.getPathSegments().get(1));
         }
     }
 
@@ -185,7 +188,6 @@ public class AlphaContract {
 
         public static Uri buildTransactionUriWithCustId(int custId) {
             return CONTENT_URI.buildUpon()
-//                    .appendQueryParameter(COLUMN_USER_ID_C, Integer.toString(custId))
                     .appendPath(Integer.toString(custId))
                     .build();
         }
@@ -203,7 +205,6 @@ public class AlphaContract {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
         public static int getTransactionFromCustId(Uri uri) {
-//            return uri.getQueryParameter(COLUMN_USER_ID_C);
             return Integer.parseInt(uri.getPathSegments().get(1));
         }
 

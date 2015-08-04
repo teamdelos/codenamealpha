@@ -50,7 +50,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
         view.setOnClickListener(this);
         viewHolder.delete.setOnClickListener(this);
         viewHolder.delete.setTag(viewHolder);
-        viewHolder.dish_image.setOnClickListener(this);
+
 
         view.setTag(viewHolder);
         return viewHolder;
@@ -68,6 +68,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         dataCursor.moveToPosition(position);
         dishName= dataCursor.getString(1).substring(0);
         dishImage= dataCursor.getString(2);

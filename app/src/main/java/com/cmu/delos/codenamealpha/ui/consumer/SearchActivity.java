@@ -1,32 +1,37 @@
 package com.cmu.delos.codenamealpha.ui.consumer;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+
 import android.database.Cursor;
+import android.graphics.Bitmap;
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
-import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.AppLocationService;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
-import com.cmu.delos.codenamealpha.ui.SettingsActivity;
+import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 import com.google.android.gms.maps.GoogleMap;
 
+import java.io.File;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 //import com.cmu.delos.codenamealpha.ui.MapsActivity;
 
@@ -34,7 +39,9 @@ public class SearchActivity extends AbstractAlphaActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private SearchView search;
+    private CircleImageView navHeaderImage;
+//    private SearchView search;
+    private static final String SEARCHRESULTFRAGMENT_TAG = "SRTAG";
 
     boolean mShowMap;
 
@@ -51,54 +58,22 @@ public class SearchActivity extends AbstractAlphaActivity {
 
         setupToolbar();
         setupNavigationView();
+        if(savedInstanceState==null){
+            handleFragment();
+        }
 
-        //new MapsActivity();
+    }
 
+    private void handleFragment(){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        Fragment searchFragment = new SearchActivityFragment();
+        fragmentTransaction.replace(R.id.search_container, searchFragment);
+        Fragment searchResultFragment = new SearchResultFragment();
+        fragmentTransaction.replace(R.id.search_result_container, searchResultFragment,SEARCHRESULTFRAGMENT_TAG);
 
-        search = (SearchView) findViewById(R.id.searchView);
-        search.setQueryHint("What type of food?");
-
-        //*** setOnQueryTextFocusChangeListener ***
-        search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                // TODO Auto-generated method stub
-
-
-            }
-        });
-
-        //*** setOnQueryTextListener ***
-        search.setOnQueryTextListener(new OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // TODO Auto-generated method stub
-                Log.v("Here query", query);
-                Cursor userMealSearch = getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithName(query), null, null, null, null);
-                Log.v("Here after search", userMealSearch.getCount() + "");
-
-
-                Intent intentToSignUp = new Intent(getApplicationContext(), SearchResults.class);
-                intentToSignUp.putExtra("query", query);
-                startActivity(intentToSignUp);
-                return false;
-            }
-
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // TODO Auto-generated method stub
-
-                //	Toast.makeText(getBaseContext(), newText,
-                //          Toast.LENGTH_SHORT.show();
-
-                return false;
-            }
-        });
-
+        fragmentTransaction.commit();
     }
 
 
@@ -107,9 +82,13 @@ public class SearchActivity extends AbstractAlphaActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation);
         TextView navHeaderTitle = (TextView)drawerLayout.findViewById(R.id.nav_header_title);
         TextView navHeaderEmail = (TextView)drawerLayout.findViewById(R.id.nav_header_email);
+
         CircleImageView navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
+
         navHeaderTitle.setText(super.getUser().getFirstName()+" "+super.getUser().getLastName());
         navHeaderEmail.setText(super.getUser().getEmail());
+        setPic();
+
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu
@@ -128,10 +107,6 @@ public class SearchActivity extends AbstractAlphaActivity {
                         startActivity(goToProfile);
                         return true;
                     // For rest of the options we just show a toast on click
-                    case R.id.navigation_item_2:
-                        Intent goToSettings = new Intent(SearchActivity.this, SettingsActivity.class);
-                        startActivity(goToSettings);
-                        return true;
                     case R.id.navigation_item_3:
                         Intent goToHistory = new Intent(SearchActivity.this, TransactionHistoryActivity.class);
                         startActivity(goToHistory);
@@ -143,7 +118,20 @@ public class SearchActivity extends AbstractAlphaActivity {
             }
         });
     }
+    private void setPic(){
+        File imgFile = new File(super.getUser().getImage());
 
+        // Part 1: Decode image
+        Bitmap unscaledBitmap = decodeResource(imgFile, 500, 400, ScalingUtilities.ScalingLogic.FIT);
+
+        // Part 2: Scale image
+        Bitmap scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, 500,
+                400, ScalingUtilities.ScalingLogic.FIT);
+        unscaledBitmap.recycle();
+
+        // Publish results
+        navHeaderImage.setImageBitmap(scaledBitmap);
+    }
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -216,13 +204,6 @@ public class SearchActivity extends AbstractAlphaActivity {
         inflater.inflate(R.menu.menu_list, menu);
         return true;
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.navigation_drawer_items, menu);
-//        return true;
-//    }
 
 
 }

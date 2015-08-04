@@ -33,26 +33,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <android.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="6dp" />
             <TextView
-                android:text="Address"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:enabled="false" />
-            <android.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
-            <EditText
-                android:paddingLeft="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/textBlack"
                 android:id="@+id/profile_full_name"/>
+            <android.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+            <TextView
+                android:text="Address"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textBlack"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:enabled="false" />
             <EditText
                 android:paddingLeft="4dp"
                 android:layout_width="match_parent"
@@ -101,15 +100,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp" />
             <TextView
-                android:text="About"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="About You:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
+                android:textColor="@color/textBlack"
+                android:textAllCaps="true"
+                android:textStyle="bold"
                 android:enabled="false" />
-            <android.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="4dp" />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

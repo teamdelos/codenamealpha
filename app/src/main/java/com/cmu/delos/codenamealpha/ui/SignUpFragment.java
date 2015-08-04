@@ -87,7 +87,6 @@ public class SignUpFragment extends Fragment {
                         Log.v("Person ID",ContentUris.parseId(insertedUri)+"");
                         //Address
                         ContentValues userProfileDetails = new ContentValues();
-                        userProfileDetails.put(AlphaContract.AddressEntry.COLUMN_USER_NAME, fName + " " + lName);
                         userProfileDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, userId);
                         Uri insertedAddressUri = getActivity().getContentResolver().insert(AlphaContract.AddressEntry.CONTENT_URI, userProfileDetails);
                         Log.v("Address ID", ContentUris.parseId(insertedAddressUri) + "");

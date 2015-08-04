@@ -33,6 +33,9 @@ public class CheckoutFragment extends Fragment {
     private  EditText profile_zip_code;
     private  EditText editText;
     public TextView total_view;
+
+    private static final String ORDERCOMPLETEFRAGMENT_TAG = "OCTAG";
+
     public CheckoutFragment() {
     }
 
@@ -66,8 +69,7 @@ public class CheckoutFragment extends Fragment {
                 Fragment fragment = new OrderCompleteFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.meal_order_detail_container, fragment);
-                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.meal_order_detail_container, fragment,ORDERCOMPLETEFRAGMENT_TAG);
                 fragmentTransaction.commit();
             }
         });
@@ -82,8 +84,6 @@ public class CheckoutFragment extends Fragment {
                     if (userAddressCur.getString(2) != null) {
                         profile_zip_code.setText(userAddressCur.getString(2));
                     }
-
-
                     if (userAddressCur.getString(5)!= null) {
                         profile_city.setText(userAddressCur.getString(5));
                     }

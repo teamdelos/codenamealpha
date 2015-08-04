@@ -8,12 +8,6 @@
             android:id="@+id/navigation_item_1"
             android:title="Profile"/>
         <item
-            android:id="@+id/navigation_item_2"
-            android:title="Kitchen Profile"/>
-        <item
-            android:id="@+id/navigation_item_3"
-            android:title="Settings"/>
-        <item
             android:id="@+id/navigation_item_11"
             android:title="About Us"/>
         <item

@@ -49,6 +49,12 @@ public class LoginFragment extends Fragment {
 
     public LoginFragment() {
     }
+//
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setRetainInstance(true);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,6 +115,11 @@ public class LoginFragment extends Fragment {
  **/
         return view;
     }
+
+//    @Override
+//    public void onActivityCreated(Bundle savedInstanceState){
+//        super.onActivityCreated(savedInstanceState);
+//    }
 
     private void handleSignIn(){
         btnSignIn.setOnClickListener(new View.OnClickListener() {
