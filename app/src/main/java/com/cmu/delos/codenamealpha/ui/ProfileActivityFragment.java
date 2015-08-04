@@ -87,7 +87,9 @@ public class ProfileActivityFragment extends Fragment {
         saveProfileBtn = (Button)rootView.findViewById(R.id.saveProfileBtn);
         Cursor userAddressCur = null;
         try {
-            userAddressCur = getActivity().getContentResolver().query(AlphaContract.AddressEntry.buildAddressUri(((ProfileActivity) getActivity()).getUser().getUserId()), PROFILE_COLUMNS, null, null, null);
+            Log.i("testing uid:", ((ProfileActivity) getActivity()).getUser().getUserId()+"");
+            userAddressCur = getActivity().getContentResolver().query(AlphaContract.AddressEntry.buildAddrressUriWithid(((ProfileActivity) getActivity()).getUser().getUserId()), PROFILE_COLUMNS, null, null, null);
+
             if (userAddressCur.getCount() > 0) {
                 for (userAddressCur.moveToFirst(); !userAddressCur.isAfterLast(); userAddressCur.moveToNext()) {
                     address = new Address();
@@ -103,7 +105,6 @@ public class ProfileActivityFragment extends Fragment {
                         address.setAbout(userAddressCur.getString(8));
                         editText.setText(userAddressCur.getString(8));
                     }
-                    Log.i("Full name test: ", userAddressCur.getString(6)+ " "+userAddressCur.getString(7));
                     if (userAddressCur.getString(6)!= null && userAddressCur.getString(7)!= null) {
                         address.setName(userAddressCur.getString(6)+ " "+userAddressCur.getString(7));
                         profile_full_name.setText(userAddressCur.getString(6)+ " "+userAddressCur.getString(7));
@@ -222,14 +223,12 @@ public class ProfileActivityFragment extends Fragment {
                 if (!address1.isEmpty() && !address2.isEmpty()
                         && !city.isEmpty() && !state.isEmpty() && !zipCode.isEmpty()) {
                     ContentValues userAddressDetails = new ContentValues();
-                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, address.getAddressId());
-                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_USER_NAME, name);
-                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, ((ProfileActivity) getActivity()).getUser().getUserId());
+//                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, address.getAddressId());
+//                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, ((ProfileActivity) getActivity()).getUser().getUserId());
                     userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_CITY, city);
                     userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_STATE, state);
                     userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_STREET_1, address1);
                     userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_STREET_12, address2);
-                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_PROFILE_ABOUT, about);
                     userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_ZIPCODE, zipCode);
                     int ret = getActivity().getContentResolver().update(AlphaContract.AddressEntry.buildAddrressUriWithid(address.getAddressId()), userAddressDetails, null, null);
 

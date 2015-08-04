@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 public class AlphaContract {
 
@@ -164,13 +165,17 @@ public class AlphaContract {
         }
 
         public static Uri buildAddrressUriWithid(int userId) {
-            return CONTENT_URI.buildUpon()
-                    .appendQueryParameter(COLUMN_USER_ID, Integer.toString(userId))
+            Uri uri = CONTENT_URI.buildUpon()
+//                    .appendQueryParameter(COLUMN_USER_ID, Integer.toString(userId))
+                    .appendPath(String.valueOf(userId))
                     .build();
+            Log.i("test query:", String.valueOf(uri));
+            return uri;
         }
 
-        public static String getuseridFromUri(Uri uri) {
-            return uri.getQueryParameter(COLUMN_USER_ID);
+        public static int getuseridFromUri(Uri uri) {
+//            return uri.getQueryParameter(COLUMN_USER_ID);
+            return Integer.parseInt(uri.getPathSegments().get(1));
         }
     }
 
