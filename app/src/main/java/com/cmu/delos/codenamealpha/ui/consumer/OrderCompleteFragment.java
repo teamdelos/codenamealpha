@@ -80,9 +80,16 @@ public class OrderCompleteFragment extends Fragment {
                 getProviderDetails().getUserId());
         Uri insertedKitchenUri = getActivity().getContentResolver().insert(AlphaContract.TransactionEntry.CONTENT_URI, transactionValues);
         Log.v("Transact ID", ContentUris.parseId(insertedKitchenUri) + "");
-
+        try {
+            ((OrderCompleteActivity) getActivity()).sendEmail("team.delos@gmail.com", "codenamealpha", user.getEmail(),
+                    "Order Placed", "Your meal " + meal.getDishName() + " will get delivered soon.");
+        } catch (Exception ex) {
+            Log.e("ERROR", ex.getMessage());
+        }
         return rootView;
     }
+
+
 
     public boolean allowBackPressed(){
         Intent moveToSearchActivity = new Intent(getActivity(), SearchActivity.class);

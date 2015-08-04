@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
+import com.cmu.delos.codenamealpha.util.SendMailTask;
 
 public class OrderCompleteActivity extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
@@ -75,8 +76,12 @@ public class OrderCompleteActivity extends AbstractAlphaActivity {
     public void onBackPressed() {
         final OrderCompleteFragment fragment = (OrderCompleteFragment) getSupportFragmentManager().findFragmentByTag(ORDERCOMPLETEFRAGMENT_TAG);
 
-        if (fragment.allowBackPressed()) {
+        if (fragment!= null && fragment.allowBackPressed()) {
             super.onBackPressed();
         }
+    }
+
+    public void sendEmail(String userEmail, String passWord, String sendEmail, String subject, String body) {
+        new SendMailTask(OrderCompleteActivity.this).execute( userEmail,  passWord,  sendEmail,  subject,  body);
     }
 }

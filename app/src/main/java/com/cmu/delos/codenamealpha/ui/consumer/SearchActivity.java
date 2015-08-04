@@ -1,28 +1,22 @@
 package com.cmu.delos.codenamealpha.ui.consumer;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
-import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.AppLocationService;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
@@ -131,8 +125,10 @@ public class SearchActivity extends AbstractAlphaActivity {
         TextView navHeaderTitle = (TextView)drawerLayout.findViewById(R.id.nav_header_title);
         TextView navHeaderEmail = (TextView)drawerLayout.findViewById(R.id.nav_header_email);
         CircleImageView navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
-        navHeaderTitle.setText(super.getUser().getFirstName()+" "+super.getUser().getLastName());
-        navHeaderEmail.setText(super.getUser().getEmail());
+        if (super.getUser() != null ) {
+            navHeaderTitle.setText(super.getUser().getFirstName() + " " + super.getUser().getLastName());
+            navHeaderEmail.setText(super.getUser().getEmail());
+        }
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu
