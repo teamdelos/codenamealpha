@@ -34,10 +34,13 @@ public class AlphaProvider extends ContentProvider{
     private static final SQLiteQueryBuilder sKitchenByUserEmailQueryBuilder;
     private static final SQLiteQueryBuilder sMealByUserEmailQueryBuilder;
     private static final SQLiteQueryBuilder sgetMealwithproviderbykidandmealName;
+    private static final SQLiteQueryBuilder sgetAddressWithUserDetails;
+
     static{
         sKitchenByUserEmailQueryBuilder = new SQLiteQueryBuilder();
         sMealByUserEmailQueryBuilder = new SQLiteQueryBuilder();
         sgetMealwithproviderbykidandmealName = new SQLiteQueryBuilder();
+        sgetAddressWithUserDetails = new SQLiteQueryBuilder();
 
         //kitchen INNER JOIN user ON kitchen.user_id = user._id
         sKitchenByUserEmailQueryBuilder.setTables(
@@ -46,6 +49,16 @@ public class AlphaProvider extends ContentProvider{
                         AlphaContract.UserEntry.TABLE_NAME +
                         " ON " + AlphaContract.KitchenEntry.TABLE_NAME +
                         "." + AlphaContract.KitchenEntry.COLUMN_USER_ID +
+                        " = " + AlphaContract.UserEntry.TABLE_NAME +
+                        "." + AlphaContract.UserEntry._ID);
+
+        //Address INNER JOIN user ON Address.user_id = user._id
+        sgetAddressWithUserDetails.setTables(
+                AlphaContract.AddressEntry.TABLE_NAME +
+                        " INNER JOIN " +
+                        AlphaContract.UserEntry.TABLE_NAME +
+                        " ON " + AlphaContract.AddressEntry.TABLE_NAME +
+                        "." + AlphaContract.AddressEntry.COLUMN_USER_ID+
                         " = " + AlphaContract.UserEntry.TABLE_NAME +
                         "." + AlphaContract.UserEntry._ID);
 
@@ -179,14 +192,15 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case ADDRESS_WITH_USER_ID: {
-                retCursor = mOpenHelper.getReadableDatabase().query(AlphaContract.AddressEntry.TABLE_NAME,
-                        projection,
-                        sAddressSelectWithUserId,
-                        new String[]{AlphaContract.UserEntry.getAddressFromUri(uri)},
-                        null,
-                        null,
-                        sortOrder
-                );
+
+                retCursor = sgetAddressWithUserDetails
+                        .query(mOpenHelper.getReadableDatabase(),
+                                projection,
+                                sAddressSelectWithUserId,
+                                new String[]{AlphaContract.UserEntry.getAddressFromUri(uri)},
+                                null,
+                                null,
+                                sortOrder);
                 break;
             }
             case USER: {
@@ -385,6 +399,14 @@ public class AlphaProvider extends ContentProvider{
             case USER:
                 rowsUpdated = db.update(
                         AlphaContract.UserEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case USER_WITH_EMAIL:
+                rowsUpdated = db.update(
+                        AlphaContract.UserEntry.TABLE_NAME,
+                        values,
+                        sUserSelectionEmail,
+                        new String[]{AlphaContract.UserEntry.getEmailFromUri(uri)}
+                );
                 break;
             case KITCHEN:
                 rowsUpdated = db.update(AlphaContract.KitchenEntry.TABLE_NAME, values, selection, selectionArgs);

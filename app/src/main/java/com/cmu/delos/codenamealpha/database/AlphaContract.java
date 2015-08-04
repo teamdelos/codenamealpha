@@ -35,6 +35,7 @@ public class AlphaContract {
         public static final String COLUMN_IMAGE = "image";
         public static final String COLUMN_GENDER = "gender";
         public static final String COLUMN_MOBILE_NUMBER = "mobile_number";
+        public static final String COLUMN_ABOUT = "short_desc";
 
 
         public static Uri buildUserUri(long id) {

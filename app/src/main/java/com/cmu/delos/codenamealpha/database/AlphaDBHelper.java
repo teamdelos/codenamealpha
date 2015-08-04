@@ -33,6 +33,7 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 UserEntry.COLUMN_IS_PROVIDER + " TEXT, "+
                 UserEntry.COLUMN_GENDER + " TEXT, "+
                 UserEntry.COLUMN_MOBILE_NUMBER + " TEXT, "+
+                UserEntry.COLUMN_ABOUT + " TEXT, "+
                 " UNIQUE (" + UserEntry.COLUMN_EMAIL+ "));";
 
 
@@ -64,7 +65,6 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 AddressEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 AddressEntry.COLUMN_USER_ID + " INTEGER NOT NULL, " +
                 AddressEntry.COLUMN_ZIPCODE + " TEXT, " +
-                AddressEntry.COLUMN_PROFILE_ABOUT + " TEXT," +
                 AddressEntry.COLUMN_USER_NAME + " TEXT," +
                 AddressEntry.COLUMN_CITY + " TEXT, " +
                 AddressEntry.COLUMN_STATE + " TEXT, " +

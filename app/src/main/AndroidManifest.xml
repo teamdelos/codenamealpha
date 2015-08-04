@@ -26,7 +26,6 @@
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -34,14 +33,10 @@
             android:name=".ui.ProfileActivity"
             android:label="@string/title_activity_profile" >
 
-            <!-- android:noHistory="true" -->
-
         </activity>
         <activity
             android:name=".ui.provider.KitchenProfileActivity"
             android:label="@string/title_activity_kitchen_profile" >
-
-            <!-- android:noHistory="true" > -->
         </activity>
         <activity
             android:name=".ui.provider.KitchenActivity"
@@ -94,7 +89,6 @@
         <provider android:authorities="com.facebook.app.FacebookContentProvider991027864253635"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true" />
-
 
         <activity
             android:name=".ui.consumer.TransactionHistoryActivity"
