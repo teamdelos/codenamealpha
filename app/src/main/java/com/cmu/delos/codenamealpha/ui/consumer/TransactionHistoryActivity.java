@@ -39,21 +39,22 @@ public class TransactionHistoryActivity extends AbstractAlphaActivity {
         meal = getMeal();
         Cursor userCurser = null;
         userCurser = getContentResolver().query(AlphaContract.TransactionEntry.buildTransactionUriWithCustId(user.getUserId()), null, null, null, AlphaContract.TransactionEntry.COLUMN_TRAN_TIME+" DESC");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm", Locale.US);
         Log.v("Count for transaction", userCurser.getCount() + "");
         if (userCurser.getCount() > 0) {
             strArr = new ArrayList<String>();
             try {
 
                 for (userCurser.moveToFirst(); !userCurser.isAfterLast(); userCurser.moveToNext()) {
-                    strArr.add("Meal Name : " + userCurser.getString(3) + " | Meal Price : " + userCurser.getDouble(4) + "   Date : " + getDate(Long.parseLong(userCurser.getString(5)), "dd/MM/yyyy hh:mm:ss"));
+                    strArr.add("Meal Name : " + userCurser.getString(3) + System.getProperty("line.separator")+"Meal Price : " + userCurser.getDouble(4) + System.getProperty("line.separator")+"Date : " + getDate(Long.parseLong(userCurser.getString(5)), "dd/MM/yyyy hh:mm:ss"));
 
                 }
             } finally {
                 userCurser.close();
             }
+
             adapter = new ArrayAdapter<String>(getApplicationContext(),
-                    android.R.layout.simple_list_item_1, strArr);
+                    android.R.layout.simple_list_item_1 ,strArr);
             lv.setAdapter(adapter);
             purchase_hist.setText("Purchase History");
 
