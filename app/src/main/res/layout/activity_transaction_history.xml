@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimaryDark"
         android:layout_below="@+id/purchase_hist"
         android:textColor="@color/textBlack"
         android:layout_marginTop="40dp" >

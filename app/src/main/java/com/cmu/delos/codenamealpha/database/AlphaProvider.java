@@ -169,7 +169,8 @@ public class AlphaProvider extends ContentProvider{
 
     private static final String sMealSelectWithDishName=
             AlphaContract.MealEntry.TABLE_NAME +
-                    "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ? ";
+                    "." + AlphaContract.MealEntry.COLUMN_DISH_NAME+" = ?  AND " + AlphaContract.MealEntry.TABLE_NAME +
+                    "." + AlphaContract.MealEntry.COLUMN_IS_LISTED+" = 1 ";
 
     private static final String sTransactionWithCustId=
             AlphaContract.TransactionEntry.TABLE_NAME +
