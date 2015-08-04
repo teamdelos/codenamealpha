@@ -5,17 +5,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
-import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
 public class KitchenProfileActivity extends AbstractAlphaActivity {
 
@@ -55,10 +52,6 @@ public class KitchenProfileActivity extends AbstractAlphaActivity {
 //                        startActivity(goToKitchenProfile);
                         return true;
                     // For rest of the options we just show a toast on click
-                    case R.id.navigation_item_3:
-                        Intent goToSettings = new Intent(KitchenProfileActivity.this, SettingsActivity.class);
-                        startActivity(goToSettings);
-                        return true;
                     default:
                         Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                         return true;

@@ -10,17 +10,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.cmu.delos.codenamealpha.ui.SettingsActivity">
+        tools:context="com.cmu.delos.codenamealpha.ui.consumer.OrderCompleteActivity">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:titleTextAppearance="@color/textWhite"
             android:background="?attr/colorPrimary"/>
-        <fragment
-            android:id="@+id/settings_container"
-            android:name="com.cmu.delos.codenamealpha.ui.SettingsActivityFragment"
-            tools:layout="@layout/fragment_settings"
+        <FrameLayout
+            android:id="@+id/meal_order_detail_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"/>

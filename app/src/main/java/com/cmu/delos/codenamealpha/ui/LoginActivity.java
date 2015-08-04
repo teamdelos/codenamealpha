@@ -1,6 +1,5 @@
 package com.cmu.delos.codenamealpha.ui;
 
-import com.cmu.delos.codenamealpha.ui.LoginActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,12 +15,9 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.AccessToken;
 
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
-import com.cmu.delos.codenamealpha.ui.LoginFragment;
 import android.content.Intent;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
-
-import com.facebook.login.widget.LoginButton;
 
 import com.cmu.delos.codenamealpha.R;
 
@@ -66,36 +62,38 @@ public class LoginActivity extends AbstractAlphaActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         //Add App code here
-                        Intent intentToGoSearch = new Intent(getApplicationContext(),SearchActivity.class);
+                        Intent intentToGoSearch = new Intent(getApplicationContext(), SearchActivity.class);
                         startActivity(intentToGoSearch);
                     }
 
                     @Override
                     public void onCancel() {
                         // App code
-                        Intent intentToGoSearch = new Intent(getApplicationContext(),LoginActivity.class);
+                        Intent intentToGoSearch = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intentToGoSearch);
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
-                        Intent intentToSearch = new Intent(getApplicationContext(),LoginActivity.class);
+                        Intent intentToSearch = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intentToSearch);
                     }
                 });
 
         setContentView(R.layout.activity_login);
-        handleFragment();
-
+        //check the changes with the saved instance state and do the rest
+        if(savedInstanceState==null){
+            handleFragment();
+        }
     }
 
     private void handleFragment(){
-        Fragment fragment = new LoginFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.login_container, fragment);
-        fragmentTransaction.commit();
+            Fragment fragment = new LoginFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.login_container, fragment);
+            fragmentTransaction.commit();
     }
 
     @Override

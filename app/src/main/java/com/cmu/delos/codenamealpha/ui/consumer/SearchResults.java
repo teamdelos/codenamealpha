@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
-import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -59,10 +58,6 @@ public class SearchResults extends AbstractAlphaActivity {
                         startActivity(goToProfile);
                         return true;
                     // For rest of the options we just show a toast on click
-                    case R.id.navigation_item_2:
-                        Intent goToSettings = new Intent(SearchResults.this, SettingsActivity.class);
-                        startActivity(goToSettings);
-                        return true;
                     case R.id.navigation_item_3:
                         Intent goToHistory = new Intent(SearchResults.this, TransactionHistoryActivity.class);
                         startActivity(goToHistory);

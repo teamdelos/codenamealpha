@@ -10,7 +10,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
-import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,7 +31,9 @@ public class OfferMealActivity extends AbstractAlphaActivity {
         setContentView(R.layout.activity_offer_meal);
         setupToolbar();
         setupNavigationView();
-        handleFragment();
+        if(savedInstanceState==null){
+            handleFragment();
+        }
     }
 
     private void setupNavigationView(){
@@ -65,10 +65,6 @@ public class OfferMealActivity extends AbstractAlphaActivity {
                     case R.id.navigation_item_2:
                         Intent goToKitchenProfile = new Intent(OfferMealActivity.this, KitchenProfileActivity.class);
                         startActivity(goToKitchenProfile);
-                        return true;
-                    case R.id.navigation_item_3:
-                        Intent goToSettings = new Intent(OfferMealActivity.this, SettingsActivity.class);
-                        startActivity(goToSettings);
                         return true;
                     default:
                         Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();

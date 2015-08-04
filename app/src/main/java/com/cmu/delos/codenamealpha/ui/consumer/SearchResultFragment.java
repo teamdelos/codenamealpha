@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,8 @@ public class SearchResultFragment extends Fragment implements LoaderManager.Load
     private RecyclerView.LayoutManager mLayoutManager;
     private MealAdapter mAdapter;
     Cursor userMealSearch;
+    static final String DETAIL_QUERY = "QUERY";
+    private String mQuery;
 
 
 
@@ -46,16 +49,32 @@ public class SearchResultFragment extends Fragment implements LoaderManager.Load
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true); //Will ignore onDestroy Method (Nested Fragments no need this if parent have it)
+    }
+
+    //Here you Save your data
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("mQuery", mQuery);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState){
-        getLoaderManager().initLoader(DISHES_LOADER, null, this);
+        if(mQuery!=null){
+            getLoaderManager().initLoader(DISHES_LOADER, null, this);
+        }
+
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Cursor userMealSearch = getActivity().getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithName(getActivity().getIntent().getStringExtra("query")), null, null, null, null);
+        Cursor userMealSearch = getActivity().getContentResolver().query(AlphaContract.MealEntry.buildMealUriWithName(mQuery), null, null, null, null);
         if (userMealSearch.getCount() > 0) {
-            Uri dishesUri = AlphaContract.MealEntry.buildMealUriWithName(getActivity().getIntent().getStringExtra("query"));
+            Uri dishesUri = AlphaContract.MealEntry.buildMealUriWithName(mQuery);
             return new CursorLoader(
                     getActivity(),
                     dishesUri,
@@ -65,7 +84,7 @@ public class SearchResultFragment extends Fragment implements LoaderManager.Load
                     null
             );
         } else {
-            Toast.makeText(getActivity(), "Meal " + getActivity().getIntent().getStringExtra("query") + " not found!",
+            Toast.makeText(getActivity(), "Meal " + mQuery + " not found!",
                     Toast.LENGTH_SHORT).show();
             Intent intentToSignUp = new Intent(getActivity(), SearchActivity.class);
             startActivity(intentToSignUp);
@@ -90,16 +109,30 @@ public class SearchResultFragment extends Fragment implements LoaderManager.Load
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
-        mAdapter = new MealAdapter(getActivity(), null);
-        mRecyclerView=(RecyclerView)view.findViewById(R.id.search_dishes_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            mQuery = arguments.getString(SearchResultFragment.DETAIL_QUERY);
+        }
 
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        if ((savedInstanceState != null) && (savedInstanceState.getString("mQuery") != null)) {
+            mQuery = savedInstanceState
+                        .getString("mQuery");
+            }
 
-        mRecyclerView.setAdapter(mAdapter);
+            mAdapter = new MealAdapter(getActivity(), null);
+            mRecyclerView=(RecyclerView)view.findViewById(R.id.search_dishes_recycler_view);
+            mRecyclerView.setHasFixedSize(true);
+
+            mLayoutManager = new LinearLayoutManager(getActivity());
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView.setAdapter(mAdapter);
 
         return view;
+    }
+
+    public void onQueryChanged(String query){
+        mQuery = query;
+        getLoaderManager().restartLoader(DISHES_LOADER, null, this);
     }
 
 }

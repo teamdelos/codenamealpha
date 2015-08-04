@@ -24,7 +24,6 @@ import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.User;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
-import com.cmu.delos.codenamealpha.ui.SettingsActivity;
 import com.cmu.delos.codenamealpha.ui.provider.MealOfferCompleteFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -87,7 +86,7 @@ public class MealDetails extends AbstractAlphaActivity {
         buy_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MealOrderDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), OrderCompleteActivity.class);
                 startActivity(intent);
             }
         });
@@ -151,11 +150,6 @@ public class MealDetails extends AbstractAlphaActivity {
                     case R.id.navigation_item_1:
                         Intent goToProfile = new Intent(MealDetails.this, ProfileActivity.class);
                         startActivity(goToProfile);
-                        return true;
-                    // For rest of the options we just show a toast on click
-                    case R.id.navigation_item_2:
-                        Intent goToSettings = new Intent(MealDetails.this, SettingsActivity.class);
-                        startActivity(goToSettings);
                         return true;
                     case R.id.navigation_item_3:
                         Intent goToHistory = new Intent(MealDetails.this, TransactionHistoryActivity.class);
