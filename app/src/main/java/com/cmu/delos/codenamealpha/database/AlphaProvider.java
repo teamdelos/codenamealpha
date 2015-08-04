@@ -193,12 +193,11 @@ public class AlphaProvider extends ContentProvider{
                 break;
             }
             case ADDRESS_WITH_USER_ID: {
-
                 retCursor = sgetAddressWithUserDetails
                         .query(mOpenHelper.getReadableDatabase(),
                                 projection,
                                 sAddressSelectWithUserId,
-                                new String[]{AlphaContract.UserEntry.getAddressFromUri(uri)},
+                                new String[]{String.valueOf(AlphaContract.AddressEntry.getuseridFromUri(uri))},
                                 null,
                                 null,
                                 sortOrder);
@@ -424,7 +423,7 @@ public class AlphaProvider extends ContentProvider{
                 rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case ADDRESS_WITH_USER_ID:
-                rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, sAddressSelectWithUserId, new String[]{AlphaContract.AddressEntry.getuseridFromUri(uri)});
+                rowsUpdated = db.update(AlphaContract.AddressEntry.TABLE_NAME, values, sAddressSelectWithUserId, new String[]{String.valueOf(AlphaContract.AddressEntry.getuseridFromUri(uri))});
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
