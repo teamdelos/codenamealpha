@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 public class KitchenActivity extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    CircleImageView navHeaderImage;
+    private CircleImageView navHeaderImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class KitchenActivity extends AbstractAlphaActivity {
         navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
         navHeaderTitle.setText(super.getUser().getFirstName() + " " + super.getUser().getLastName());
         navHeaderEmail.setText(super.getUser().getEmail());
+        setPic();
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu
@@ -62,10 +64,6 @@ public class KitchenActivity extends AbstractAlphaActivity {
                         startActivity(goToProfile);
                         return true;
                     // For rest of the options we just show a toast on click
-                    case R.id.navigation_item_2:
-                        Intent goToKitchenProfile = new Intent(KitchenActivity.this, KitchenProfileActivity.class);
-                        startActivity(goToKitchenProfile);
-                        return true;
                     default:
                         Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                         return true;

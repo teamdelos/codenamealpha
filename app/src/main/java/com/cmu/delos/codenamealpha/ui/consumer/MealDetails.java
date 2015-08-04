@@ -2,6 +2,7 @@ package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -25,12 +26,18 @@ import com.cmu.delos.codenamealpha.model.User;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.provider.MealOfferCompleteFragment;
+import com.cmu.delos.codenamealpha.util.ScalingUtilities;
+
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 public class MealDetails extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private CircleImageView navHeaderImage;
     private Button buy_btn;
 
     private static final String[] MEAL_COLUMNS = {
@@ -131,9 +138,10 @@ public class MealDetails extends AbstractAlphaActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation);
         TextView navHeaderTitle = (TextView)drawerLayout.findViewById(R.id.nav_header_title);
         TextView navHeaderEmail = (TextView)drawerLayout.findViewById(R.id.nav_header_email);
-        CircleImageView navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
+        navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
         navHeaderTitle.setText(super.getUser().getFirstName() + " " + super.getUser().getLastName());
         navHeaderEmail.setText(super.getUser().getEmail());
+        setPic();
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu
@@ -160,5 +168,20 @@ public class MealDetails extends AbstractAlphaActivity {
                 }
             }
         });
+    }
+
+    private void setPic(){
+        File imgFile = new File(super.getUser().getImage());
+
+        // Part 1: Decode image
+        Bitmap unscaledBitmap = decodeResource(imgFile, 500, 400, ScalingUtilities.ScalingLogic.FIT);
+
+        // Part 2: Scale image
+        Bitmap scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, 500,
+                400, ScalingUtilities.ScalingLogic.FIT);
+        unscaledBitmap.recycle();
+
+        // Publish results
+        navHeaderImage.setImageBitmap(scaledBitmap);
     }
 }
