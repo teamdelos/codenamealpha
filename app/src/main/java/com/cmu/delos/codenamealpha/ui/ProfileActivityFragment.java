@@ -87,7 +87,6 @@ public class ProfileActivityFragment extends Fragment {
         saveProfileBtn = (Button)rootView.findViewById(R.id.saveProfileBtn);
         Cursor userAddressCur = null;
         try {
-            Log.i("testing uid:", ((ProfileActivity) getActivity()).getUser().getUserId()+"");
             userAddressCur = getActivity().getContentResolver().query(AlphaContract.AddressEntry.buildAddrressUriWithid(((ProfileActivity) getActivity()).getUser().getUserId()), PROFILE_COLUMNS, null, null, null);
 
             if (userAddressCur.getCount() > 0) {
@@ -223,8 +222,6 @@ public class ProfileActivityFragment extends Fragment {
                 if (!address1.isEmpty() && !address2.isEmpty()
                         && !city.isEmpty() && !state.isEmpty() && !zipCode.isEmpty()) {
                     ContentValues userAddressDetails = new ContentValues();
-//                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, address.getAddressId());
-//                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_USER_ID, ((ProfileActivity) getActivity()).getUser().getUserId());
                     userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_CITY, city);
                     userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_STATE, state);
                     userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_STREET_1, address1);
@@ -233,13 +230,11 @@ public class ProfileActivityFragment extends Fragment {
                     int ret = getActivity().getContentResolver().update(AlphaContract.AddressEntry.buildAddrressUriWithid(address.getAddressId()), userAddressDetails, null, null);
 
                     if(!about.isEmpty() || mCurrentPhotoPath==null){
-                        Log.i("Entered the image", "Wrong");
                         ContentValues userProfileDetails = new ContentValues();
                         userProfileDetails.put(AlphaContract.UserEntry.COLUMN_ABOUT,about);
                         userProfileDetails.put(AlphaContract.UserEntry.COLUMN_IMAGE,mCurrentPhotoPath);
                         int userRowsUpdated = getActivity().getContentResolver().update(AlphaContract.UserEntry.buildUserUriWithEmail(((ProfileActivity) getActivity()).getUser().getEmail()), userProfileDetails, null, null);
                     }
-//                    userAddressDetails.put(AlphaContract.AddressEntry.COLUMN_PROFILE_ABOUT, about);
 
                     Toast.makeText(getActivity().getApplicationContext(), "Profile has been updated!",
                             Toast.LENGTH_LONG).show();

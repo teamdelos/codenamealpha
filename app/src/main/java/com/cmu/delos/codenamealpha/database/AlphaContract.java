@@ -166,15 +166,12 @@ public class AlphaContract {
 
         public static Uri buildAddrressUriWithid(int userId) {
             Uri uri = CONTENT_URI.buildUpon()
-//                    .appendQueryParameter(COLUMN_USER_ID, Integer.toString(userId))
                     .appendPath(String.valueOf(userId))
                     .build();
-            Log.i("test query:", String.valueOf(uri));
             return uri;
         }
 
         public static int getuseridFromUri(Uri uri) {
-//            return uri.getQueryParameter(COLUMN_USER_ID);
             return Integer.parseInt(uri.getPathSegments().get(1));
         }
     }
@@ -191,7 +188,6 @@ public class AlphaContract {
 
         public static Uri buildTransactionUriWithCustId(int custId) {
             return CONTENT_URI.buildUpon()
-//                    .appendQueryParameter(COLUMN_USER_ID_C, Integer.toString(custId))
                     .appendPath(Integer.toString(custId))
                     .build();
         }
@@ -209,7 +205,6 @@ public class AlphaContract {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
         public static int getTransactionFromCustId(Uri uri) {
-//            return uri.getQueryParameter(COLUMN_USER_ID_C);
             return Integer.parseInt(uri.getPathSegments().get(1));
         }
 
