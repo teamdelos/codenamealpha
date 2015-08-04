@@ -63,7 +63,8 @@ public class ProfileActivityFragment extends Fragment {
             AlphaContract.AddressEntry.COLUMN_STREET_12,
             AlphaContract.AddressEntry.COLUMN_CITY,
             AlphaContract.AddressEntry.COLUMN_STATE,
-            AlphaContract.AddressEntry.COLUMN_USER_NAME,
+            AlphaContract.UserEntry.COLUMN_F_NAME,
+            AlphaContract.UserEntry.COLUMN_L_NAME,
             AlphaContract.UserEntry.COLUMN_ABOUT,
             AlphaContract.UserEntry.COLUMN_IMAGE
     };
@@ -98,13 +99,14 @@ public class ProfileActivityFragment extends Fragment {
                         address.setZipCode(userAddressCur.getString(1));
                         profile_zip_code.setText(userAddressCur.getString(1));
                     }
-                    if (userAddressCur.getString(7)!= null) {
-                        address.setAbout(userAddressCur.getString(7));
-                        editText.setText(userAddressCur.getString(7));
+                    if (userAddressCur.getString(8)!= null) {
+                        address.setAbout(userAddressCur.getString(8));
+                        editText.setText(userAddressCur.getString(8));
                     }
-                    if (userAddressCur.getString(6)!= null) {
-                        address.setName(userAddressCur.getString(6));
-                        profile_full_name.setText(userAddressCur.getString(6));
+                    Log.i("Full name test: ", userAddressCur.getString(6)+ " "+userAddressCur.getString(7));
+                    if (userAddressCur.getString(6)!= null && userAddressCur.getString(7)!= null) {
+                        address.setName(userAddressCur.getString(6)+ " "+userAddressCur.getString(7));
+                        profile_full_name.setText(userAddressCur.getString(6)+ " "+userAddressCur.getString(7));
                     }
                     if (userAddressCur.getString(4)!= null) {
                         address.setCity(userAddressCur.getString(4));
@@ -122,9 +124,9 @@ public class ProfileActivityFragment extends Fragment {
                         address.setStreetAddress2(userAddressCur.getString(3));
                         profile_address_2.setText(userAddressCur.getString(3));
                     }
-                    if(userAddressCur.getString(8)!=null){
-                        ((ProfileActivity) getActivity()).getUser().setImage(userAddressCur.getString(8));
-                        mCurrentPhotoPath = userAddressCur.getString(8);
+                    if(userAddressCur.getString(9)!=null){
+                        ((ProfileActivity) getActivity()).getUser().setImage(userAddressCur.getString(9));
+                        mCurrentPhotoPath = userAddressCur.getString(9);
                         setPic();
                     }
                     break;
@@ -176,6 +178,7 @@ public class ProfileActivityFragment extends Fragment {
 
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 mCurrentPhotoPath = cursor.getString(columnIndex);
+                ((ProfileActivity) getActivity()).getUser().setImage(mCurrentPhotoPath);
                 setPic();
                 cursor.close();
 

@@ -1,6 +1,7 @@
 package com.cmu.delos.codenamealpha.ui.provider;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,12 +16,18 @@ import android.widget.Toast;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
+import com.cmu.delos.codenamealpha.util.ScalingUtilities;
+
+import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 public class KitchenActivity extends AbstractAlphaActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    CircleImageView navHeaderImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +41,8 @@ public class KitchenActivity extends AbstractAlphaActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation);
         TextView navHeaderTitle = (TextView)drawerLayout.findViewById(R.id.nav_header_title);
         TextView navHeaderEmail = (TextView)drawerLayout.findViewById(R.id.nav_header_email);
-        CircleImageView navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
-        navHeaderTitle.setText(super.getUser().getFirstName()+" "+super.getUser().getLastName());
+        navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
+        navHeaderTitle.setText(super.getUser().getFirstName() + " " + super.getUser().getLastName());
         navHeaderEmail.setText(super.getUser().getEmail());
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -65,6 +72,20 @@ public class KitchenActivity extends AbstractAlphaActivity {
                 }
             }
         });
+    }
+    private void setPic(){
+        File imgFile = new File(super.getUser().getImage());
+
+        // Part 1: Decode image
+        Bitmap unscaledBitmap = decodeResource(imgFile, 500, 400, ScalingUtilities.ScalingLogic.FIT);
+
+        // Part 2: Scale image
+        Bitmap scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, 500,
+                400, ScalingUtilities.ScalingLogic.FIT);
+        unscaledBitmap.recycle();
+
+        // Publish results
+        navHeaderImage.setImageBitmap(scaledBitmap);
     }
 
     private void setupToolbar(){

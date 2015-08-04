@@ -12,7 +12,7 @@ import com.cmu.delos.codenamealpha.database.AlphaContract.UserEntry;
 
 public class AlphaDBHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     static final String DATABASE_NAME = "codenamealpha.db";
 
@@ -65,7 +65,6 @@ public class AlphaDBHelper extends SQLiteOpenHelper {
                 AddressEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 AddressEntry.COLUMN_USER_ID + " INTEGER NOT NULL, " +
                 AddressEntry.COLUMN_ZIPCODE + " TEXT, " +
-                AddressEntry.COLUMN_USER_NAME + " TEXT," +
                 AddressEntry.COLUMN_CITY + " TEXT, " +
                 AddressEntry.COLUMN_STATE + " TEXT, " +
                 AddressEntry.COLUMN_STREET_1 + " TEXT, " +
