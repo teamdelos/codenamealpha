@@ -17,11 +17,14 @@ import com.facebook.AccessToken;
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 
 import android.content.Intent;
+import android.view.View;
+
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 
 
 import com.cmu.delos.codenamealpha.R;
+import com.facebook.login.widget.LoginButton;
 
 public class LoginActivity extends AbstractAlphaActivity {
 
@@ -29,14 +32,21 @@ public class LoginActivity extends AbstractAlphaActivity {
     AccessTokenTracker accessTokenTracker;
     AccessToken accessToken;
     ProfileTracker profileTracker;
+    protected LoginButton loginButton;
+    protected LoginManager LoginManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        setContentView(R.layout.activity_login);
+
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
+
         callbackManager = CallbackManager.Factory.create();
+
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
@@ -59,31 +69,32 @@ public class LoginActivity extends AbstractAlphaActivity {
             }
         };
 
+
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         //Add App code here
-                        Intent intentToGoSearch = new Intent(getApplicationContext(),SearchActivity.class);
+                        Intent intentToGoSearch = new Intent(getApplicationContext(), SearchActivity.class);
                         startActivity(intentToGoSearch);
                     }
 
                     @Override
                     public void onCancel() {
                         // App code
-                        Intent intentToGoSearch = new Intent(getApplicationContext(),LoginActivity.class);
+                        Intent intentToGoSearch = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intentToGoSearch);
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
-                        Intent intentToSearch = new Intent(getApplicationContext(),LoginActivity.class);
+                        Intent intentToSearch = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intentToSearch);
                     }
                 });
 
-        setContentView(R.layout.activity_login);
+
         handleFragment();
 
     }
