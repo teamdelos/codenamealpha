@@ -16,7 +16,6 @@ import com.facebook.AccessToken;
 
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 import android.content.Intent;
-import android.view.View;
 
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
