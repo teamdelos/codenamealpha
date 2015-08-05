@@ -1,3 +1,6 @@
+/**
+ * Transaction history activity which displays all the transactions of the consumer
+ */
 package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.database.Cursor;

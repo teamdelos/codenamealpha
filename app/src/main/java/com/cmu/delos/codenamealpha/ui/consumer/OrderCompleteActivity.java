@@ -1,3 +1,6 @@
+/**
+ * A Order Compltete activity which inflates checkout and order complete fragments
+ */
 package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.os.Bundle;

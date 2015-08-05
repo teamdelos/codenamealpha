@@ -1,3 +1,6 @@
+/**
+ * Profile Activity for handling profile fragment
+ */
 package com.cmu.delos.codenamealpha.ui;
 
 

@@ -1,3 +1,6 @@
+/**
+ * Login fragment for handling login operations
+ */
 package com.cmu.delos.codenamealpha.ui;
 
 import android.content.Intent;
@@ -30,9 +33,7 @@ import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 import com.cmu.delos.codenamealpha.ui.provider.KitchenActivity;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class LoginFragment extends Fragment {
 
     private Button signUpBtn;

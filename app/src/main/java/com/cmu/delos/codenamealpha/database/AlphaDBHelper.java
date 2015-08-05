@@ -9,7 +9,10 @@ import com.cmu.delos.codenamealpha.database.AlphaContract.KitchenEntry;
 import com.cmu.delos.codenamealpha.database.AlphaContract.MealEntry;
 import com.cmu.delos.codenamealpha.database.AlphaContract.TransactionEntry;
 import com.cmu.delos.codenamealpha.database.AlphaContract.UserEntry;
-
+/**
+ * DB helper class for creating and maintaining database and tables
+ * Created by Vignan on 7/19/2015.
+ */
 public class AlphaDBHelper extends SQLiteOpenHelper {
 
 

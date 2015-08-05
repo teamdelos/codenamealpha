@@ -1,3 +1,6 @@
+/**
+ * Search activity which handles search activity fragment and search result fragment
+ */
 package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.app.Fragment;
@@ -22,7 +25,6 @@ import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
-import com.cmu.delos.codenamealpha.ui.AppLocationService;
 import com.cmu.delos.codenamealpha.ui.LoginActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
@@ -34,7 +36,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
-//import com.cmu.delos.codenamealpha.ui.MapsActivity;
 
 public class SearchActivity extends AbstractAlphaActivity {
 
@@ -49,8 +50,6 @@ public class SearchActivity extends AbstractAlphaActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     //private Location mylocation = mMap.getMyLocation();
     //private LatLng sydney = new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
-
-    AppLocationService appLocationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

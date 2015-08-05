@@ -1,6 +1,7 @@
 package com.cmu.delos.codenamealpha.model;
 
 /**
+ * Address model Object for usage across classes
  * Created by Vignan on 7/19/2015.
  */
 public class Address {

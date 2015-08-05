@@ -1,6 +1,7 @@
 package com.cmu.delos.codenamealpha.util;
 
 /**
+ *Class for authenticating mail credentials
  * Created by Mrik on 8/4/15.
  */
 import javax.mail.Authenticator;

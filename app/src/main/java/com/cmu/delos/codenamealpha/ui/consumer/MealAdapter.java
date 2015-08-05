@@ -23,6 +23,7 @@ import java.io.File;
 import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 /**
+ * A recycler adapter class for loading data on to recycler view for cards on the application page
  * Created by Vignan on 7/27/2015.
  */
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ViewHolder> implements View.OnClickListener {

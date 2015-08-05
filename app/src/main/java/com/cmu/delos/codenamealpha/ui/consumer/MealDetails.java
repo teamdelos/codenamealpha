@@ -1,3 +1,6 @@
+/**
+ * A Meal Details activity for showing the details of the selected dish on search activity
+ */
 package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.content.Intent;

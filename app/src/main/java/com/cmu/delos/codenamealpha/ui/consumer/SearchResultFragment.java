@@ -1,3 +1,6 @@
+/**
+ * Search result Fragment which displays the results of the search
+ */
 package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.app.Fragment;

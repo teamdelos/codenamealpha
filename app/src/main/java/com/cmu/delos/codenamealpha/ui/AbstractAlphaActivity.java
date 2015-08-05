@@ -8,6 +8,7 @@ import com.cmu.delos.codenamealpha.model.Meal;
 import com.cmu.delos.codenamealpha.model.User;
 
 /**
+ * Abstract activity which extends appcompat activity and is extends by activity classes
  * Created by Mrik on 7/24/15.
  */
 public class AbstractAlphaActivity extends AppCompatActivity {

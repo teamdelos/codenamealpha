@@ -28,7 +28,7 @@ import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * Order complete fragment for displaying the confirmation details of the ordered meal
  */
 public class OrderCompleteFragment extends Fragment {
 

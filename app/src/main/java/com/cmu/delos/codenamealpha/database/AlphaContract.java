@@ -5,7 +5,10 @@ import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.util.Log;
-
+/**
+ * Contract class for table and column details
+ * Created by Vignan on 7/19/2015.
+ */
 public class AlphaContract {
 
     public static final String CONTENT_AUTHORITY = "com.cmu.delos.codenamealpha";

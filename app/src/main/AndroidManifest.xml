@@ -68,11 +68,6 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDRXEbFVEoFg9ZtCpaxv1WN-Z-lc5ezV0E" />
 
-        <activity
-            android:name=".ui.MapsActivity"
-            android:label="@string/title_activity_maps" >
-        </activity>
-
 
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=

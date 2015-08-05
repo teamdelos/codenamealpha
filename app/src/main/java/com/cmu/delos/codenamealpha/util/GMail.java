@@ -1,6 +1,7 @@
 package com.cmu.delos.codenamealpha.util;
 
 /**
+ * Gmail class for sending email notifications
  * Created by Vignan on 7/19/2015.
  */
 import android.util.Log;

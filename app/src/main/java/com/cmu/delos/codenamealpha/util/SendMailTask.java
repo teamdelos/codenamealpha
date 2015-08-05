@@ -1,6 +1,7 @@
 package com.cmu.delos.codenamealpha.util;
 
 /**
+ * Send mail utility task for sending email notifications
  * Created by Mrik on 8/4/15.
  */
 import android.app.Activity;

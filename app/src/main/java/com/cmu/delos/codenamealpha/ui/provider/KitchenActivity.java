@@ -1,3 +1,6 @@
+/**
+ * Kitchen activity which inflates and handles kitchen activity fragment
+ */
 package com.cmu.delos.codenamealpha.ui.provider;
 
 import android.content.Intent;

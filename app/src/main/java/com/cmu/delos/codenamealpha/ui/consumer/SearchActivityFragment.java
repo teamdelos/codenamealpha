@@ -1,3 +1,6 @@
+/**
+ * Search activity Fragment which has the search bar for searching the meals
+ */
 package com.cmu.delos.codenamealpha.ui.consumer;
 
 import android.content.Intent;
@@ -12,7 +15,6 @@ import android.widget.SearchView;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
-import com.cmu.delos.codenamealpha.ui.AppLocationService;
 
 //import com.cmu.delos.codenamealpha.ui.MapsActivity;
 
@@ -23,7 +25,6 @@ import com.cmu.delos.codenamealpha.ui.AppLocationService;
 public class SearchActivityFragment extends Fragment {
 
 
-    AppLocationService appLocationService;
     private SearchView search;
     private static final String SEARCHRESULTFRAGMENT_TAG = "SRTAG";
 

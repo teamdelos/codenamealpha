@@ -1,6 +1,7 @@
 package com.cmu.delos.codenamealpha.model;
 
 /**
+ * Meal model Object for usage across classes
  * Created by Vignan on 7/19/2015.
  */
 public class Meal {

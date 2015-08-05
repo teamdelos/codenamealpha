@@ -9,6 +9,7 @@ import android.graphics.Rect;
 import java.io.File;
 
 /**
+ * Handling image size for displaying details and scaling images
  * Created by Vignan on 7/26/2015.
  */
 public class ScalingUtilities {

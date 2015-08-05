@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 /**
+ * Content Provider class
  * Created by Vignan on 7/19/2015.
  */
 public class AlphaProvider extends ContentProvider{

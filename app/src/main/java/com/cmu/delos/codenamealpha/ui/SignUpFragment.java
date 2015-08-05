@@ -1,3 +1,6 @@
+/**
+ * Signup fragment creating user
+ */
 package com.cmu.delos.codenamealpha.ui;
 
 import android.content.ContentUris;
@@ -22,9 +25,7 @@ import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
 import com.cmu.delos.codenamealpha.ui.provider.KitchenActivity;
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class SignUpFragment extends Fragment {
 
     private Button signUpPageBtn;

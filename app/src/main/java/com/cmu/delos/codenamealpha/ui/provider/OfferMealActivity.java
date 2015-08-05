@@ -1,3 +1,6 @@
+/**
+ * Offer meal activity which handles offer meal fragment, offer complete fragment
+ */
 package com.cmu.delos.codenamealpha.ui.provider;
 
 import android.content.Intent;

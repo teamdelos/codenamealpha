@@ -17,7 +17,7 @@ import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 
 /**
- * A placeholder fragment containing a simple view.
+ * A Checkout fragment inflated on Order Complete Activity for handling check out operation
  */
 public class CheckoutFragment extends Fragment {
     private Button placeOrderBtn;

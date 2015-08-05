@@ -1,3 +1,6 @@
+/**
+ * Meal offer complete fragment for details of the offered meal
+ */
 package com.cmu.delos.codenamealpha.ui.provider;
 
 import android.graphics.Bitmap;
@@ -23,10 +26,6 @@ import java.util.List;
 
 import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
-
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MealOfferCompleteFragment extends Fragment {
     private TextView dish_name;
     private TextView dish_price;

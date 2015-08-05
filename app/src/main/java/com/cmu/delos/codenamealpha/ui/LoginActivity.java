@@ -1,3 +1,6 @@
+/**
+ * Login Activity for handling login & signup fragments
+ */
 package com.cmu.delos.codenamealpha.ui;
 
 import android.os.Bundle;

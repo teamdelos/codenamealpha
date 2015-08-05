@@ -1,3 +1,6 @@
+/**
+ * Kitchen activity fragment for displaying all the meals being offered by user and handling meal details
+ */
 package com.cmu.delos.codenamealpha.ui.provider;
 
 import android.app.Fragment;
@@ -21,9 +24,7 @@ import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.Kitchen;
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class KitchenActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     private static final int DISHES_LOADER = 0;

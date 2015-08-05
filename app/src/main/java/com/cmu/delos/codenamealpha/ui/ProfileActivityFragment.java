@@ -1,3 +1,6 @@
+/**
+ * Profile fragment for handling profile changes
+ */
 package com.cmu.delos.codenamealpha.ui;
 
 import android.content.ContentValues;
@@ -29,9 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class ProfileActivityFragment extends Fragment {
 
     private TextView profile_full_name;
@@ -231,7 +232,7 @@ public class ProfileActivityFragment extends Fragment {
 
                     if(!about.isEmpty() || mCurrentPhotoPath==null){
                         ContentValues userProfileDetails = new ContentValues();
-                        userProfileDetails.put(AlphaContract.UserEntry.COLUMN_ABOUT,about);
+                        userProfileDetails.put(AlphaContract.UserEntry.COLUMN_ABOUT, about);
                         userProfileDetails.put(AlphaContract.UserEntry.COLUMN_IMAGE,mCurrentPhotoPath);
                         ((ProfileActivity) getActivity()).getUser().setImage(mCurrentPhotoPath);
                         int userRowsUpdated = getActivity().getContentResolver().update(AlphaContract.UserEntry.buildUserUriWithEmail(((ProfileActivity) getActivity()).getUser().getEmail()), userProfileDetails, null, null);

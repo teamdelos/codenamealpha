@@ -1,5 +1,8 @@
+/**
+ * recycler view adapter for loading details on to recycler view and cards
+ * Created by Vignan on 7/27/2015.
+ */
 package com.cmu.delos.codenamealpha.ui.provider;
-
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,9 +28,6 @@ import java.io.File;
 
 import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
-/**
- * Created by Vignan on 7/27/2015.
- */
 public class KitchenDishesAdapter extends RecyclerView.Adapter<KitchenDishesAdapter.ViewHolder> implements View.OnClickListener {
 
     Cursor dataCursor;

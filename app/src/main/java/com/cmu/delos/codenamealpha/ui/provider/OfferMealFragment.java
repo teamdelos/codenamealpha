@@ -1,3 +1,6 @@
+/**
+ * Offer meal fragment to fill details of the meal
+ */
 package com.cmu.delos.codenamealpha.ui.provider;
 
 import android.content.ContentResolver;
@@ -35,9 +38,7 @@ import java.util.Date;
 import static com.cmu.delos.codenamealpha.util.ScalingUtilities.decodeResource;
 
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class OfferMealFragment extends Fragment {
     private Button listMealButton;
     private EditText dish_name;
