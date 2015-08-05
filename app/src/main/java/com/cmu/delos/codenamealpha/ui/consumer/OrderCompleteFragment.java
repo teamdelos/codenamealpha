@@ -36,6 +36,7 @@ public class OrderCompleteFragment extends Fragment {
     private TextView textView4;
     private TextView textView5;
     private User user;
+    private User provider;
     private Meal meal;
     private ImageView imageView_complete;
 
@@ -47,6 +48,7 @@ public class OrderCompleteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_order_complete, container, false);
         user = ((AbstractAlphaActivity)getActivity()).getUser();
+        provider = ((AbstractAlphaActivity)getActivity()).getProviderDetails();
         Log.v("USER ", user.getFirstName());
         meal = ((AbstractAlphaActivity)getActivity()).getMeal();
         Log.v("MEAL ", meal.getKitchenId()+"");
@@ -80,9 +82,32 @@ public class OrderCompleteFragment extends Fragment {
                 getProviderDetails().getUserId());
         Uri insertedKitchenUri = getActivity().getContentResolver().insert(AlphaContract.TransactionEntry.CONTENT_URI, transactionValues);
         Log.v("Transact ID", ContentUris.parseId(insertedKitchenUri) + "");
+
         try {
-            ((OrderCompleteActivity) getActivity()).sendEmail("team.delos@gmail.com", "codenamealpha", user.getEmail(),
-                    "Order Placed", "Your meal " + meal.getDishName() + " will get delivered soon.");
+            String consumerMessage = "Your meal " + meal.getDishName() + " will get delivered soon.\n" +
+                    "Provider: " + provider.getFirstName() + " " + provider.getLastName() +
+                    " will contact you regarding the delivery." +
+                    "\nIf you wish to contact him? Here is his Email:" + provider.getEmail();
+
+            String providerMessage = "Your meal " + meal.getDishName() + " is ordered by "+user.getFirstName()+" "+user.getLastName()+
+                    "\n Please contact him regarding the delivery on his Email:"+user.getEmail();
+
+            ((OrderCompleteActivity) getActivity())
+                    .sendEmail(
+                            getResources().getString(R.string.emailId),
+                            getResources().getString(R.string.emailPwd),
+                            user.getEmail(),
+                            "Order Placed on CodeNameAlpha",
+                            consumerMessage
+                    );
+            ((OrderCompleteActivity) getActivity())
+                    .sendEmail(
+                            getResources().getString(R.string.emailId),
+                            getResources().getString(R.string.emailPwd),
+                            provider.getEmail(),
+                            "Order for you on CodeNameAlpha",
+                            providerMessage
+                    );
         } catch (Exception ex) {
             Log.e("ERROR", ex.getMessage());
         }

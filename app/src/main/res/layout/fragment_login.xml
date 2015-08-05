@@ -112,7 +112,7 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="8dp"
             android:text="***Sign Up to be a Provider"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/add_signup_options" />

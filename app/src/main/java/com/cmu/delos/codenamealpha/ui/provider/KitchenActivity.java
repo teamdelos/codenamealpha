@@ -45,9 +45,6 @@ public class KitchenActivity extends AbstractAlphaActivity {
         navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
         navHeaderTitle.setText(super.getUser().getFirstName() + " " + super.getUser().getLastName());
         navHeaderEmail.setText(super.getUser().getEmail());
-        if(super.getUser().getImage()!=null){
-            setPic();
-        }
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu
@@ -116,5 +113,13 @@ public class KitchenActivity extends AbstractAlphaActivity {
         startActivity(intent);
         finish();
 //        System.exit(0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (super.getUser().getImage() != null) {
+            setPic();
+        }
     }
 }

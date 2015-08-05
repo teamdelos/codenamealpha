@@ -233,6 +233,7 @@ public class ProfileActivityFragment extends Fragment {
                         ContentValues userProfileDetails = new ContentValues();
                         userProfileDetails.put(AlphaContract.UserEntry.COLUMN_ABOUT,about);
                         userProfileDetails.put(AlphaContract.UserEntry.COLUMN_IMAGE,mCurrentPhotoPath);
+                        ((ProfileActivity) getActivity()).getUser().setImage(mCurrentPhotoPath);
                         int userRowsUpdated = getActivity().getContentResolver().update(AlphaContract.UserEntry.buildUserUriWithEmail(((ProfileActivity) getActivity()).getUser().getEmail()), userProfileDetails, null, null);
                     }
 

@@ -52,8 +52,8 @@ public class MealDetails extends AbstractAlphaActivity {
             AlphaContract.MealEntry.COLUMN_IS_LISTED,
             AlphaContract.UserEntry.COLUMN_F_NAME,
             AlphaContract.UserEntry.COLUMN_L_NAME,
-            AlphaContract.UserEntry.TABLE_NAME+"."+AlphaContract.UserEntry._ID
-
+            AlphaContract.UserEntry.TABLE_NAME+"."+AlphaContract.UserEntry._ID,
+            AlphaContract.UserEntry.COLUMN_EMAIL
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,7 @@ public class MealDetails extends AbstractAlphaActivity {
                     provider.setUserId(mealCursor.getInt(11));
                     provider.setFirstName(mealCursor.getString(9));
                     provider.setLastName(mealCursor.getString(10));
+                    provider.setEmail(mealCursor.getString(12));
 
                     setProviderDetails(provider);
                     Log.v("User ID", mealCursor.getString(10));
@@ -141,9 +142,6 @@ public class MealDetails extends AbstractAlphaActivity {
         navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
         navHeaderTitle.setText(super.getUser().getFirstName() + " " + super.getUser().getLastName());
         navHeaderEmail.setText(super.getUser().getEmail());
-        if(super.getUser().getImage()!=null){
-            setPic();
-        }
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu
@@ -186,4 +184,14 @@ public class MealDetails extends AbstractAlphaActivity {
         // Publish results
         navHeaderImage.setImageBitmap(scaledBitmap);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (super.getUser().getImage() != null) {
+            setPic();
+        }
+    }
+
+
 }

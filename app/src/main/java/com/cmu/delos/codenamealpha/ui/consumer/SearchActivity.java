@@ -71,7 +71,7 @@ public class SearchActivity extends AbstractAlphaActivity {
         Fragment searchFragment = new SearchActivityFragment();
         fragmentTransaction.replace(R.id.search_container, searchFragment);
         Fragment searchResultFragment = new SearchResultFragment();
-        fragmentTransaction.replace(R.id.search_result_container, searchResultFragment,SEARCHRESULTFRAGMENT_TAG);
+        fragmentTransaction.replace(R.id.search_result_container, searchResultFragment, SEARCHRESULTFRAGMENT_TAG);
 
         fragmentTransaction.commit();
     }
@@ -82,14 +82,13 @@ public class SearchActivity extends AbstractAlphaActivity {
         navigationView = (NavigationView) findViewById(R.id.navigation);
         TextView navHeaderTitle = (TextView)drawerLayout.findViewById(R.id.nav_header_title);
         TextView navHeaderEmail = (TextView)drawerLayout.findViewById(R.id.nav_header_email);
-
-        CircleImageView navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
+        navHeaderImage = (CircleImageView)drawerLayout.findViewById(R.id.profile_image);
 
         navHeaderTitle.setText(super.getUser().getFirstName() + " " + super.getUser().getLastName());
         navHeaderEmail.setText(super.getUser().getEmail());
-        if(super.getUser().getImage()!=null){
-            setPic();
-        }
+//        if(super.getUser().getImage()!=null){
+//            setPic();
+//        }
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -150,42 +149,6 @@ public class SearchActivity extends AbstractAlphaActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.bland_meal:
-                //startActivity(new Intent(this, About.class));
-                return true;
-            case R.id.diabetic_meal:
-                //startActivity(new Intent(this, Help.class));
-                return true;
-            case R.id.glutenfree_meal:
-                //startActivity(new Intent(this, About.class));
-                return true;
-            case R.id.low_calorie:
-                //startActivity(new Intent(this, Help.class));
-                return true;
-            case R.id.low_cholesterol_meal:
-                //startActivity(new Intent(this, About.class));
-                return true;
-            case R.id.low_sodium:
-                //startActivity(new Intent(this, Help.class));
-                return true;
-            case R.id.nonlactose_meal:
-                //startActivity(new Intent(this, About.class));
-                return true;
-            case R.id.vegan_meal:
-                //startActivity(new Intent(this, Help.class));
-                return true;
-            case R.id.vegeterian_meal:
-                //startActivity(new Intent(this, About.class));
-                return true;
-            case R.id.nutsorpeanuts:
-                //startActivity(new Intent(this, Help.class));
-                return true;
-            case R.id.kosher_meal:
-                //startActivity(new Intent(this, About.class));
-                return true;
-            case R.id.child_meal:
-                //startActivity(new Intent(this, Help.class));
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -200,11 +163,12 @@ public class SearchActivity extends AbstractAlphaActivity {
 //        System.exit(0);
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_list, menu);
-        return true;
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(super.getUser().getImage()!=null){
+            setPic();
+        }
     }
 
 
