@@ -26,8 +26,6 @@ public class AbstractAlphaActivity extends AppCompatActivity {
         AbstractAlphaActivity.providerDetails = providerDetails;
     }
 
-
-
     public static String getQuery() {
         return query;
     }
