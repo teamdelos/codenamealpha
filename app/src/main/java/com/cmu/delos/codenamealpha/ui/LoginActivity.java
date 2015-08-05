@@ -15,26 +15,44 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.AccessToken;
 
 import com.cmu.delos.codenamealpha.ui.consumer.SearchActivity;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 19ae40408980d938f768ba0b72549b181c0eebc0
 import android.content.Intent;
+import android.view.View;
+
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 19ae40408980d938f768ba0b72549b181c0eebc0
 import com.cmu.delos.codenamealpha.R;
+import com.facebook.login.widget.LoginButton;
 
 public class LoginActivity extends AbstractAlphaActivity {
+
     CallbackManager callbackManager;
     AccessTokenTracker accessTokenTracker;
     AccessToken accessToken;
     ProfileTracker profileTracker;
-
+    protected LoginButton loginButton;
+    protected LoginManager LoginManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        setContentView(R.layout.activity_login);
+
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
+
         callbackManager = CallbackManager.Factory.create();
+
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
@@ -56,6 +74,7 @@ public class LoginActivity extends AbstractAlphaActivity {
                 // App code
             }
         };
+
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -81,11 +100,17 @@ public class LoginActivity extends AbstractAlphaActivity {
                     }
                 });
 
+<<<<<<< HEAD
+
+        handleFragment();
+
+=======
         setContentView(R.layout.activity_login);
         //check the changes with the saved instance state and do the rest
         if(savedInstanceState==null){
             handleFragment();
         }
+>>>>>>> 19ae40408980d938f768ba0b72549b181c0eebc0
     }
 
     private void handleFragment(){

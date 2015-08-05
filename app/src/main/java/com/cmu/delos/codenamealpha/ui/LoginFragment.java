@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
+import com.facebook.login.LoginBehavior;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginResult;
@@ -36,7 +37,8 @@ public class LoginFragment extends Fragment {
 
     private Button signUpBtn;
     private Button btnSignIn;
-    LoginButton loginButton;
+    protected LoginButton loginButton;
+
     //private ImageButton fbBtn;
     private EditText login_username;
     private EditText login_password;
@@ -176,7 +178,7 @@ public class LoginFragment extends Fragment {
                         }
                         else{
                             login_password.setText("");
-                            Toast.makeText(getActivity(), "Wrong Password. Please enter again",
+                            Toast.makeText(getActivity(), "Wrong Password. Please enter again.",
                                     Toast.LENGTH_LONG).show();
                         }
                     } else {
