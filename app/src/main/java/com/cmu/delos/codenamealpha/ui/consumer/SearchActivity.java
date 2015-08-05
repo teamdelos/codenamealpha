@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
 import com.cmu.delos.codenamealpha.ui.AppLocationService;
+import com.cmu.delos.codenamealpha.ui.LoginActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 import com.google.android.gms.maps.GoogleMap;
@@ -111,6 +112,13 @@ public class SearchActivity extends AbstractAlphaActivity {
                     case R.id.navigation_item_3:
                         Intent goToHistory = new Intent(SearchActivity.this, TransactionHistoryActivity.class);
                         startActivity(goToHistory);
+                        return true;
+                    case R.id.navigation_item_14:
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
                         return true;
                     default:
                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();

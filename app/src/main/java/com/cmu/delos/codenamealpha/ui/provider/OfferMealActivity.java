@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
+import com.cmu.delos.codenamealpha.ui.LoginActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
 
@@ -66,6 +67,13 @@ public class OfferMealActivity extends AbstractAlphaActivity {
                     case R.id.navigation_item_1:
                         Intent goToProfile = new Intent(OfferMealActivity.this, ProfileActivity.class);
                         startActivity(goToProfile);
+                        return true;
+                    case R.id.navigation_item_14:
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
                         return true;
                     // For rest of the options we just show a toast on click
                     default:

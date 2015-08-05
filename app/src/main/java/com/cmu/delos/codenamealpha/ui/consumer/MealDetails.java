@@ -24,6 +24,7 @@ import com.cmu.delos.codenamealpha.R;
 import com.cmu.delos.codenamealpha.database.AlphaContract;
 import com.cmu.delos.codenamealpha.model.User;
 import com.cmu.delos.codenamealpha.ui.AbstractAlphaActivity;
+import com.cmu.delos.codenamealpha.ui.LoginActivity;
 import com.cmu.delos.codenamealpha.ui.ProfileActivity;
 import com.cmu.delos.codenamealpha.ui.provider.MealOfferCompleteFragment;
 import com.cmu.delos.codenamealpha.util.ScalingUtilities;
@@ -162,6 +163,14 @@ public class MealDetails extends AbstractAlphaActivity {
                     case R.id.navigation_item_3:
                         Intent goToHistory = new Intent(MealDetails.this, TransactionHistoryActivity.class);
                         startActivity(goToHistory);
+                        return true;
+                    case R.id.navigation_item_14:
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                        return true;
                     default:
                         Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                         return true;

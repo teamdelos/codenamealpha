@@ -54,7 +54,8 @@ public class TransactionHistoryActivity extends AbstractAlphaActivity {
             }
 
             adapter = new ArrayAdapter<String>(getApplicationContext(),
-                    android.R.layout.simple_list_item_1 ,strArr);
+                    R.layout.meal_detail_list, // The name of the layout ID.
+                    R.id.list_item_meal_details_textview,strArr);
             lv.setAdapter(adapter);
             purchase_hist.setText("Purchase History");
 
